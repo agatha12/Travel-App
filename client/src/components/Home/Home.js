@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as firebase from 'firebase';
 import "./style.css";
+import {FormButton} from "../Input"
 
 class Home extends Component {
 
@@ -38,6 +39,7 @@ render(){
         <div id="homediv">
             <h1>Travel App</h1>
             <p>Welcome {this.state.username}</p>
+            <a href="/itinerary"><FormButton>Itinerary</FormButton></a>
         </div>
     );
 }

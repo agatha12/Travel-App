@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Input, SelectDate, Time, FormButton } from "../components/Input";
+import { Input, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container } from "../components/Input";
 import API from "../utils/API";
 
 
 class Form extends Component {
     state = {
-        itinerarydata: [],
+        useritinerary: [],
         passengername: "",
         flightnumber: "",
         airport: "",
@@ -14,24 +14,21 @@ class Form extends Component {
         firstDepTime: "",
         firstarrivalDate: "",
         firstarrivalTime: "",
+        hour:"",
+        minute: "",
+        hotelName: "",
+        checkinTime: "",
+        checkoutTime: "",
         seconddepDate: "",
         seconddepTime: "",
         secondarrivalDate: "",
-        secondarrivalTime: "",
-        value:""
+        secondarrivalTime: ""
     }
 
-    // componentDidMount() {
-    //     this.loadUsers();   
-    // }
-
-    
-    // loadUsers = () => {
-    //     API.getForms()
-    //     .then(res => console.log(res.data))
+    // getItinerary = () => {
+    //     API.getForm(this.props.match.params.id)
     //     .catch(err => console.log(err))
     // }
-
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -42,20 +39,25 @@ class Form extends Component {
 
     handleFormButton = event => {
         event.preventDefault();
+        alert("You just made an itinerary!")
         API.saveForm({
             passengername: this.state.passengername,
             flightnumber: this.state.flightnumber,
             airport: this.state.airport,
             destination: this.state.destination,
             firstDepDate: this.state.firstDepDate,
-            firstDepTime: this.state.firsDepTime,
+            firstDepTime: this.state.dept_hour+":"+this.state.dept_min+this.state.dept_time,
             firstarrivalDate: this.state.firstarrivalDate,
-            firstarrivalTime: this.state.firstarrivalTime,
+            firstarrivalTime: this.state.arr_hour+":"+this.state.arr_min+this.state.arr_time,
+            hotelName: this.state.hotelName,
+            checkinTime: this.state.check_hour+":"+this.state.check_min+this.state.in_time,
+            checkoutTime: this.state.out_hour+":"+this.state.out_min+this.state.out_time,
             seconddepDate: this.state.seconddepDate,
-            // seconddepTime: this.state.seconddepTime,
-            secondarrivalDate: this.state.secondarrivalDate
-            // secondarrivalTime: this.state.secondarrivalTime
-        }).catch(err => console.log(err))
+            seconddepTime: this.state.deptwo_hour+":"+this.state.deptwo_min+this.state.deptwo_time,
+            secondarrivalDate: this.state.secondarrivalDate,
+            secondarrivalTime: this.state.arrtwo_hour+":"+this.state.arrtwo_min+this.state.arrtwo_time
+        }).then(res => this.setState({useritinerary: res.data}))
+        .catch(err => console.log(err));
     }
     
     render() {
@@ -86,7 +88,6 @@ class Form extends Component {
                     
                     
                     <h4>Departure Date</h4>
-                    
                     <SelectDate
                         name="firstDepDate"
                         onChange={this.handleInputChange}
@@ -94,12 +95,19 @@ class Form extends Component {
                         placeholder = "MM/DD/YYYY"
                     />
                     
-                    <Time
-                        name="firstDepTime"
+                    <Container value={this.state.firstDepTime}>
+                    
+                    <Hour
                         onChange={this.handleInputChange}
-                        value={this.state.firstDepTime}
-                        placeholder="Time of Departure"
-                    />
+                        name="dept_hour" /> : <Minute
+                        name="dept_min"
+                        onChange={this.handleInputChange} />
+                    <Timezone 
+                    name="dept_time"
+                    onChange={this.handleInputChange} />
+                
+                    </Container>
+        
                     <h4>Arrival Date</h4>
                     <SelectDate
                         name="firstarrivalDate"
@@ -107,12 +115,50 @@ class Form extends Component {
                         value = {this.state.firstarrivalDate}
                         placeholder = "MM/DD/YYYY"
                     />
-                    <Time
-                        name="firstarrivalTime"
+
+                    <Container value={this.state.firstarrivalTime}>
+                    
+                    <Hour
                         onChange={this.handleInputChange}
-                        value={this.state.firstarrivalTime}
-                        placeholder="Time of Arrival"
-                    />
+                        name="arr_hour" /> : <Minute
+                        name="arr_min"
+                        onChange={this.handleInputChange} />    
+                    <Timezone 
+                    name="arr_time"
+                    onChange={this.handleInputChange} />
+                    </Container>
+
+                    <h4>Hotel Check-In</h4>
+                    <Input
+                        name="hotelName"
+                        placeholder="Hotel Name"
+                        value={this.state.hotelName}
+                        onChange={this.handleInputChange} />
+                    
+                    <Container value={this.state.checkinTime}>
+                    <Hour
+                        onChange={this.handleInputChange}
+                        name="check_hour" /> : <Minute
+                        name="check_min"
+                        onChange={this.handleInputChange} />
+                    <Timezone 
+                    name="in_time"
+                    onChange={this.handleInputChange} />
+                    </Container>
+
+                    <h4>Hotel Check-Out</h4>
+                    <Container value={this.state.checkoutTime}>
+                    <Hour
+                        onChange={this.handleInputChange}
+                        name="out_hour" /> : <Minute
+                        name="out_min"
+                        onChange={this.handleInputChange} />
+                    <Timezone 
+                    name="out_time"
+                    onChange={this.handleInputChange} />
+                    </Container>
+
+                    <h4>Activities</h4>
                     <h4>Departure Date</h4>
                     <SelectDate
                         name="seconddepDate"
@@ -120,12 +166,19 @@ class Form extends Component {
                         value={this.state.seconddepDate}
                         placeholder = "MM/DD/YYYY"
                     />
-                    <Time
-                        name="seconddepTime"
+                    
+                    <Container value={this.state.seconddepTime}>
+                    
+                    <Hour
                         onChange={this.handleInputChange}
-                        value={this.state.seconddepTime}
-                        placeholder="Time of Departure"
-                    />
+                        name="deptwo_hour" /> : <Minute
+                        name="deptwo_min"
+                        onChange={this.handleInputChange} />
+                    <Timezone 
+                    name="deptwo_time"
+                    onChange={this.handleInputChange} />
+                    </Container>
+
                     <h4>Arrival Date</h4>
                     <SelectDate
                         name="secondarrivalDate"
@@ -133,18 +186,27 @@ class Form extends Component {
                         value = {this.state.secondarrivalDate}
                         placeholder = "MM/DD/YYYY"
                     />
-                    <Time
-                        name="secondarrivalTime"
+                    
+                    <Container value={this.state.secondarrivalTime}>
+                    
+                    <Hour
                         onChange={this.handleInputChange}
-                        value={this.state.secondarrivalTime}
-                        placeholder="Time of Arrival"
-                    />
-                    <br></br>
+                        name="arrtwo_hour" /> : <Minute
+                        name="arrtwo_min"
+                        onChange={this.handleInputChange} />
+                    <Timezone 
+                    name="arrtwo_time"
+                    onChange={this.handleInputChange} />
+                    </Container>
+                    <br />
+                    
                     <FormButton onClick={this.handleFormButton}>
                         Submit
                     </FormButton>
                 </form>
-                <button>Generate Itinerary</button>
+                <a href={"/itinerary/" + this.state.useritinerary._id}>
+                <ItineraryButton>Go to Itinerary</ItineraryButton>
+                </a>
             </div>
         )
     }
