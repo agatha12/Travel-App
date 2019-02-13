@@ -1,0 +1,78 @@
+#form-div {
+    text-align: center;
+}
+
+.general {
+    text-align: center;
+}
+
+.deletebutton{
+    position: relative;
+    bottom: 380px;
+    left: 44%;
+}
+
+.firstDep {
+    width: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    top: 50px;
+    margin-left: 5%;
+}
+
+.firstArr {
+    width: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    bottom: 60px;
+    left: 28%;
+}
+
+.checkIn {
+    width: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    bottom: 195px;
+    left: 51%;
+}
+
+.checkOut {
+    width: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    bottom: 329px;
+    left: 74%;
+}
+
+.secondDep {
+    width: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    bottom: 300px;
+    left: 74%;
+}
+
+.secondArr {
+    width: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    bottom: 410px;
+    left: 51%;
+}
+
+
+
+
+
