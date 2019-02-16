@@ -5,6 +5,7 @@ import LoginForm from './components/Login/login';
 import Home from "./components/Home/Home";
 import Form from "./pages/itinerary";
 import Itinerary from "./pages/itinerary2";
+import Calendar from "./pages/calendar/calendar";
 import NoMatch from "./pages/nomatch";
 
 
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path="/home" component={Home}/>
           <Route exact path="/itinerary" component={Form}/>
           <Route exact path = "/itinerary/:id" component= {Itinerary} />
+          <Route exact path = "/calendar/:id" component= {Calendar} />
           <Route component={NoMatch} />
       </Switch>
       </div>

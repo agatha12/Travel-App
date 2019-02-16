@@ -9,7 +9,7 @@ export function Input(props) {
 }
 
 export function SelectDate(props) {
-  return (
+  return ( 
     <div className="form-group">
       <input className="form-control" {...props} />
     </div>
@@ -108,6 +108,7 @@ export function Minute(props) {
 
   )
 }
+
 
 export function Timezone (props) {
   return (

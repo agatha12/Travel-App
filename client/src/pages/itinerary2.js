@@ -32,7 +32,7 @@ class Itinerary extends Component {
 
     render() {
         return (
-            <div class="itinerary_id">
+            <div className="itinerary_id">
                 <div className="general">
                 <h2>Hello {this.state.itinerary.passengername}! </h2> 
                 <h4>Here's your itinerary for your trip to {this.state.itinerary.destination}.</h4>
@@ -43,34 +43,38 @@ class Itinerary extends Component {
 
                 <div className="firstDep">
                 <p><Moment format="MM/DD/YYYY">{this.state.itinerary.firstDepDate}</Moment> {this.state.itinerary.firstDepTime}</p>
-                <h3>Departure from {this.state.itinerary.airport} ➡ </h3>
+                <h6>Departure from {this.state.itinerary.airport} ➡ </h6>
                 </div>
                 
                 <div className="firstArr">
                 <p><Moment format="MM/DD/YYYY">{this.state.itinerary.firstarrivalDate}</Moment> {this.state.itinerary.firstarrivalTime}</p>
-                <h3>Arrive to {this.state.itinerary.destination} ➡ </h3>
+                <h6>Arrive to {this.state.itinerary.destination} ➡ </h6>
                 </div>
 
                 <div className="checkIn">
-                <p>{this.state.itinerary.checkinTime}</p>
-                <h3>Check-in at {this.state.itinerary.hotelName} ➡ </h3>
+                <p><Moment format="MM/DD/YYYY">{this.state.itinerary.checkinDate}</Moment> {this.state.itinerary.checkinTime}</p>
+                <h6>Check-in at {this.state.itinerary.hotelName} ➡ </h6>
                 </div>
 
+                <div className="activities">
+                <p><Moment format="MM/DD/YYYY">{this.state.itinerary.activityDate}</Moment> {this.state.itinerary.activityTime}</p>
+                <h6>{this.state.itinerary.listActivity} ⬇</h6>
+                </div>
+
+
                 <div className="checkOut">
-                <p>{this.state.itinerary.checkoutTime}</p>
-                <h3>Check out at {this.state.itinerary.hotelName} ⬇ </h3>
+                <p><Moment format="MM/DD/YYYY">{this.state.itinerary.checkoutDate}</Moment> {this.state.itinerary.checkoutTime}</p>
+                <h6>⬅ Check out at {this.state.itinerary.hotelName}</h6>
                 </div>
 
                 <div className="secondDep">
                 <p><Moment format="MM/DD/YYYY">{this.state.itinerary.seconddepDate}</Moment> {this.state.itinerary.seconddepTime}</p>
-                <h3>⬅ Departure to {this.state.itinerary.airport}</h3>
+                <h6>⬅ Departure to {this.state.itinerary.airport}</h6>
                 </div>
                 
                 <div className="secondArr">
-                
                 <p><Moment format="MM/DD/YYYY">{this.state.itinerary.secondarrivalDate}</Moment> {this.state.itinerary.secondarrivalTime}</p>
-                
-                <h3>Arrival Date</h3>
+                <h6>Arrival Date</h6>
                 </div>
                 
                 <a href="/home" className="deletebutton">

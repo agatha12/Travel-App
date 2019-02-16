@@ -16,19 +16,19 @@ class Form extends Component {
         firstarrivalTime: "",
         hour:"",
         minute: "",
+        checkinDate: "",
         hotelName: "",
         checkinTime: "",
+        checkoutDate: "",
         checkoutTime: "",
+        listActivity: "",
+        activityDate: "",
+        activityTime: "",
         seconddepDate: "",
         seconddepTime: "",
         secondarrivalDate: "",
         secondarrivalTime: ""
     }
-
-    // getItinerary = () => {
-    //     API.getForm(this.props.match.params.id)
-    //     .catch(err => console.log(err))
-    // }
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -49,9 +49,14 @@ class Form extends Component {
             firstDepTime: this.state.dept_hour+":"+this.state.dept_min+this.state.dept_time,
             firstarrivalDate: this.state.firstarrivalDate,
             firstarrivalTime: this.state.arr_hour+":"+this.state.arr_min+this.state.arr_time,
+            checkinDate: this.state.checkinDate,
             hotelName: this.state.hotelName,
             checkinTime: this.state.check_hour+":"+this.state.check_min+this.state.in_time,
+            checkoutDate: this.state.checkoutDate,
             checkoutTime: this.state.out_hour+":"+this.state.out_min+this.state.out_time,
+            listActivity: this.state.listActivity,
+            activityDate: this.state.activityDate,
+            activityTime: this.state.act_hour+":"+this.state.act_min+this.state.act_time,
             seconddepDate: this.state.seconddepDate,
             seconddepTime: this.state.deptwo_hour+":"+this.state.deptwo_min+this.state.deptwo_time,
             secondarrivalDate: this.state.secondarrivalDate,
@@ -92,8 +97,7 @@ class Form extends Component {
                         name="firstDepDate"
                         onChange={this.handleInputChange}
                         value={this.state.firstDepDate}
-                        placeholder = "MM/DD/YYYY"
-                    />
+                        placeholder = "MM/DD/YYYY" />
                     
                     <Container value={this.state.firstDepTime}>
                     
@@ -113,8 +117,7 @@ class Form extends Component {
                         name="firstarrivalDate"
                         onChange={this.handleInputChange}
                         value = {this.state.firstarrivalDate}
-                        placeholder = "MM/DD/YYYY"
-                    />
+                        placeholder = "MM/DD/YYYY" />
 
                     <Container value={this.state.firstarrivalTime}>
                     
@@ -135,6 +138,13 @@ class Form extends Component {
                         value={this.state.hotelName}
                         onChange={this.handleInputChange} />
                     
+                    <SelectDate
+                        name="checkinDate"
+                        onChange={this.handleInputChange}
+                        value = {this.state.checkinDate}
+                        placeholder = "MM/DD/YYYY"
+                    />
+
                     <Container value={this.state.checkinTime}>
                     <Hour
                         onChange={this.handleInputChange}
@@ -147,6 +157,12 @@ class Form extends Component {
                     </Container>
 
                     <h4>Hotel Check-Out</h4>
+                    <SelectDate
+                        name="checkoutDate"
+                        onChange={this.handleInputChange}
+                        value = {this.state.checkoutDate}
+                        placeholder = "MM/DD/YYYY"
+                    />
                     <Container value={this.state.checkoutTime}>
                     <Hour
                         onChange={this.handleInputChange}
@@ -159,6 +175,31 @@ class Form extends Component {
                     </Container>
 
                     <h4>Activities</h4>
+
+                    <Input 
+                    onChange={this.handleInputChange}
+                     name="listActivity"
+                     value={this.state.listActivity}
+                     placeholder="Activity"/>
+                    <SelectDate
+                        name="activityDate"
+                        onChange = {this.handleInputChange}
+                        value = {this.state.activityDate}
+                        placeholder = "MM/DD/YYYY" />
+                    
+                    <Container value={this.state.activityTime}>
+    
+                    <Hour
+                        onChange={this.handleInputChange}
+                        name="act_hour" /> : <Minute
+                        name="act_min"
+                        onChange={this.handleInputChange} />
+                    <Timezone 
+                    name="act_time"
+                    onChange={this.handleInputChange} />
+                
+                    </Container>
+
                     <h4>Departure Date</h4>
                     <SelectDate
                         name="seconddepDate"
@@ -168,7 +209,6 @@ class Form extends Component {
                     />
                     
                     <Container value={this.state.seconddepTime}>
-                    
                     <Hour
                         onChange={this.handleInputChange}
                         name="deptwo_hour" /> : <Minute
@@ -188,7 +228,6 @@ class Form extends Component {
                     />
                     
                     <Container value={this.state.secondarrivalTime}>
-                    
                     <Hour
                         onChange={this.handleInputChange}
                         name="arrtwo_hour" /> : <Minute
