@@ -7,7 +7,7 @@ import Form from "./pages/itinerary";
 import Itinerary from "./pages/itinerary2";
 import Calendar from "./pages/calendar/calendar";
 import NoMatch from "./pages/nomatch";
-
+import GetFlights from './pages/flights';
 
 
 class App extends Component {
@@ -22,6 +22,7 @@ class App extends Component {
           <Route exact path="/itinerary" component={Form}/>
           <Route exact path = "/itinerary/:id" component= {Itinerary} />
           <Route exact path = "/calendar/:id" component= {Calendar} />
+          <Route exact path = "/getflights" component= {GetFlights} />
           <Route component={NoMatch} />
       </Switch>
       </div>
