@@ -1,7 +1,10 @@
 import axios from "axios";
 
 export default {
-    
+    searchFlight: function(query ) {
+        return axios.get("/api/getflight", { params: query });
+    },
+
     getForms: function() {
         return axios.get("/api/itinerary");
     },
