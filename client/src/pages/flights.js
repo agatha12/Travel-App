@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import { Input, Container, Year, Month, Day, FormButton } from "../components/Input";
+import { Input, Year, Month, Day, FormButton } from "../components/Input";
 
 class GetFlights extends Component {
     state = {
@@ -34,7 +34,7 @@ class GetFlights extends Component {
             }
             // console.log(res)
             const flightInfo = res.data.flightStatuses[0];
-            const queryInfo = res.data.request;
+            // const queryInfo = res.data.request;
             console.log(flightInfo)
             this.setState({ response: flightInfo })
             // console.log(this.state)
