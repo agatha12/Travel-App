@@ -4,11 +4,15 @@ import './index.css';
 import App from './App';
 import { createStore } from 'redux';
 import * as serviceWorker from './serviceWorker';
-import combineReducers from './reducers/index'
+import combineReducers from './reducers/index';
+import {loadState, saveState} from './localStorage';
 
+const persistedState = loadState();
+const store = createStore(combineReducers, persistedState);
 
-const store = createStore(combineReducers)
-
+store.subscribe(() => {
+    saveState(store.getState())
+})
 
 ReactDOM.render(<App store={store} />, document.getElementById('root'));
 

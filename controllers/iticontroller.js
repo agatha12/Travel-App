@@ -16,7 +16,7 @@ module.exports = {
     
     findById: function(req, res) {
         db.Itinerary
-        .findById(req.params.id)
+        .find({ passengername: req.params.id})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
