@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import { Input, Year, Month, Day, FormButton } from "../components/Input";
+import { UserInput, Year, Month, Day, FormButton } from "../components/Input";
 
 class GetFlights extends Component {
     state = {
@@ -84,17 +84,17 @@ class GetFlights extends Component {
             <div>
                 <h1>Get Flight</h1>
                 <form>
-                    <Input
+                    <UserInput
                         name="airline"
                         placeholder="Airline"
                         value={this.state.airline}
                         onChange={this.handleInputChange} />
-                    <Input
+                    <UserInput
                         name="flNumber"
                         placeholder="Flight Number"
                         value={this.state.flNumber}
                         onChange={this.handleInputChange} />
-                    <Input
+                    <UserInput
                         name="depAirport"
                         placeholder="Departing Airport"
                         value={this.state.depAirport}

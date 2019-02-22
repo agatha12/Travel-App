@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import dateFns from "date-fns";
 // import Moment from "react-moment";
-import "./style.css";
+// import "./style.css";
 
 class Calendar extends Component {
     state = {
@@ -90,8 +90,7 @@ class Calendar extends Component {
                                 ? "selected" : ""
                             }`}
                         key={day}
-                        onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
-                    >
+                        onClick={() => this.onDateClick(dateFns.parse(cloneDay))}>
                         <span className="number">{formattedDate}</span>
                         <span className="bg">{formattedDate}</span>
                     </div>
@@ -130,8 +129,8 @@ class Calendar extends Component {
         return (
             <div className="calendar">
             <div className="intro">
-            <h3>Hey {this.state.userItinerary.passengername}</h3>
-            <p>Here's your itinerary for your trip to {this.state.userItinerary.destination}</p>
+                <h3>Hey {this.state.userItinerary.passengername}</h3>
+                <p>Here's your itinerary for your trip to {this.state.userItinerary.destination}</p>
             </div>
                 {this.renderHeader()}
                 {this.renderDays()}
