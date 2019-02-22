@@ -1,0 +1,38 @@
+.cardflight {
+ text-align: center;
+}
+
+.general {
+    text-align: center;
+}
+
+.deletebutton{
+    position: relative;
+    bottom: 400px;
+    left: 44%;
+}
+
+.flight {
+    
+    margin-right: 65%;
+    margin-left: 3%;
+    text-align: center;
+    padding-bottom: 5%;
+}
+
+.hotel {
+    margin-right: 70%;
+    text-align: center;
+    padding-bottom: 5%;
+}
+
+.activities{
+    margin-right: 70%;
+    text-align: center;
+    padding-bottom: 5%;
+}
+
+
+
+
+
