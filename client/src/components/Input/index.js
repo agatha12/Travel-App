@@ -1,18 +1,64 @@
 import React from "react";
+import { Row, Input, Modal, Button, Icon } from "react-materialize";
 
-export function Input(props) {
+export function RowContainer (props) {
+  return(
+    <Row>
+      {props.children}
+    </Row>
+  )
+}
+
+export function ReactModal (props) {
+  return(
+    <Modal
+    trigger={<Button>ADD EVENT 
+      <Icon>insert_chart</Icon>
+    </Button>}>
+    {props.children}
+    </Modal>
+  )
+}
+
+export function FlightModal (props) {
+  return(
+    <Modal
+    trigger={<Button>
+    ADD FLIGHT
+    <i className="material-icons right">add_circle</i>
+    </Button>}>
+    {props.children}
+    </Modal>
+  )
+}
+
+export function HotelModal (props) {
+  return(
+    <Modal
+    trigger={<Button>ADD HOTEL
+    </Button>}>
+    {props.children}
+    </Modal>
+  )
+}
+
+export function UserInput (props) {
   return (
-    <div className="form-group">
-      <input className="form-control" {...props} />
-    </div>
+    <Input s={3} type="text" className="form-control validate"  {...props} />  
+  )
+}
+
+export function ModalInput (props) {
+  return (
+    <Input s={4} type="text" className="form-control validate"  {...props} />  
   )
 }
 
 export function SelectDate(props) {
   return ( 
-    <div className="form-group">
-      <input className="form-control" {...props} />
-    </div>
+  <Row>
+    <Input s={4} name='on' type='date' onChange={function(e, value) {}} {...props} />
+  </Row>
   )
 }
 
@@ -88,10 +134,18 @@ export function Day(props) {
   )
 }
 
+export function Container(props) {
+  return (   
+    <Row>
+      {props.children}
+    </Row>
+  )
+}
+
 export function Hour(props) {
   return (
-
-    <select {...props}>
+    
+    <Input s={2} type='select' label="Hour" {...props}>
       <option></option>
       <option>1</option>
       <option>2</option>
@@ -105,15 +159,15 @@ export function Hour(props) {
       <option>10</option>
       <option>11</option>
       <option>12</option>
-    </select>
-
+    </Input>
+   
   )
 }
 
 export function Minute(props) {
   return (
-
-    <select {...props}>
+    
+    <Input s={2} type='select' label="Minute" {...props}>
       <option></option>
       <option>00</option>
       <option>01</option>
@@ -175,34 +229,25 @@ export function Minute(props) {
       <option>57</option>
       <option>58</option>
       <option>59</option>
-
-    </select>
-
+    </Input>
+    
   )
 }
-
 
 export function Timezone (props) {
   return (
-    <select {...props}>
+    <Input s={2} type='select' label="Timezone" {...props}>
       <option></option>
       <option>AM</option>
       <option>PM</option>
-    </select>
-  )
-}
-
-export function Container(props) {
-  return (
-    <div className="container">
-      {props.children}
-    </div>
+    </Input>  
   )
 }
 
 export function FormButton(props) {
   return (
-    <button {...props}>
+    <button className="waves-effect waves-light btn-small" {...props}>
+    <i className="material-icons right">send</i>
       {props.children}
     </button>
   )
@@ -218,8 +263,9 @@ export function DeleteButton(props) {
 
 export function ItineraryButton(props) {
   return (
-    <button {...props}>
+    <button className="waves-effect waves-light btn-small" {...props}>
       {props.children}
     </button>
   )
 }
+

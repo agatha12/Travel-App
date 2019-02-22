@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 
 const itinerarySchema = new Schema({
-    passengername: { type: String, required: false },
+    passengername: { type: String, required: true },
     flightnumber: { type: String, required: false },
     airport: { type: String, required: false },
     destination: { type: String, required: false },
@@ -28,7 +28,5 @@ const itinerarySchema = new Schema({
 });
 
 const Itinerary = mongoose.model("Itinerary", itinerarySchema);
-
-
 
 module.exports = Itinerary

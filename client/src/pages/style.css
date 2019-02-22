@@ -1,5 +1,5 @@
-#form-div {
-    text-align: center;
+.cardflight {
+ text-align: center;
 }
 
 .general {
@@ -12,74 +12,24 @@
     left: 44%;
 }
 
-.firstDep {
-    width: 200px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.flight {
+    
+    margin-right: 65%;
+    margin-left: 3%;
     text-align: center;
-    padding: 5px;
-    position: relative;
-    top: 50px;
-    margin-left: 5%;
+    padding-bottom: 5%;
 }
 
-.firstArr {
-    width: 200px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.hotel {
+    margin-right: 70%;
     text-align: center;
-    padding: 5px;
-    position: relative;
-    bottom: 60px;
-    left: 28%;
+    padding-bottom: 5%;
 }
 
-.checkIn {
-    width: 200px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.activities{
+    margin-right: 70%;
     text-align: center;
-    padding: 5px;
-    position: relative;
-    bottom: 172px;
-    left: 51%;
-}
-
-.activities {
-    width: 200px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-    padding: 5px;
-    position: relative;
-    bottom: 284px;
-    left: 74%;
-}
-
-.checkOut {
-    width: 200px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-    padding: 5px;
-    position: relative;
-    bottom: 250px;
-    left: 74%;
-}
-
-.secondDep {
-    width: 200px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-    padding: 5px;
-    position: relative;
-    bottom: 360px;
-    left: 51%;
-}
-
-.secondArr {
-    width: 200px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-    padding: 5px;
-    position: relative;
-    bottom: 470px;
-    left: 28%;
+    padding-bottom: 5%;
 }
 
 
