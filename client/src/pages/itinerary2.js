@@ -17,6 +17,7 @@ class Itinerary extends Component {
 
     componentDidMount() {
         this.getuserInput();
+        setTimeout(() =>{console.log(this.state)}, 2000)
     }
 
     // gets user info for specific _id
