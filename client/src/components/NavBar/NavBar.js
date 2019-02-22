@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import './NavBar.css';
 import PropTypes from 'prop-types'
-import Example from "./modal"
+import ModalContainer from "./modalContainer"
 
 
 class NavBar extends Component {
@@ -70,6 +70,8 @@ class NavBar extends Component {
   }
 
 
+
+
   login = event => {
     console.log(this.state.username, this.state.password)
     this.connectFirebase()
@@ -122,14 +124,15 @@ class NavBar extends Component {
               <li><a href="/">Home</a></li>
               <li><a href="/itinerary">Itinerary</a></li>
               <li><a href="/getflights">Flight Search</a></li>
-              <li><Example
+              <li><ModalContainer
                 logout={this.logout}
                 login={this.login}
                 signup={this.signup}
                 handleInputChange={this.handleInputChange}
                 password={this.state.password}
                 username={this.state.username}
-              ></Example></li>
+                currentUser={this.props.userName}
+              ></ModalContainer></li>
             </ul>
           </div>
         </nav>

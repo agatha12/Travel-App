@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
-import Form from "./pages/itinerary";
+// import Form from "./pages/itinerary";
+import ItinFormContainer from './pages/ItinFormContainer'
 import Itinerary from "./pages/itinerary2";
 import Calendar from "./pages/calendar/calendar";
 import NoMatch from "./pages/nomatch";
@@ -19,7 +20,7 @@ const App = ({store}) => (
       <NavContainer/>
       <Switch>
         <Route exact path="/" component={HomeContainer}/>
-        <Route exact path="/itinerary" component={Form}/>
+        <Route exact path="/itinerary" component={ItinFormContainer}/>
         <Route exact path = "/itinerary/:id" component= {Itinerary} />
         <Route exact path = "/calendar/:id" component= {Calendar} />
         <Route exact path = "/getflights" component= {GetFlights} />

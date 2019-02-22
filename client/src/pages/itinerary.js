@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { RowContainer, ReactModal, FlightModal, HotelModal, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../components/Input";
 import API from "../utils/API";
+import PropTypes from 'prop-types'
 import { Row, Col, Button, Toast } from "react-materialize";
 
 class Form extends Component {
@@ -31,6 +32,11 @@ class Form extends Component {
         secondarrivalTime: ""
     };
 
+
+    componentDidMount = () => {
+        console.log(this.props.userName)
+    }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -54,7 +60,7 @@ class Form extends Component {
         event.preventDefault();
         alert("You just made an itinerary!")
         API.saveForm({
-            passengername: this.state.passengername,
+            passengername: this.props.userName,
             flightnumber: this.state.flightnumber,
             airport: this.state.airport,
             destination: this.state.destination,
@@ -85,11 +91,7 @@ class Form extends Component {
                  <RowContainer>
                     <form>
                         <Row>
-                            <UserInput
-                                name="passengername"
-                                value={this.state.passengername}
-                                onChange={this.handleInputChange}
-                                label="Full Name" />
+                    <p>{this.props.userName}</p>
                             <UserInput
                                 name="flightnumber"
                                 label="Flight Number"
@@ -282,7 +284,7 @@ class Form extends Component {
                         </Col>
                     </form>
                     <Col s={2}>
-                        <a href={"/itinerary/" + this.state.useritinerary._id}>
+                        <a href={"/itinerary/" + this.props.userName}>
                             <ItineraryButton>Go to Itinerary</ItineraryButton>
                         </a>
                     </Col>
@@ -292,5 +294,9 @@ class Form extends Component {
         )
     }
 }
+
+Form.props = {
+    userName: PropTypes.String
+  }
 
 export default Form;
