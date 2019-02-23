@@ -3,19 +3,19 @@ const modalControl = ( state, action) => {
         case 'OPEN_MODAL':
         
         
-        return {
+        return { ...state,
             modalIsOpen: true
         }
         case 'CLOSE_MODAL' :
         
-        return {
+        return { ...state,
             modalIsOpen: false
         }
             
         
         default:
         
-        return {
+        return { ...state,
             modalIsOpen: false
         }
     }

@@ -29,7 +29,7 @@ class NavModal extends React.Component {
   render() {
     return (
       <div>
-        <button style={customStyles.modalButton} onClick={this.props.openModal}>Login</button>
+        <button id="NavModalButton" style={customStyles.modalButton} onClick={this.props.openModal}>Login</button>
         <Modal
           isOpen={this.props.modalIsOpen}
          
@@ -45,7 +45,6 @@ class NavModal extends React.Component {
                 <input onChange={this.props.handleInputChange} name="password" type="text" id="password" placeholder="password" value={this.props.password}></input><br></br>
                 <button onClick={this.props.login} className="btn btn-action" id="loginbutton">Log In</button>
                 <button onClick={this.props.signup} className="btn btn-action" id="signupbutton">Sign Up</button>
-                <button onClick={this.props.logout} className="btn btn-action" id="logoutbutton">Log Out</button>
             </div>
         
        
