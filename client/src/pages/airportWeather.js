@@ -1,39 +1,27 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import SearchFlightForm from "../components/SearchFlightForm"
+import { UserInput, FormButton } from "../components/Input";
+import SearchAirportWeatherForm from "../components/SearchAirportWeatherForm"
 
-class GetFlights extends Component {
+class getAirportWeather extends Component {
     state = {
         response: {},
-        airline: '',
-        flNumber: '',
-        year: '',
-        month: '',
-        day: '',
-        depAirport: ''
+        airport: "",
     }
-
-    // Get flight from api get result into response
-    searchFlight = () => {
-        const { airline, flNumber, year, month, day, depAirport } = this.state;
-        console.log(airline, flNumber, year, month, day, depAirport);
-        API.searchFlight(
+    
+    //get airport weather from api get result into response
+    searchAirportWeather = () => {
+        API.searchAirportWeather(
             {
-            airline: airline,
-            flNumber: flNumber,
-            year: year,
-            month: month,
-            day: day,
-            depAirport: depAirport
-        }
+                airport: this.state.airport
+            }
         ).then(res => {
-            if(res){
+            if (res) {
                 console.log('got result')
             }
-            const flightInfo = res.data.flightStatuses[0];
-            console.log(flightInfo)
-            this.setState({ response: flightInfo })
-
+            const airportWeather = res.data.zoneForecast;
+            console.log(airportWeather)
+            this.setState({ response: airportWeather })
         })
             .catch(function (err) {
                 console.log('ERROR')
@@ -43,8 +31,8 @@ class GetFlights extends Component {
 
     handleFormButton = event => {
         event.preventDefault();
-        alert("Checking for Flight");
-        this.searchFlight()
+        alert("Checking for Weather");
+        this.searchAirportWeather()
     }
 
     handleInputChange = event => {
@@ -54,7 +42,7 @@ class GetFlights extends Component {
         });
     };
 
-    renderFlightInfo = () => {
+    renderWeatherInfo = () => {
         if (this.state.response.departureAirportFsCode) {
             return (
                 <div>
@@ -74,22 +62,17 @@ class GetFlights extends Component {
     render() {
         return (
             <div>
-                <h1>Get Flight</h1>
-                <SearchFlightForm
+                <h1>Get Airport Weather</h1>
+                <SearchAirportWeatherForm
+                airline={this.state.airport}
                 handleInputChange={this.handleInputChange}
                 handleFormButton={this.handleFormButton}
-                airline={this.state.airline}
-                flNumber={this.state.flNumber}
-                depAirport={this.state.depAirport}
-                year={this.state.year}
-                month={this.state.month}
-                day={this.state.day}
                 />
-                {this.renderFlightInfo()}
+                {/* {this.renderFlightInfo()} */}
             </div>
 
         );
     }
 };
 
-export default GetFlights;
+export default getAirportWeather;

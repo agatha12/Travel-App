@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { RowContainer, ReactModal, FlightModal, HotelModal, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../components/Input";
 import API from "../utils/API";
 import PropTypes from 'prop-types'
-import { Row, Col, Button, Toast } from "react-materialize";
+import { Row, Col, Toast } from "react-materialize";
+import SearchFlight from "../components/SearchFlightForm";
+import FlightForm_Long  from "../components/FlightForm_Long"
 
 class Form extends Component {
 
     state = {
+        // FlightAPIWorked is boolean IF 1 Shows API form if 0 (false) shows long form
+        FlightAPIWorked: 1,
         useritinerary: [],
         passengername: "",
         flightnumber: "",
@@ -88,10 +92,10 @@ class Form extends Component {
         return (
             <div id="form-div">
                 <h3>Itinerary Form</h3>
-                 <RowContainer>
+                <RowContainer>
                     <form>
                         <Row>
-                    <p>{this.props.userName}</p>
+                            <p>{this.props.userName}</p>
                             <UserInput
                                 name="flightnumber"
                                 label="Flight Number"
@@ -116,79 +120,41 @@ class Form extends Component {
                                 {/* ADD FLIGHT */}
                                 <FlightModal>
                                     <h4>Departure Date</h4>
-                                    <br />
-                                    <SelectDate
-                                        name="firstDepDate"
-                                        onChange={this.handleInputChange}
-                                        value={this.state.firstDepDate}
-                                        label="Pick a Date" />
+                                    <br /> 
+                                    {this.state.FlightAPIWorked ?
+                                    <SearchFlight
+                                        handleInputChange={this.handleInputChange}
+                                        handleFormButton={this.handleFormButton}
+                                        airline={this.state.airline}
+                                        flNumber={this.state.flNumber}
+                                        depAirport={this.state.depAirport}
+                                        year={this.state.year}
+                                        month={this.state.month}
+                                        day={this.state.day}
+                                    />
+                                    :
+                                    <FlightForm_Long
+                                    firstDepDate={this.state.firstDepDate}
+                                    firstDepTime={this.state.firstDepTime}
 
-                                    <Container value={this.state.firstDepTime}>
-                                        <Hour
-                                            onChange={this.handleInputChange}
-                                            name="dept_hour" /><Minute
-                                            name="dept_min"
-                                            onChange={this.handleInputChange} />
-                                        <Timezone
-                                            name="dept_time"
-                                            onChange={this.handleInputChange} />
-                                    </Container>
-                                    <h4>Arrival Date</h4>
-                                    <SelectDate
-                                        name="firstarrivalDate"
-                                        onChange={this.handleInputChange}
-                                        value={this.state.firstarrivalDate}
-                                        label="Pick a Date" />
+                                    firstarrivalDate={this.state.firstarrivalDate}
+                                    firstarrivalTime={this.state.firstarrivalTime}
 
-                                    <Container value={this.state.firstarrivalTime}>
-                                        <Hour
-                                            onChange={this.handleInputChange}
-                                            name="arr_hour" /><Minute
-                                            name="arr_min"
-                                            onChange={this.handleInputChange} />
-                                        <Timezone
-                                            name="arr_time"
-                                            onChange={this.handleInputChange} />
-                                    </Container>
-                                    <h4>Departure Date</h4>
-                                    <SelectDate
-                                        name="seconddepDate"
-                                        onChange={this.handleInputChange}
-                                        value={this.state.seconddepDate}
-                                        placeholder="Pick a Date" />
+                                    seconddepDate={this.state.seconddepDate}
+                                    seconddepTime={this.state.seconddepTime}
 
-                                    <Container value={this.state.seconddepTime}>
-                                        <Hour
-                                            onChange={this.handleInputChange}
-                                            name="deptwo_hour" /><Minute
-                                            name="deptwo_min"
-                                            onChange={this.handleInputChange} />
-                                        <Timezone
-                                            name="deptwo_time"
-                                            onChange={this.handleInputChange} />
-                                    </Container>
+                                    secondarrivalDate={this.state.secondarrivalDate}
+                                    secondarrivalTime={this.state.secondarrivalTime}
 
-                                    <h4>Arrival Date</h4>
-                                    <SelectDate
-                                        name="secondarrivalDate"
-                                        onChange={this.handleInputChange}
-                                        value={this.state.secondarrivalDate}
-                                        placeholder="Pick a Date" />
+                                    handleInputChange={this.handleInputChange}
+                                    />
+                                    }
 
-                                    <Container value={this.state.secondarrivalTime}>
-                                        <Hour
-                                            onChange={this.handleInputChange}
-                                            name="arrtwo_hour" /><Minute
-                                            name="arrtwo_min"
-                                            onChange={this.handleInputChange} />
-                                        <Timezone
-                                            name="arrtwo_time"
-                                            onChange={this.handleInputChange} />
-                                    </Container>            
                                     <Toast toast="Added Flight" className="button blue darken-1" onClick={this.getValue}>
-                                        Add 
+                                        Add
                                         <i className="material-icons right">add_circle</i>
                                     </Toast>
+                                    
                                 </FlightModal>
                             </Col>
                             <Col s={2}>
@@ -196,17 +162,17 @@ class Form extends Component {
                                 <HotelModal>
                                     <h4>Hotel Check-In</h4>
                                     <Row>
-                                    <ModalInput
-                                        name="hotelName"
-                                        placeholder="Hotel Name"
-                                        value={this.state.hotelName}
-                                        onChange={this.handleInputChange} />
+                                        <ModalInput
+                                            name="hotelName"
+                                            placeholder="Hotel Name"
+                                            value={this.state.hotelName}
+                                            onChange={this.handleInputChange} />
                                     </Row>
                                     <SelectDate
                                         name="checkinDate"
                                         onChange={this.handleInputChange}
                                         value={this.state.checkinDate}
-                                        label="Pick a Date"/>
+                                        label="Pick a Date" />
 
                                     <Container value={this.state.checkinTime}>
                                         <Hour
@@ -237,7 +203,7 @@ class Form extends Component {
                                             onChange={this.handleInputChange} />
                                     </Container>
                                     <Toast toast="Added Hotel" className="button blue darken-1" onClick={this.getValue}>
-                                    Add 
+                                        Add
                                     <i className="material-icons right">add_circle</i>
                                     </Toast>
                                 </HotelModal>
@@ -270,9 +236,9 @@ class Form extends Component {
                                             name="act_time"
                                             onChange={this.handleInputChange} />
                                     </Container>
-                                    <Toast toast="Added Event" className="button blue darken-1" onClick={this.getValue}> 
-                                    <i className="material-icons right">add_circle</i>
-                                    Add
+                                    <Toast toast="Added Event" className="button blue darken-1" onClick={this.getValue}>
+                                        <i className="material-icons right">add_circle</i>
+                                        Add
                                     </Toast>
                                 </ReactModal>
                             </Col>
@@ -297,6 +263,6 @@ class Form extends Component {
 
 Form.props = {
     userName: PropTypes.String
-  }
+}
 
 export default Form;
