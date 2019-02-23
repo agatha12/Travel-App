@@ -1,24 +1,19 @@
-const userInfo = ( state, action) => {
-    switch (action.type){
+const userInfo = (state, action) => {
+    switch (action.type) {
         case 'UPDATE_USER':
-        console.log(state)
-        console.log(action.text)
-        
-        return {
-            userName: action.text
-        }
-        case 'GET_USER' :
-        console.log("get" + state)
-        return {
-            state
-        }
-            
-        
+            console.log(state)
+            console.log(action.text)
+
+            return { ...state,
+                userName: action.text
+            }
+        case 'GET_USER':
+            console.log("get" + state)
+            return {...state}
+    
         default:
-        console.log("default" +state)
-        return {
-            state
-        }
+            console.log("default" + state)
+            return  {...state}
     }
 }
 
