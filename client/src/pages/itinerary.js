@@ -3,13 +3,13 @@ import { RowContainer, ReactModal, FlightModal, HotelModal, UserInput, SelectDat
 import API from "../utils/API";
 import PropTypes from 'prop-types'
 import { Row, Col, Toast } from "react-materialize";
-import SearchFlight from "../components/SearchFlight";
+import SearchFlight from "../components/SearchFlightForm";
 import FlightForm_Long  from "../components/FlightForm_Long"
 
 class Form extends Component {
 
     state = {
-        // FlightAPIWorked is boolean IF 1 Shows my form if 0 (false) shows long form
+        // FlightAPIWorked is boolean IF 1 Shows API form if 0 (false) shows long form
         FlightAPIWorked: 1,
         useritinerary: [],
         passengername: "",
