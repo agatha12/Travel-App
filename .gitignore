@@ -67,3 +67,8 @@ client/yarn.lock
 client/package-lock.json
 
 client/node_modules
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?

@@ -124,6 +124,7 @@ class NavBar extends Component {
               <li><a href="/">Home</a></li>
               <li><a href="/itinerary">Itinerary</a></li>
               <li><a href="/getflights">Flight Search</a></li>
+              <li><a href="/getairportweather">Airport Weather Search</a></li>
               <li><ModalContainer
                 logout={this.logout}
                 login={this.login}

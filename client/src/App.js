@@ -7,6 +7,7 @@ import Itinerary from "./pages/itinerary2";
 import Calendar from "./pages/calendar/calendar";
 import NoMatch from "./pages/nomatch";
 import GetFlights from './pages/flights';
+import GetAirportWeather from './pages/airportWeather';
 import PropTypes from 'prop-types'
 import HomeContainer from './pages/Home/Home'
 import NavContainer from "./components/NavBar/NavContainer"
@@ -24,6 +25,7 @@ const App = ({store}) => (
         <Route exact path = "/itinerary/:id" component= {Itinerary} />
         <Route exact path = "/calendar/:id" component= {Calendar} />
         <Route exact path = "/getflights" component= {GetFlights} />
+        <Route exact path = "/getairportweather" component= {GetAirportWeather} />
         <Route component={NoMatch} />
     </Switch>
     </div>

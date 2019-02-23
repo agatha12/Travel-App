@@ -1,11 +1,16 @@
 import axios from "axios";
 
 export default {
-    searchFlight: function(query ) {
+    //GETs api weather info
+    searchAirportWeather: function (query) {
+        return axios.get("/api/getairportweather", { params: query });
+    },
+    
+    searchFlight: function (query) {
         return axios.get("/api/getflight", { params: query });
     },
 
-    getForms: function() {
+    getForms: function () {
         return axios.get("/api/itinerary");
     },
 
@@ -13,7 +18,7 @@ export default {
     getForm: function (id) {
         return axios.get("/api/itinerary/" + id);
     },
-    
+
     deleteForm: function (id) {
         return axios.delete("/api/itinerary/" + id);
     },
