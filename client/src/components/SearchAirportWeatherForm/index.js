@@ -1,5 +1,6 @@
 import React from "react";
-import { UserInput, FormButton } from "../Input";
+import {FormButton} from "../Input";
+import {SelectAirports} from "../Select_AirportOrAirline"
 
 export default function (props) {
     
@@ -7,9 +8,9 @@ export default function (props) {
     const { handleInputChange, airport, handleFormButton } = props
     return (
         <form>
-            <UserInput
+            <SelectAirports
                 name="airport"
-                placeholder="Enter Airport"
+                icon="cloud"
                 value={airport}
                 onChange={handleInputChange} />
 

@@ -4,13 +4,13 @@ import API from "../utils/API";
 import PropTypes from 'prop-types'
 import { Row, Col, Toast } from "react-materialize";
 import SearchFlight from "../components/SearchFlightForm";
-import FlightForm_Long  from "../components/FlightForm_Long"
+import FlightFormLong  from "../components/FlightForm_Long"
 
 class Form extends Component {
 
     state = {
         // FlightAPIWorked is boolean IF 1 Shows API form if 0 (false) shows long form
-        FlightAPIWorked: 1,
+        FlightAPIWorked: 0,
         useritinerary: [],
         passengername: "",
         flightnumber: "",
@@ -35,7 +35,6 @@ class Form extends Component {
         secondarrivalDate: "",
         secondarrivalTime: ""
     };
-
 
     componentDidMount = () => {
         console.log(this.props.userName)
@@ -133,7 +132,7 @@ class Form extends Component {
                                         day={this.state.day}
                                     />
                                     :
-                                    <FlightForm_Long
+                                    <FlightFormLong
                                     firstDepDate={this.state.firstDepDate}
                                     firstDepTime={this.state.firstDepTime}
 

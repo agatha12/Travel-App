@@ -1,64 +1,75 @@
 import React from "react";
 import { Row, Input, Modal, Button, Icon } from "react-materialize";
 
-export function RowContainer (props) {
-  return(
+export function RowContainer(props) {
+  return (
     <Row>
       {props.children}
     </Row>
   )
 }
 
-export function ReactModal (props) {
-  return(
+export function ReactModal(props) {
+  return (
     <Modal
-    trigger={<Button>ADD EVENT 
+      trigger={<Button>ADD EVENT
       <Icon>insert_chart</Icon>
-    </Button>}>
-    {props.children}
+      </Button>}>
+      {props.children}
     </Modal>
   )
 }
 
-export function FlightModal (props) {
-  return(
+export function FlightModal(props) {
+  return (
     <Modal
-    trigger={<Button>
-    ADD FLIGHT
+      trigger={<Button>
+        ADD FLIGHT
     <i className="material-icons right">add_circle</i>
-    </Button>}>
-    {props.children}
+      </Button>}>
+      {props.children}
     </Modal>
   )
 }
 
-export function HotelModal (props) {
-  return(
+export function HotelModal(props) {
+  return (
     <Modal
-    trigger={<Button>ADD HOTEL
+      trigger={<Button>ADD HOTEL
     </Button>}>
-    {props.children}
+      {props.children}
     </Modal>
   )
 }
 
-export function UserInput (props) {
+export function UserInput(props) {
   return (
-    <Input s={3} type="text" className="form-control validate"  {...props} />  
+    <Row>
+    <Input s={8} type="text" className="form-control validate"  {...props} />
+    </Row>
   )
+
 }
 
-export function ModalInput (props) {
+export function ModalInput(props) {
   return (
-    <Input s={4} type="text" className="form-control validate"  {...props} />  
+    <Input s={4} type="text" className="form-control validate"  {...props} />
   )
 }
 
 export function SelectDate(props) {
-  return ( 
-  <Row>
-    <Input s={4} name='on' type='date' onChange={function(e, value) {}} {...props} />
-  </Row>
+  return (
+    <Row>
+      <Input s={4} name='on' icon="view_comfy" type='date' onChange={function (e, value) { }} {...props} />
+    </Row>
+  )
+}
+
+export function SelectTimes(props) {
+  return (
+    <Row>
+      <Input name='on' type='time' onChange={function (e, value) { }} {...props} />
+    </Row>
   )
 }
 
@@ -135,7 +146,7 @@ export function Day(props) {
 }
 
 export function Container(props) {
-  return (   
+  return (
     <Row>
       {props.children}
     </Row>
@@ -144,7 +155,7 @@ export function Container(props) {
 
 export function Hour(props) {
   return (
-    
+
     <Input s={2} type='select' label="Hour" {...props}>
       <option></option>
       <option>1</option>
@@ -160,13 +171,13 @@ export function Hour(props) {
       <option>11</option>
       <option>12</option>
     </Input>
-   
+
   )
 }
 
 export function Minute(props) {
   return (
-    
+
     <Input s={2} type='select' label="Minute" {...props}>
       <option></option>
       <option>00</option>
@@ -230,24 +241,24 @@ export function Minute(props) {
       <option>58</option>
       <option>59</option>
     </Input>
-    
+
   )
 }
 
-export function Timezone (props) {
+export function Timezone(props) {
   return (
     <Input s={2} type='select' label="Timezone" {...props}>
       <option></option>
       <option>AM</option>
       <option>PM</option>
-    </Input>  
+    </Input>
   )
 }
 
 export function FormButton(props) {
   return (
     <button className="waves-effect waves-light btn-small" {...props}>
-    <i className="material-icons right">send</i>
+      <i className="material-icons right">send</i>
       {props.children}
     </button>
   )

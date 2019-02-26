@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { RowContainer, ReactModal, FlightModal, HotelModal, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../Input";
+import React from "react";
+import { SelectDate, Hour, Minute, Timezone, Container } from "../Input";
 // import API from "../utils/API";
 // import PropTypes from 'prop-types'
-import { Row, Col, Button, Toast } from "react-materialize";
+// import { Row, Col, Button, Toast } from "react-materialize";
 // import SearchFlight from "../components/SearchFlight";
 
 export default function (props) {
