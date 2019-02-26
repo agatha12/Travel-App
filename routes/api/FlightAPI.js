@@ -7,9 +7,9 @@ const BASEURL = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flig
 // https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/3750/arr/2019/2/17?appId=359b0593&appKey=7391440a35325ac00e3ce0e14f4e7b52&utc=false&airport=BOS
 // https://cors-anywhere.herokuapp.com/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/3750/arr/2019/2/17?appId=359b0593&appKey=7391440a35325ac00e3ce0e14f4e7b52&utc=false&airport=BOS
 
-let APPID = '359b0593';
+let APPID = '2a633fa8';
 APPID = `appId=${APPID}`;
-let APPKEY = '7391440a35325ac00e3ce0e14f4e7b52';
+let APPKEY = 'a17f32fde5d1f23deb93952dccb6987c';
 APPKEY = `appKey=${APPKEY}`;
 const UTC = '&utc=false';
 const APPCRED = `?${APPID}&${APPKEY}${UTC}`;

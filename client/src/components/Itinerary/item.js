@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { DeleteButton } from '../Input/index';
 import Moment from "react-moment";
 import { Col, Row, Card, CardTitle } from "react-materialize";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import { UserInput, FormButton } from "../components/Input";
+// import { UserInput, FormButton } from "../components/Input";
 import SearchAirportWeatherForm from "../components/SearchAirportWeatherForm"
 
 class getAirportWeather extends Component {
