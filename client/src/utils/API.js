@@ -10,6 +10,10 @@ export default {
         return axios.get("/api/getflight", { params: query });
     },
 
+    searchHotel: function(query) {
+        return axios.post("/api/gethotel");
+    },
+
     getForms: function () {
         return axios.get("/api/itinerary");
     },

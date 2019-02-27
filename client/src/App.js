@@ -8,6 +8,7 @@ import Calendar from "./pages/calendar/calendar";
 import NoMatch from "./pages/nomatch";
 import GetFlights from './pages/flights';
 import GetAirportWeather from './pages/airportWeather';
+import Hotel from './pages/hotel';
 import PropTypes from 'prop-types'
 import HomeContainer from './pages/Home/Home'
 import NavContainer from "./components/NavBar/NavContainer"
@@ -31,6 +32,7 @@ const App = ({store}) => (
 
         <Route exact path = "/testpage" component= {TestPage} />
 
+        <Route exact path = "/gethotel" component= {Hotel} />
         <Route component={NoMatch} />
     </Switch>
     </div>
