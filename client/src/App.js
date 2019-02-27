@@ -25,6 +25,7 @@ const App = ({store}) => (
         <Route exact path="/" component={HomeContainer}/>
         <Route exact path="/itinerary" component={ItinFormContainer}/>
         <Route exact path = "/itinerary/:id" component= {Itinerary} />
+        <Route exact path = "/itinerary/pass/:id" component= {Itinerary} />
         <Route exact path = "/calendar/:id" component= {Calendar} />
         <Route exact path = "/getflights" component= {GetFlights} />
         <Route exact path = "/getairportweather" component= {GetAirportWeather} />

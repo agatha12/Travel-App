@@ -19,6 +19,10 @@ export default {
         return axios.get("/api/itinerary/" + id);
     },
 
+    getPass: function (id) {
+        return axios.get("/api/itinerary/pass/" + id);
+    },
+
     deleteForm: function (id) {
         return axios.delete("/api/itinerary/" + id);
     },
