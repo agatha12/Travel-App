@@ -13,4 +13,8 @@ router
     .put(itiControlller.update)
     .delete(itiControlller.remove)
 
+router
+    .route("/pass/:id")
+    .get(itiControlller.findByPass)
+
 module.exports = router;

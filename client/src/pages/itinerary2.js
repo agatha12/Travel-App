@@ -17,7 +17,7 @@ class Itinerary extends Component {
 
     // gets user info for specific _id
     getuserInput() {
-        API.getForm(this.props.match.params.id)
+        API.getPass(this.props.match.params.id)
             .then(res => this.setState({ itinerary: res.data }))
             .catch(err => console.log(err));
     };
