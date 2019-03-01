@@ -1,8 +1,9 @@
-
 import React, { Component } from 'react';
 import axios from 'axios';
 import { request } from 'https';
 import API from '../utils/API';
+import { Input, Year, Month, Day, FormButton } from "../components/Input";
+
 
 // let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/"
 
@@ -17,6 +18,7 @@ class Hotel extends Component {
         this.state = {
             tokenerer: "",
             userCity: "miami",
+            superHotel: [],
             startYear: "2019",
             startMonth: "05",
             startDay: "10",
@@ -34,62 +36,39 @@ class Hotel extends Component {
     componentDidMount() {
 
         API.searchHotel().then(response => {
-            console.log("THIS IS FROM THE API " + response.data)
+            // console.log("THIS IS FROM THE API " + response.data)
             this.setState({
                 tokenerer: response.data,
                 isLoading: false
             })
+            // console.log("is the token the same " + this.state.tokenerer)
+            this.hotelCaller();
         })
 
-        const url = this.makeUserCity();
+    }
 
-        console.log("is the token the same" + this.state.tokenerer)
 
-        this.hotelCaller();
-            // axios.get(url, { headers: { Authorization: 'JWT ' + this.state.tokenerer } })
-
-            //     .then(response => {
-            //         this.setState({
-            //             hoteler: response.data.comparison[0].Hotel,
-            //             isLoading: false
-            //         })
-
-            //         console.log(this.state.hoteler)
-
-            //     })
-            //     .catch(function (error) {
-            //         console.log("Hotel call errors " + error);
-            //     })
-        }
-    
-
-handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-        [name]: value
-    });
-}
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    }
 
     // let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
 
 
-makeUserCity = () => {
+    makeUserCity = () => {
         const { baseURL, userCity, startYear, startMonth, startDay, endYear, endMonth, endDay } = this.state;
         const totalURL = `${baseURL}/${userCity}/${startYear}-${startMonth}-${startDay}/${endYear}-${endMonth}-${endDay}`;
         console.log("YOU MADE THIS URL " + totalURL);
         return totalURL;
-};
+    };
 
 
-    handleFormSubmit = event => {
+    handleFormButton = event => {
         event.preventDefault()
-            .then(res => {
-                if (res.data.status === "error") {
-                    throw new Error(res.data.message);
-                }
-                this.setState({ results: res.data.message, error: "" });
-            })
-            .catch(err => this.setState({ error: err.message }));
+        this.hotelCaller();
     };
 
     hotelCaller = () => {
@@ -100,23 +79,51 @@ makeUserCity = () => {
 
             .then(response => {
                 this.setState({
-                    hoteler: response.data.comparison[0].Hotel
+                    superHotel: response.data
                 })
+                console.log("0th response: " + response.data)
+                console.log("First Hotel List State: " + this.state.superHotel.comparison[0])
+                console.log("Second trip down the line " + this.state.superHotel.comparison[0].Hotel)
+                console.log("Second trip down the line " + this.state.superHotel.comparison[1].Hotel)
+                console.log("Second trip down the line " + this.state.superHotel.comparison[0].ratings)
+                console.log("Second trip down the line " + this.state.superHotel.comparison[1]["review-highlights"])
 
-                console.log(this.state.hoteler)
-
+                // this.renderHotelInfo();
             }).catch(function (error) {
 
-                console.log("Hotel call errors" + error);
+                console.log("Hotel call errors " + error);
             });
-    
+
     }
+
+    // renderHotelInfo = () => {
+    //     if (this.state.superHotel){
+    //         return (
+    //             <div>
+    //                 {this.state.superHotel.map(eachHotel => {
+    //                     return (
+    //                         <p>{eachHotel.Hotel}</p>
+    //                     )
+    //                     })
+    //                 }
+    //             </div>
+    //         )
+    //     }
+    //     else {
+    //         return (
+    //             <h3>NO RESULTS BOI</h3>
+    //         )
+    //     }
+    // }
 
     render() {
         return (
             <div>
-                <p>This is your token {this.state.tokenerer}</p>
-                <p>This is your hotel {this.state.hoteler}</p>
+                {/* <p>{this.renderHotelInfo()}</p> */}
+
+                <form>
+  
+                </form>
 
             </div>
         );
