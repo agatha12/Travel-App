@@ -14,8 +14,6 @@ import HomeContainer from './pages/Home/Home'
 import NavContainer from "./components/NavBar/NavContainer"
 import { Provider } from "react-redux";
 
-import TestPage from './pages/testpage'
-
 const App = ({store}) => (
 
   <Provider store={store}>
@@ -30,9 +28,7 @@ const App = ({store}) => (
         <Route exact path = "/calendar/:id" component= {Calendar} />
         <Route exact path = "/getflights" component= {GetFlights} />
         <Route exact path = "/getairportweather" component= {GetAirportWeather} />
-
-        <Route exact path = "/testpage" component= {TestPage} />
-
+        
         <Route component={NoMatch} />
     </Switch>
     </div>
