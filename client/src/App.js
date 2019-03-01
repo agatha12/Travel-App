@@ -31,10 +31,14 @@ const App = ({store}) => (
         <Route exact path = "/getflights" component= {GetFlights} />
         <Route exact path = "/getairportweather" component= {GetAirportWeather} />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
         <Route exact path = "/testpage" component= {TestPage} />
 
         <Route exact path = "/gethotel" component= {Hotel} />
+=======
+        
+>>>>>>> Stashed changes
 =======
         
 >>>>>>> Stashed changes
