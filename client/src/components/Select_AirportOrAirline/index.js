@@ -5,7 +5,7 @@ export function SelectAirlines(props) {
     return (
       <Row>
         <Input s={8} type='select' icon='local_airport' label="Airline"  defaultValue="" {...props}>
-          <option value="" disabled >Choose your option</option>
+          <option value="" disabled >Choose an Airline</option>
           <option value='AA'>(AA) American Airlines</option>
           <option value='DL'>(DL) Delta Air Lines</option>
           <option value='WN'>(WN) Southwest Airlines</option>
@@ -43,8 +43,8 @@ export function SelectAirlines(props) {
     return (
       <Row>
         <Input s={8} type='select' icon='work' label="Departing Airport" defaultValue="" {...props}>
-          <option value="" disabled defaultValue>Choose your option</option>
-          <option value='JFK'>(JFK) John F Kennedy Airport</option>
+          <option value="" disabled defaultValue>Choose an Airport</option>
+          <option value='JFK'>John F Kennedy Airport (JFK)</option>
           <option value='MIA'>Miami International Airport (MIA)</option>
           <option value='ATL'>Hartsfield-Jackson Atlanta International Airport (ATL)</option>
           <option value='EWR'>Newark Liberty International Airport (EWR)</option>

@@ -34,5 +34,9 @@ export default {
     // Saves a itinerary form to Database
     saveForm: function (formData) {
         return axios.post("/api/itinerary", formData)
+    },
+    
+    updateForm: function (id, item) {
+        return axios.put("/api/itinerary/" + id , item)
     }
 };

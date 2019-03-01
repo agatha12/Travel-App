@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from 'moment';
 import API from "../utils/API";
 // import { UserInput, FormButton } from "../components/Input";
 import SearchAirportWeatherForm from "../components/SearchAirportWeatherForm"
@@ -8,7 +9,7 @@ class getAirportWeather extends Component {
         response: {},
         airport: "",
     }
-    
+
     //get airport weather from api get result into response
     searchAirportWeather = () => {
         API.searchAirportWeather(
@@ -17,9 +18,9 @@ class getAirportWeather extends Component {
             }
         ).then(res => {
             if (res) {
-                console.log('got result')
+                console.log('Response Receieved')
             }
-            const airportWeather = res.data.zoneForecast;
+            const airportWeather = res.data;
             console.log(airportWeather)
             this.setState({ response: airportWeather })
         })
@@ -42,20 +43,41 @@ class getAirportWeather extends Component {
         });
     };
 
-    renderWeatherInfo = () => {
-        if (this.state.response.departureAirportFsCode) {
-            return (
-                <div>
-                    <p>Arriving: <span>{this.state.response.departureAirportFsCode}</span></p>
-                    <p>{this.state.response.arrivalAirportFsCode}</p>
-                    <p>{this.state.response.departureDate.dateLocal}</p>
-                    <p>{this.state.response.arrivalDate.dateLocal}</p>
-                    <p>{this.state.response.flightDurations.scheduledBlockMinutes}</p>
-                </div>
-            )
+    weatherConditions = condition => {
+        console.log(`Condition is: ${condition}`)
+        switch (condition) {
+            case 'Thunderstorms':
+                return (<i className="fas fa-bolt"></i>);
+                break;
 
-        } else {
-            return (<h3>No Results to Display</h3>)
+            case 'Showers':
+                return <i className="fas fa-cloud-rain"></i>
+                break;
+
+            // case 'Fog':
+            //     break;
+
+            case 'Rain':
+                return <i className="fas fa-cloud-rain"></i>
+                break;
+
+            case 'Sunny':
+                return <i className="fas fa-sun"></i>
+                break;
+
+            case 'Cloudy':
+                return <i className="fas fa-cloud"></i>
+                break;
+
+            case 'Snow':
+                return <i className="fas fa-snowflake"></i>
+                break;
+
+            case 'Partly Cloudy':
+                return <i className="fas fa-cloud"></i>
+                break;
+            default:
+                return '';
         }
     }
 
@@ -64,11 +86,23 @@ class getAirportWeather extends Component {
             <div>
                 <h1>Get Airport Weather</h1>
                 <SearchAirportWeatherForm
-                airline={this.state.airport}
-                handleInputChange={this.handleInputChange}
-                handleFormButton={this.handleFormButton}
+                    airline={this.state.airport}
+                    handleInputChange={this.handleInputChange}
+                    handleFormButton={this.handleFormButton}
                 />
-                {/* {this.renderFlightInfo()} */}
+
+                {this.state.response.zoneForecast ?
+                    (this.state.response.zoneForecast.dayForecasts.map((eachWeather, i) => {
+                        return (
+                            <div key={i}>
+                                <h4>{eachWeather.day}</h4>
+                                <p>Forcast: {eachWeather.forecast}</p>
+                                <p>From: {moment(eachWeather.start).format('LT')} to {moment(eachWeather.end).format('LT')}</p>
+                                <p>Conditions: {eachWeather.tags[0].value}  {this.weatherConditions(eachWeather.tags[0].value)}</p>
+                            </div>)
+                    })
+                    ) : <div>-</div>
+                }
             </div>
 
         );

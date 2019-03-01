@@ -59,6 +59,7 @@ class GetFlights extends Component {
             [name]: value
         });
         this.changeDateWithMoment();
+        console.log(this.state)
 
     };
     // Changes firstDepDate into 3 parts: year, month, day

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 // import Form from "./pages/itinerary";
+import Update from "./pages/itineraryUpdate";
 import ItinFormContainer from './pages/ItinFormContainer'
 import Itinerary from "./pages/itinerary2";
 import Calendar from "./pages/calendar/calendar";
@@ -14,8 +15,6 @@ import HomeContainer from './pages/Home/Home'
 import NavContainer from "./components/NavBar/NavContainer"
 import { Provider } from "react-redux";
 
-import TestPage from './pages/testpage'
-
 const App = ({store}) => (
 
   <Provider store={store}>
@@ -25,23 +24,12 @@ const App = ({store}) => (
       <Switch>
         <Route exact path="/" component={HomeContainer}/>
         <Route exact path="/itinerary" component={ItinFormContainer}/>
-        <Route exact path = "/itinerary/:id" component= {Itinerary} />
+        <Route exact path = "/itinerary/:id" component= {Update} />
         <Route exact path = "/itinerary/pass/:id" component= {Itinerary} />
         <Route exact path = "/calendar/:id" component= {Calendar} />
         <Route exact path = "/getflights" component= {GetFlights} />
         <Route exact path = "/getairportweather" component= {GetAirportWeather} />
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-        <Route exact path = "/testpage" component= {TestPage} />
-
         <Route exact path = "/gethotel" component= {Hotel} />
-=======
-        
->>>>>>> Stashed changes
-=======
-        
->>>>>>> Stashed changes
         <Route component={NoMatch} />
     </Switch>
     </div>
