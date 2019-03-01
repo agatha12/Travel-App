@@ -17,7 +17,7 @@ class Hotel extends Component {
 
         this.state = {
             tokenerer: "",
-            userCity: "",
+            userCity: "miami",
             superHotel: [],
             startYear: "2019",
             startMonth: "05",
@@ -36,14 +36,15 @@ class Hotel extends Component {
     componentDidMount() {
 
         API.searchHotel().then(response => {
-            console.log("THIS IS FROM THE API " + response.data)
+            // console.log("THIS IS FROM THE API " + response.data)
             this.setState({
                 tokenerer: response.data,
                 isLoading: false
             })
+            // console.log("is the token the same " + this.state.tokenerer)
+            this.hotelCaller();
         })
 
-        console.log("is the token the same" + this.state.tokenerer)
     }
 
 
@@ -80,52 +81,48 @@ class Hotel extends Component {
                 this.setState({
                     superHotel: response.data
                 })
+                console.log("0th response: " + response.data)
+                console.log("First Hotel List State: " + this.state.superHotel.comparison[0])
+                console.log("Second trip down the line " + this.state.superHotel.comparison[0].Hotel)
+                console.log("Second trip down the line " + this.state.superHotel.comparison[1].Hotel)
+                console.log("Second trip down the line " + this.state.superHotel.comparison[0].ratings)
+                console.log("Second trip down the line " + this.state.superHotel.comparison[1]["review-highlights"])
 
-                console.log(this.state.hoteler)
-
+                // this.renderHotelInfo();
             }).catch(function (error) {
 
                 console.log("Hotel call errors " + error);
             });
-        this.renderHotelInfo();
 
     }
 
-    renderHotelInfo = () => {
-        if (this.state.hoteler.comparison){
-            return (
-                <div>
-                    {this.state.hoteler.comparison.map(eachHotel => {
-                        return (
-                            <p>{eachHotel.hotel}</p>
-                        )
-                        })
-                    }
-                </div>
-            )
-        }
-        else {
-            return (
-                <h3>NO RESULTS BOI</h3>
-            )
-        }
-    }
+    // renderHotelInfo = () => {
+    //     if (this.state.superHotel){
+    //         return (
+    //             <div>
+    //                 {this.state.superHotel.map(eachHotel => {
+    //                     return (
+    //                         <p>{eachHotel.Hotel}</p>
+    //                     )
+    //                     })
+    //                 }
+    //             </div>
+    //         )
+    //     }
+    //     else {
+    //         return (
+    //             <h3>NO RESULTS BOI</h3>
+    //         )
+    //     }
+    // }
 
     render() {
         return (
             <div>
-                <p>This is your token {this.state.tokenerer}</p>
-                <p>This is your hotel {this.state.hoteler}</p>
+                {/* <p>{this.renderHotelInfo()}</p> */}
 
                 <form>
-                    <Input
-                        name="userCity"
-                        placeholder="Enter City"
-                        value={this.state.userCity}
-                        onChange={this.handleInputChange} />
-                    <FormButton onClick={this.handleFormButton}>
-                        Submit
-                    </FormButton>
+  
                 </form>
 
             </div>
