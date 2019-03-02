@@ -88,7 +88,7 @@ class Hotel extends Component {
                 console.log("Second trip down the line " + this.state.superHotel.comparison[0].ratings)
                 console.log("Second trip down the line " + this.state.superHotel.comparison[1]["review-highlights"])
 
-                // this.renderHotelInfo();
+                this.renderHotelInfo();
             }).catch(function (error) {
 
                 console.log("Hotel call errors " + error);
@@ -96,40 +96,35 @@ class Hotel extends Component {
 
     }
 
-    // renderHotelInfo = () => {
-    //     if (this.state.superHotel){
-    //         return (
-    //             <div>
-    //                 {this.state.superHotel.map(eachHotel => {
-    //                     return (
-    //                         <p>{eachHotel.Hotel}</p>
-    //                     )
-    //                     })
-    //                 }
-    //             </div>
-    //         )
-    //     }
-    //     else {
-    //         return (
-    //             <h3>NO RESULTS BOI</h3>
-    //         )
-    //     }
-    // }
+    renderHotelInfo = () => {
+        console.log("THIS IS FROM RENDER \n"  + this.state.superHotel.comparison)
+        return (
+        
+            this.state.superHotel.comparison.map((eachHotel, index) => {
+                return (
+                    <p key={index}>{eachHotel.Hotel}
+                    </p>
+                )
+            })
+        )
+    }
 
     render() {
+
+        const truHotel = this.state.superHotel.comparison
         return (
             <div>
-                {/* <p>{this.renderHotelInfo()}</p> */}
-
-                <form>
-  
-                </form>
-
+            {truHotel ?
+            <div>
+                {this.renderHotelInfo()}
+            </div>
+                : <p>No Dice</p> 
+            }
             </div>
         );
-
     }
 }
+
 export default Hotel;
 
 
