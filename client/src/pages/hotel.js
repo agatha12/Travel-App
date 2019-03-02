@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { request } from 'https';
 import API from '../utils/API';
-import { Input, Year, Month, Day, FormButton } from "../components/Input";
+import HotelForm from "../components/HotelForm"
+import moment from 'moment';
 
-
-// let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/"
 
 let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
 
-// https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17
 
 class Hotel extends Component {
     constructor(props) {
@@ -17,14 +15,16 @@ class Hotel extends Component {
 
         this.state = {
             tokenerer: "",
-            userCity: "miami",
+            userCity: "",
             superHotel: [],
-            startYear: "2019",
-            startMonth: "05",
-            startDay: "10",
-            endYear: "2019",
-            endMonth: "05",
-            endDay: "17",
+            checkInDate: "",
+            startYear: "",
+            startMonth: "",
+            startDay: "",
+            checkOutDate: "",
+            endYear: "",
+            endMonth: "",
+            endDay: "",
             hotelRepsonse: "",
             baseURL: "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2",
             totalURL: "",
@@ -36,13 +36,13 @@ class Hotel extends Component {
     componentDidMount() {
 
         API.searchHotel().then(response => {
-            // console.log("THIS IS FROM THE API " + response.data)
+            console.log("THIS IS FROM THE API " + response.data)
             this.setState({
                 tokenerer: response.data,
                 isLoading: false
             })
-            // console.log("is the token the same " + this.state.tokenerer)
-            this.hotelCaller();
+            console.log("is the token the same " + this.state.tokenerer)
+            // this.hotelCaller();
         })
 
     }
@@ -53,7 +53,28 @@ class Hotel extends Component {
         this.setState({
             [name]: value
         });
+        this.changeDateWithMoment();
     }
+
+    changeDateWithMoment = () => {
+        let localCheckInDate = moment(this.state.checkInDate, 'DD MMMM YYYY');
+        let localCheckOutDate = moment(this.state.checkOutDate, 'DD MMMM YYYY');
+        let checkInYearFormat = localCheckInDate.format('YYYY');
+        let checkInMonthFormat = localCheckInDate.format('MM');
+        let checkInDayFormat = localCheckInDate.format('DD');
+        let checkOutYearFormat = localCheckOutDate.format('YYYY');
+        let checkOutMonthFormat = localCheckOutDate.format('MM');
+        let checkOutDayFormat = localCheckOutDate.format('DD');
+        // console.log(firstDepDate.format('L'));
+        this.setState({
+            startYear: checkInYearFormat,
+            startMonth: checkInMonthFormat,
+            startDay: checkInDayFormat,
+            endYear: checkOutYearFormat,
+            endMonth: checkInMonthFormat,
+            endDay: checkOutDayFormat
+        });
+    };
 
     // let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
 
@@ -97,12 +118,13 @@ class Hotel extends Component {
     }
 
     renderHotelInfo = () => {
-        console.log("THIS IS FROM RENDER \n"  + this.state.superHotel.comparison)
+        console.log("THIS IS FROM RENDER \n" + this.state.superHotel.comparison)
         return (
-        
+
             this.state.superHotel.comparison.map((eachHotel, index) => {
                 return (
-                    <p key={index}>{eachHotel.Hotel}
+                    <p key={index}>
+                        {eachHotel.Hotel}
                     </p>
                 )
             })
@@ -114,12 +136,24 @@ class Hotel extends Component {
         const truHotel = this.state.superHotel.comparison
         return (
             <div>
-            {truHotel ?
-            <div>
-                {this.renderHotelInfo()}
-            </div>
-                : <p>No Dice</p> 
-            }
+                <h1>Get Hotel</h1>
+                <HotelForm
+                    handleInputChange={this.handleInputChange}
+                    handleFormButton={this.handleFormButton}
+                    userCity={this.state.userCity}
+                    checkInDate={this.state.checkInDate}
+                    checkOutDate={this.state.checkOutDate}
+                />
+                <h1>Hotel Results</h1>
+
+                <div>
+                    {truHotel ?
+                        <div>
+                            {this.renderHotelInfo()}
+                        </div>
+                        : <p>No Results</p>
+                    }
+                </div>
             </div>
         );
     }
