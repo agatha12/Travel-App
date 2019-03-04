@@ -13,6 +13,7 @@ import Hotel from './pages/hotel';
 import PropTypes from 'prop-types'
 import HomeContainer from './pages/Home/Home'
 import NavContainer from "./components/NavBar/NavContainer"
+import PhotoFormContainer from './pages/photoForm'
 import PhotoAlbumContainer from './pages/photoAlbum'
 import { Provider } from "react-redux";
 
@@ -31,6 +32,7 @@ const App = ({store}) => (
         <Route exact path = "/getflights" component= {GetFlights} />
         <Route exact path = "/getairportweather" component= {GetAirportWeather} />
         <Route exact path = "/gethotel" component= {Hotel} />
+        <Route exact path = "/photoForm" component= {PhotoFormContainer} />
         <Route exact path = "/photoAlbum" component= {PhotoAlbumContainer} />
         <Route component={NoMatch} />
     </Switch>

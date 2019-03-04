@@ -1,102 +1,37 @@
 import React from "react";
-import PropTypes from 'prop-types'
-//import FileUploader from 'react-firebase-file-uploader'
-import firebase from "../../utils/firebase"
-import PreviewPicture from "./PreviewImage";
+import PreviewPicture from "./PreviewImage"
 
 
 
+const PhotoForm = (props) => {
 
 
-class PhotoAlbum extends React.Component {
 
-    constructor(state) {
-        super(state);
-        this.state = {
-            picture: null,
-            pictureURL: null,
-        }
-    }
-
-
-    // state = {
-    //     image: '',
-    //     imageURL: '',
-    //     progress: 0
-    // }
-
-    // handleUploadStart = () => {
-    //     this.setState({
-    //         progress: 0
-    //     })
-    // }
-
-    // handleUploadSUccess = filename => {
-
-    //     this.setState({
-    //         image: filename,
-    //         progress: 100
-    //     })
-    //     firebase.upload(filename)
-    // }
-
-    displayPicture = event => {
-        let reader = new FileReader();
-        let file = event.target.files[0]
-        console.log(file)
-        //firebase.upload(file)
-        reader.onloadend = () => {
-            this.setState({
-                picture: file,
-                pictureURL: reader.result
-            })
-        }
-        reader.readAsDataURL(file)
-        // setTimeout(() => {console.log(this.state)}, 5000) 
-    }
-
-    addPic = picture => {
-        picture.preventDefault()
-        console.log(picture)
-        firebase.upload(this.state.picture)
-    }
-
-
-    render() {
-        //console.log(this.state)
         return (
             <div>
-                <form onSubmit={this.addPic} className="form-group">
+                <h3>Add a new photo</h3>
+                <form onSubmit={props.addPic} className="form-group">
                     <label>Photo</label>
                     <input onChange={(event) => {
-                        this.displayPicture(event)
+                        props.displayPicture(event)
                     }} type="file" className="form-control"></input>
+                    <label>Album Name</label>
+                    <input onChange={props.handleChange} type="text" name="albumName"></input>
                 <input  type="submit" className="btn btn-primary btn-block"></input>               
                 
                 <PreviewPicture 
-                pictureURL={this.state.pictureURL}/>
+                pictureURL={props.pictureURL}/>
+                <PreviewPicture 
+                pictureURL={props.img}/>
                 
                  </form>
-                
-                
-                
-                {/* <FileUploader
-accept="image/*"
-name="image"
-storageRef={firebase.storageRef}
-onUploadStart={this.handleUploadStart}
-onUploadSuccess={this.handleUploadSuccess}
 
-/> */}
+
 
             </div>
         )
     }
-}
 
-PhotoAlbum.props = {
-    userName: PropTypes.String
-}
 
-export default PhotoAlbum;
+export default PhotoForm;
 
