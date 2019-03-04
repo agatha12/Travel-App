@@ -41,7 +41,12 @@ class NavBar extends Component {
 
   _getStateButtons = () => {
     if (this.props.userName === "") {
+        let path = window.location.pathname
+          if (path !== "/"){
+             window.location.replace("/")
+          }
       return (
+        <ul id="nav-mobile" className="right">
         <li id="modalLi"><ModalContainer
           login={this.login}
           signup={this.signup}
@@ -50,9 +55,19 @@ class NavBar extends Component {
           username={this.state.username}
           currentUser={this.props.userName}
         ></ModalContainer></li>
+        </ul>
       )
     } else {
-      return <li id="buttonLi"><button onClick={firebase.logout}>Logout</button></li>
+      return (
+      <ul id="nav-mobile" className="right">
+      <li><a href="/">Home</a></li>
+      <li><a href="/itinerary">Itinerary</a></li>
+      <li><a href="/getflights">Flight Search</a></li>
+      <li><a href="/getairportweather">Airport Weather</a></li>
+      <li><a href="/gethotel">Hotel Search</a></li>
+      <li><a href="/photoAlbum">Photo Album</a></li>
+      <li id="buttonLi"><button id="logoutButton" onClick={firebase.logout}>Logout</button></li>
+      </ul>)
     }
 
   }
@@ -64,14 +79,11 @@ class NavBar extends Component {
           <div className="nav-wrapper">
             <a href="/" className="brand-logo hide-on-med-and-down">Travel App</a>
 
-            <ul id="nav-mobile" className="right">
-              <li><a href="/">Home</a></li>
-              <li><a href="/itinerary">Itinerary</a></li>
-              <li><a href="/getflights">Flight Search</a></li>
-              <li><a href="/getairportweather">Airport Weather</a></li>
+            
+             
               {this._getStateButtons()}
 
-            </ul>
+            
           </div>
         </nav>
 
