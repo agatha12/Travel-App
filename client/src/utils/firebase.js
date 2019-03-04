@@ -62,50 +62,48 @@ export default {
 
     task.on('state_changed',
       function progress(snapshot) {
+        //document.getElementById("progressDiv").empty()
+        document.getElementById("progressDiv").append("Your photo is uploading...")
 
       },
       function error(err) {
+        alert(err)
         console.log(err)
       },
       function complete() {
         console.log("done")
         const images = firebase.storage().ref(`photos/${user}/${albumName}/${picture.name}`)
    
-    //const image = images.child('image1');
-    // if (currentPhotos.length === 0){
-    //   console.log(0)
-    //   images.getDownloadURL().then((url) => { photoAPI.updateForm(id, {photos: [url]})});
-
-    // }
-    // else if(currentPhotos.length === 1){
-    //   console.log(1)
-    //   images.getDownloadURL().then((url) => { photoAPI.updateForm(id, {photos: [currentPhotos, url]})});
-
-    // }
-    // else{
       console.log(2)
-      images.getDownloadURL().then((url) => { photoAPI.updateForm(id, [...currentPhotos, url])});
-
-    //}
+       
+      images.getDownloadURL().then((url) => { 
+        let newImage = {
+          photoName: `photos/${user}/${albumName}/${picture.name}`,
+          URL: url
+        }
+        photoAPI.updateForm(id, [...currentPhotos, newImage])});
+      window.location.replace("/photoAlbum")
       }
 
     )
   },
 
-  getPhoto: function (photo, id, currentPhotos) {
-    const images = firebase.storage().ref(photo)
-    console.log(photo)
-    //const image = images.child('image1');
-    images.getDownloadURL().then((url) => { photoAPI.updateForm(id, {photos: [...currentPhotos, {photoName: url}]})});
-  },
 
-  deletePhoto: function (photo) {
-    // Create a reference to the file to delete
-    var desertRef = firebase.storage().ref('photos/'+photo);
+  deletePhoto: function (photoName, currentPhotos, index, id) {
 
-    // Delete the file
-    desertRef.delete().then(function () {
-      // File deleted successfully
+    let Ref = firebase.storage().ref(photoName);
+
+
+    Ref.delete().then(function () {
+
+      let newArray = currentPhotos
+      currentPhotos.splice((index), 1)
+      console.log(index)
+      console.log(newArray)
+      console.log(currentPhotos)
+      photoAPI.updateForm(id, newArray);
+      window.location.replace("/photoAlbum")
+
     }).catch(function (error) {
       // Uh-oh, an error occurred!
     });

@@ -23,5 +23,6 @@ router.route("/")
 router.route("/:id")
     .get(photoControlller.findByUser)
     .put(photoControlller.update)
+    .delete(photoControlller.remove)
 
 module.exports = router;

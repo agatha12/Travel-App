@@ -18,7 +18,7 @@ const PhotoForm = (props) => {
                     <label>Album Name</label>
                     <input onChange={props.handleChange} type="text" name="albumName"></input>
                 <input  type="submit" className="btn btn-primary btn-block"></input>               
-                
+                <div id="progressDiv"></div>
                 <PreviewPicture 
                 pictureURL={props.pictureURL}/>
                 <PreviewPicture 

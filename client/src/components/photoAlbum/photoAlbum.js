@@ -88,7 +88,9 @@ addPic = picture => {
       console.log(album)
       photoAPI.createAlbum(
         album
-    ).then(res => {console.log(res)})
+    ).then(res => {
+    window.location.replace("/photoAlbum")
+  })
         .catch(err => console.log(err));
 
 
@@ -106,12 +108,14 @@ addPic = picture => {
         let index = this.state.index
         let name = this.state.userAlbums[index].albumName
         let photos= this.state.userAlbums[index].photos
+        let id = this.state.userAlbums[index]._id
         
         return (
           <div>
         <Album
         name={name}
         photos={photos}
+        id={id}
         />
         <PhotoForm
         addPic={this.addPic}
@@ -141,7 +145,7 @@ addPic = picture => {
                 <h1>Your Albums</h1>
                 <div id="albumsbuttons">
                   {this.state.userAlbums.map((album, index) => {
-                    return (<button onClick={() => {
+                    return (<button key={index} onClick={() => {
 
                       this.click(index)
                     }}>{album.albumName}</button>)
@@ -153,7 +157,7 @@ addPic = picture => {
               <form onSubmit={this.createAlbum}>
                 <h4>Create new album</h4>
                 <label>Album Name</label>
-                <input name="albumName" onChange={this.handleChange} type="text"></input>
+                <input id="albumName" name="albumName" onChange={this.handleChange} type="text"></input>
                 <input type="submit"></input>
               </form>
             </div>
