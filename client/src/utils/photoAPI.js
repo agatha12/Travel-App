@@ -14,9 +14,9 @@ export default {
     //     return axios.get("/api/itinerary/pass/" + id);
     // },
 
-    // deleteForm: function (id) {
-    //     return axios.delete("/api/itinerary/" + id);
-    // },
+    deleteAlbum: function (id) {
+        return axios.delete("/api/photos/" + id);
+    },
 
     createAlbum: function (formData) {
         return axios.post("/api/photos", formData)
