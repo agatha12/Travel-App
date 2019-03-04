@@ -1,3 +1,4 @@
 module.exports = {
-    Itinerary: require("./itinerarymodel")
+    Itinerary: require("./itinerarymodel"),
+    Photo: require("./photoModel")
 };

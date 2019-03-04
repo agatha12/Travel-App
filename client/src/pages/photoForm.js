@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import {GET_USER} from '../actions/index'
-import PhotoAlbum from "../components/photoAlbum/photoAlbum"
+import PhotoForm from "../components/photoAlbum/PhotoForm"
 
 
 
@@ -14,9 +14,9 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-const PhotoAlbumContainer = connect(
+const PhotoFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PhotoAlbum)
+)(PhotoForm)
 
-export default PhotoAlbumContainer
+export default PhotoFormContainer
