@@ -5,7 +5,6 @@ import './App.css';
 import Update from "./pages/itineraryUpdate";
 import ItinFormContainer from './pages/ItinFormContainer'
 import Itinerary from "./pages/itinerary2";
-import Calendar from "./pages/calendar/calendar";
 import NoMatch from "./pages/nomatch";
 import GetFlights from './pages/flights';
 import GetAirportWeather from './pages/airportWeather';
@@ -28,7 +27,6 @@ const App = ({ store }) => (
         <Route exact path="/itinerary" component={ItinFormContainer}/>
         <Route exact path = "/itinerary/:id" component= {Update} />
         <Route exact path = "/itinerary/pass/:id" component= {Itinerary} />
-        <Route exact path = "/calendar/:id" component= {Calendar} />
         <Route exact path = "/getflights" component= {GetFlights} />
         <Route exact path = "/getairportweather" component= {GetAirportWeather} />
         <Route exact path = "/gethotel" component= {Hotel} />

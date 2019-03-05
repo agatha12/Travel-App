@@ -14,21 +14,19 @@ class Update extends Component {
             flightnumber: '',
             airport: '',
             destination: '',
-            hotelName: '',
+            // hotelName: '',
             firstDepDate: '',
             firstDepTime: '',
             firstarrivalDate: '',
             firstarrivalTime: '',
-            checkinDate: '',
-            checkinTime: '',
-            checkoutTime: '',
-            checkoutDate: '',
+            // checkinDate: '',
+            // checkinTime: '',
+            // checkoutTime: '',
+            // checkoutDate: '',
             seconddepDate: '',
             seconddepTime: '',
-            secondarrivalDate: ''
-            // check_hour: '',
-            // check_min: '',
-            // in_time: ''
+            secondarrivalDate: '',
+            hotelList: []
         },
         FlightAPIWorked: 0
     }
@@ -65,17 +63,20 @@ class Update extends Component {
         const { flightnumber, airport, destination,
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
-            secondarrivalDate,
-            hotelName, checkinDate, checkinTime,
-            checkoutDate, checkoutTime } = this.state.itinerary
+            secondarrivalDate, hotelList
+            // hotelName, checkinDate, checkinTime,
+            // checkoutDate, checkoutTime, hotelList 
+            } = this.state.itinerary
+
+        alert("Update Complete");
 
         API.updateForm(this.props.match.params.id, {
             flightnumber, airport, destination,
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
-            secondarrivalDate,
-            hotelName, checkinDate, checkinTime,
-            checkoutDate, checkoutTime
+            secondarrivalDate, hotelList
+            // hotelName, checkinDate, checkinTime,
+            // checkoutDate, checkoutTime
         })
             .then((result) => {
                 console.log(result.data)
@@ -117,8 +118,10 @@ class Update extends Component {
                                     onChange={this.onChange}
                                     value={this.state.itinerary.firstDepDate} />
                                 <UserInput
+                                    s={6}
                                     name="firstDepTime"
                                     value={this.state.itinerary.firstDepTime}
+                                    icon="access_time"
                                     onChange={this.onChange} />
                                 <h4>Arrival Date</h4>
                                 <SelectDate
@@ -126,7 +129,9 @@ class Update extends Component {
                                     onChange={this.onChange}
                                     value={this.state.itinerary.firstarrivalDate} />
                                 <UserInput
+                                    s={6}
                                     name="firstarrivalTime"
+                                    icon="access_time"
                                     value={this.state.itinerary.firstarrivalTime}
                                     onChange={this.onChange} />
                                 <h4>Departure Date</h4>
@@ -135,7 +140,9 @@ class Update extends Component {
                                     onChange={this.onChange}
                                     value={this.state.itinerary.seconddepDate} />
                                 <UserInput
+                                    s={6}
                                     name="seconddepTime"
+                                    icon="access_time"
                                     value={this.state.itinerary.seconddepTime}
                                     onChange={this.onChange} />
                                 <h4>Arrival Date</h4>
@@ -148,7 +155,7 @@ class Update extends Component {
 
                         <Col s={2}>
                             {/* ADD HOTEL */}
-                            <HotelModal>
+                            {/* <HotelModal>
                                 <h4>Hotel Check-In</h4>
 
                                 <label>Hotel Name</label>
@@ -188,7 +195,7 @@ class Update extends Component {
                                     Update
                                     <i className="material-icons right">add_circle</i>
                                 </Toast>
-                            </HotelModal>
+                            </HotelModal> */}
                         </Col>
                         <Col s={2}>
                             {/* ADD EVENT */}

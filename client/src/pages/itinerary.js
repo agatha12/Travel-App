@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import { RowContainer, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../components/Input";
 import API from "../utils/API";
 import PropTypes from 'prop-types'
-import { Row, Col } from "react-materialize";
+import { Row, Col} from "react-materialize";
+import Intro from "../components/Intro";
 import SearchFlight from "../components/SearchFlightForm";
+import FlightFormLong from "../components/FlightForm_Long"
 import { AreYouFlying2 } from "../components/AreYouFlying";
 import { FlightModalButton, HotelModalButton, ActivitiesModalButton } from "../components/Modals";
 import NotFlyingForm from "../components/NotFlyingForm";
+import { NewFooter } from "../components/Footer";
 
 class Form extends Component {
     state = {
@@ -23,7 +26,6 @@ class Form extends Component {
         passengername: "",
         flightnumber: "",
         airport: "",
-
         firstDepDate: "",
         firstDepTime: "",
         firstarrivalDate: "",
@@ -33,6 +35,7 @@ class Form extends Component {
         minute: "",
 
         checkinDate: "",
+        hotelList: [],
         hotelName: "",
         checkinTime: "",
         checkoutDate: "",
@@ -65,30 +68,9 @@ class Form extends Component {
         event.preventDefault();
     };
 
-    register(name) {
-        console.log(name);
-    };
-
     getValue = () => {
-        console.log("Hey")
-    };
-
-    pushActivity = () => {
-
-        console.log("Here");
-
-        let act = {
-            activityName: this.state.activityName,
-            activityDate: this.state.activityDate,
-            activityTime: this.state.act_hour + this.state.act_min + this.state.act_time
-        }
-
-        console.log(act)
-
-        this.setState({
-            activityList: [...this.state.activityList, act]
-        })
-    };
+        console.log(this.state.useritinerary);
+    }
 
     showAddFlightManually = () => {
         this.setState({ apiNoResults: "disabled" })
@@ -116,6 +98,45 @@ class Form extends Component {
         console.log("clicked on handleFlightFormApi")
     };
 
+    pushActivity = () => {
+
+        alert("Added Event")
+
+        console.log("Here");
+
+        let act = {
+            activityName: this.state.activityName,
+            activityDate: this.state.activityDate,
+            activityTime: this.state.act_hour + this.state.act_min + this.state.act_time
+        }
+
+        this.setState({
+            activityList: [...this.state.activityList, act]
+        })
+    };
+
+
+    pushHotel = () => {
+
+        alert("Added Hotel")
+
+        console.log("Hotel");
+
+        let newHotel = {
+            hotelName: this.state.hotelName,
+            checkinDate: this.state.checkinDate,
+            checkinTime: this.state.check_hour + ":" +this.state.check_min + this.state.in_time,
+            checkoutDate: this.state.checkoutDate,
+            checkoutTime: this.state.out_hour + ":" + this.state.out_min + this.state.out_time
+        }
+
+        this.setState({
+            hotelList: [...this.state.hotelList, newHotel]
+        })
+
+    }
+
+
     handleFormButton = event => {
         event.preventDefault();
         alert("You just made an itinerary!")
@@ -124,24 +145,18 @@ class Form extends Component {
             flightnumber: this.state.flightnumber,
             airport: this.state.airport,
             destination: this.state.destination,
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
             firstDepDate: this.state.firstDepDate,
             firstDepTime: this.state.dept_hour + ":" + this.state.dept_min + this.state.dept_time,
             firstarrivalDate: this.state.firstarrivalDate,
             firstarrivalTime: this.state.arr_hour + ":" + this.state.arr_min + this.state.arr_time,
-            checkinDate: this.state.checkinDate,
-            hotelName: this.state.hotelName,
-            checkinTime: this.state.check_hour + ":" + this.state.check_min + this.state.in_time,
-            checkoutDate: this.state.checkoutDate,
-            checkoutTime: this.state.out_hour + ":" + this.state.out_min + this.state.out_time,
+            hotelList: [...this.state.hotelList],
             seconddepDate: this.state.seconddepDate,
             seconddepTime: this.state.deptwo_hour + ":" + this.state.deptwo_min + this.state.deptwo_time,
             secondarrivalDate: this.state.secondarrivalDate,
             secondarrivalTime: this.state.arrtwo_hour + ":" + this.state.arrtwo_min + this.state.arrtwo_time,
-            activityList: [{
-                activityName: this.state.activityName,
-                activityDate: this.state.activityDate,
-                activityTime: this.state.act_hour + ":" + this.state.act_min + this.state.act_time,
-            }]
+            activityList: [...this.state.activityList]
         }).then(res => this.setState({ useritinerary: res.data }))
             .catch(err => console.log(err));
     };
@@ -237,17 +252,24 @@ class Form extends Component {
                     </Row>
                     <Row>
                         <Col s={2}>
-                            <FormButton onClick={this.handleFormButton}>Submit </FormButton>
-                        </Col>
-                        <Col s={2}>
-                            <a href={"/itinerary/pass/" + this.props.userName}>
-                                <ItineraryButton>Go to Itinerary</ItineraryButton>
-                            </a>
+                            <FormButton onClick={this.handleFormButton}>
+                                Submit
+                        </FormButton>
                         </Col>
                     </Row>
+                    <Col s={2}>
+                        <a href={"/itinerary/pass/" + this.props.userName}>
+                            <ItineraryButton>
+                            <i className="material-icons right">card_travel</i>
+                                View Trips
+                                </ItineraryButton>
+                        </a>
+                    </Col>
                 </RowContainer>
+                <NewFooter>
+                    Test
+                </NewFooter>
             </div >
-
         )
     };
 }
