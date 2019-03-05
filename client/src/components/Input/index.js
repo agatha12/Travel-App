@@ -14,9 +14,10 @@ export function ReactModal(props) {
     <Modal
       header="Activities"
       fixedFooter
-      trigger={<Button>ADD EVENT
-      <Icon>insert_chart</Icon>
-      </Button>}>
+      trigger={<button className="light-blue lighten-3 waves-effect waves-light btn-small">
+        EVENT
+      <i className="material-icons right">directions_bike</i>
+      </button>}>
       {props.children}
     </Modal>
   )
@@ -27,10 +28,10 @@ export function FlightModal(props) {
   return (
     <Modal
       fixedFooter
-      trigger={<Button disabled={props.disabled} >
-        ADD FLIGHT
-    <i className="material-icons right">add_circle</i>
-      </Button>}>
+      trigger={<button className="light-blue lighten-3 waves-effect waves-light btn-small">
+        FLIGHT
+    <i className="material-icons right">airplanemode_active</i>
+      </button>}>
       {props.children}
     </Modal>
   )
@@ -40,8 +41,10 @@ export function HotelModal(props) {
   return (
     <Modal
       fixedFooter
-      trigger={<Button>ADD HOTEL</Button>}
-    >
+      trigger={<button className="light-blue lighten-3 waves-effect waves-light btn-small">
+        HOTEL
+      <i className="material-icons right">hotel</i>
+      </button>}>
       {props.children}
     </Modal>
   )
@@ -53,7 +56,22 @@ export function UserInput(props) {
       <Input s={10} type="text" className="form-control validate"  {...props} />
     </Row>
   )
+}
 
+export function FlightInput(props) {
+  return (
+    <Row>
+      <Input s={6} icon="airplanemode_active" type="text" className="form-control validate"  {...props} />
+    </Row>
+  ) 
+}
+
+export function AirportInput(props) {
+  return (
+    <Row>
+      <Input s={6} icon="work" type="text" className="form-control validate"  {...props} />
+    </Row>
+  ) 
 }
 
 export function ModalInput(props) {
@@ -65,8 +83,16 @@ export function ModalInput(props) {
 export function SelectDate(props) {
   return (
     <Row>
-      <Input s={12} name='on' icon="view_comfy" type='date' onChange={function (e, value) { }} {...props} />
+      <Input s={12} name='on' icon="date_range" type='date' onChange={function (e, value) { }} {...props} />
     </Row>
+  )
+}
+
+export function StartDate(props) {
+  return (
+
+    <Input name='on' icon="date_range" type='date' onChange={function (e, value) { }} {...props} />
+
   )
 }
 
@@ -262,7 +288,7 @@ export function Timezone(props) {
 
 export function FormButton(props) {
   return (
-    <button className={`waves-effect waves-light btn-small ${props.color}`} {...props}>
+    <button className="light-blue lighten-3 waves-effect waves-light btn-small" {...props}>
       <i className="material-icons right">send</i>
       {props.children}
     </button>
@@ -279,7 +305,7 @@ export function DeleteButton(props) {
 
 export function ItineraryButton(props) {
   return (
-    <button className="waves-effect waves-light btn-small" {...props}>
+    <button className="light-blue lighten-3 waves-effect waves-light btn-small" {...props}>
       {props.children}
     </button>
   )

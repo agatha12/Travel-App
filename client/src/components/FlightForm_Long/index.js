@@ -1,5 +1,5 @@
 import React from "react";
-import { SelectDate, Hour, Minute, Timezone, Container } from "../Input";
+import { SelectDate, Hour, Minute, Timezone, Container, UserInput, FlightInput, AirportInput } from "../Input";
 // import API from "../utils/API";
 // import PropTypes from 'prop-types'
 // import { Row, Col, Button, Toast } from "react-materialize";
@@ -7,12 +7,37 @@ import { SelectDate, Hour, Minute, Timezone, Container } from "../Input";
 
 export default function (props) {
     //This for the flight modal - if API is not available the user can enter all the information manually
-    const {firstDepDate, firstDepTime, firstarrivalDate , firstarrivalTime } = props;
-    const {seconddepDate, seconddepTime, secondarrivalDate , secondarrivalTime } = props;
-    const {handleInputChange} = props;
+    const { flightnumber, airport } = props;
+    const { firstDepDate, firstDepTime, firstarrivalDate, firstarrivalTime } = props;
+    const { seconddepDate, seconddepTime, secondarrivalDate, secondarrivalTime } = props;
+    const { handleInputChange } = props;
 
     return (
         <div>
+            <h4>Flight Details</h4>
+            <FlightInput
+                name="flightnumber"
+                onChange={handleInputChange}
+                value={flightnumber}
+                label="Flight Number"
+            />
+            {/* <UserInput
+                name="flightnumber"
+                onChange={handleInputChange}
+                value={flightnumber}
+                label="Flight Number" /> */}
+            <AirportInput 
+                name="airport"
+                onChange={handleInputChange}
+                value={airport}
+                label="Departure Airport" 
+            />
+            {/* <UserInput
+                name="airport"
+                onChange={handleInputChange}
+                value={airport}
+                label="Departure Airport"/> */}
+            <h4>Departure Date</h4>
             <SelectDate
                 name="firstDepDate"
                 onChange={handleInputChange}
