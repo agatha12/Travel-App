@@ -16,9 +16,9 @@ import NavContainer from "./components/NavBar/NavContainer"
 import PhotoFormContainer from './pages/photoForm'
 import PhotoAlbumContainer from './pages/photoAlbum'
 import { Provider } from "react-redux";
+import testpage from "./pages/testpage"
 
-const App = ({store}) => (
-
+const App = ({ store }) => (
   <Provider store={store}>
     <Router>
     <div>
@@ -39,11 +39,11 @@ const App = ({store}) => (
     </div>
     </Router>
   </Provider>
-  )
+)
 
-  App.propTypes = {
-    store: PropTypes.object.isRequired
-  }
+App.propTypes = {
+  store: PropTypes.object.isRequired
+}
 
 
 export default App;

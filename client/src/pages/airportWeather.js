@@ -8,8 +8,7 @@ class getAirportWeather extends Component {
     state = {
         response: {},
         airport: "",
-    }
-
+    };
     //get airport weather from api get result into response
     searchAirportWeather = () => {
         API.searchAirportWeather(
@@ -34,7 +33,7 @@ class getAirportWeather extends Component {
         event.preventDefault();
         alert("Checking for Weather");
         this.searchAirportWeather()
-    }
+    };
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -42,9 +41,9 @@ class getAirportWeather extends Component {
             [name]: value
         });
     };
-
+    //added icons to a few weather conditon using font awesome 
     weatherConditions = condition => {
-        console.log(`Condition is: ${condition}`)
+        // console.log(`Condition is: ${condition}`)
         switch (condition) {
             case 'Thunderstorms':
                 return (<i className="fas fa-bolt"></i>);
@@ -54,11 +53,16 @@ class getAirportWeather extends Component {
                 return <i className="fas fa-cloud-rain"></i>
                 break;
 
-            // case 'Fog':
-            //     break;
-
             case 'Rain':
                 return <i className="fas fa-cloud-rain"></i>
+                break;
+
+            case 'Ice':
+                return <i class="fas fa-icicles"></i>
+                break;
+
+            case 'Partly Sunny':
+                return <i class="fas fa-cloud-sun"></i>
                 break;
 
             case 'Sunny':
@@ -79,30 +83,69 @@ class getAirportWeather extends Component {
             default:
                 return '';
         }
-    }
+    };
+
+    cToF = celsius => {
+        let cTemp = Number(celsius);
+        const cToFahr = cTemp * 9 / 5 + 32;
+        console.log(cToFahr);
+        return cToFahr
+    };
+
+    renderWithMetarWeather = () => {
+        if (this.state.response.metar) {
+            const { appendix, metar } = this.state.response
+            return (
+                <div className="collection-item">
+                    <h4>Location: {appendix.airports[0].city}, {appendix.airports[0].countryName}</h4>
+                    <h5>Local Time: {moment(appendix.airports[0].localTime).format('LT')}</h5>
+                    <p>Current Temperture at {appendix.airports[0].name}</p>
+                    <p>Temperture: {this.cToF(metar.temperatureCelsius)}°F</p>
+
+                    {/* <p>{this.state.response.metar.weatherConditions[0] || ""}</p> */}
+                </div>
+            )
+        }
+        else {
+            return (<div>No Response</div>)
+        }
+    };
+
+    renderWithZoneForcast = () => {
+        //wrap everything in one return
+        return (
+            (this.state.response.zoneForecast.dayForecasts.map((eachWeather, i) => {
+                return (
+                    <div key={i} className="collection-item">
+                        <h5>{eachWeather.day}</h5>
+                        <p>Forcast: {eachWeather.forecast}</p>
+                        <p>From: {moment(eachWeather.start).format('LT')} to {moment(eachWeather.end).format('LT')}</p>
+                        <p>Conditions: {eachWeather.tags[0].value}  {this.weatherConditions(eachWeather.tags[0].value)}</p>
+                        <br />
+                    </div>)
+            })
+            )
+        ) //final return
+    };
 
     render() {
         return (
             <div>
-                <h1>Get Airport Weather</h1>
+                <h2>Get Airport Weather</h2>
                 <SearchAirportWeatherForm
+                    s={6}
                     airline={this.state.airport}
                     handleInputChange={this.handleInputChange}
                     handleFormButton={this.handleFormButton}
                 />
-
-                {this.state.response.zoneForecast ?
-                    (this.state.response.zoneForecast.dayForecasts.map((eachWeather, i) => {
-                        return (
-                            <div key={i}>
-                                <h4>{eachWeather.day}</h4>
-                                <p>Forcast: {eachWeather.forecast}</p>
-                                <p>From: {moment(eachWeather.start).format('LT')} to {moment(eachWeather.end).format('LT')}</p>
-                                <p>Conditions: {eachWeather.tags[0].value}  {this.weatherConditions(eachWeather.tags[0].value)}</p>
-                            </div>)
-                    })
-                    ) : <div>-</div>
-                }
+                <br />
+                <div className="container collection">
+                    {this.state.response.zoneForecast ?
+                        this.renderWithZoneForcast()
+                        :
+                        this.renderWithMetarWeather()
+                    }
+                </div>
             </div>
 
         );
