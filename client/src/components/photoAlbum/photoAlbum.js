@@ -17,7 +17,7 @@ class PhotoAlbum extends React.Component {
         this.state = {
         albumName: "",
         userAlbums: [],
-        index: this.props.index
+        index: null
         }
     }
 
@@ -103,6 +103,7 @@ addPic = picture => {
 
     click = index => {
       console.log(index)
+      this.props.updateIndex(index)
       this.setState({
         index: index
       })
