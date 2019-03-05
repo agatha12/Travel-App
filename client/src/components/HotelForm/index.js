@@ -13,6 +13,8 @@ export default function (props) {
     return (
         <form>
             <UserInput
+                s={8}
+                icon="location_city"
                 name="userCity"
                 placeholder="Where do you want to go?"
                 value={userCity}
@@ -24,14 +26,16 @@ export default function (props) {
                 name="checkInDate"
                 onChange={handleInputChange}
                 value={checkInDate}
-                label="Pick a Date" />
+                label="Pick a Date"
+                placeholder
+            />
             <br />
             <SelectDate
                 s={8}
                 name="checkOutDate"
                 onChange={handleInputChange}
                 value={checkOutDate}
-                label="Pick a Date" 
+                label="Pick a Date"
             />
             <FormButton onClick={handleFormButton}>
                 Submit
