@@ -82,7 +82,8 @@ export default {
           URL: url
         }
         photoAPI.updateForm(id, [...currentPhotos, newImage])});
-      window.location.replace("/photoAlbum")
+        setTimeout(() => { window.location.replace("/photoAlbum")}, 2000)
+      
       }
 
     )
