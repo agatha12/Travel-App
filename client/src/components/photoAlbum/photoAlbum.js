@@ -4,6 +4,7 @@ import photoAPI from '../../utils/photoAPI'
 import Album from './Album'
 import PhotoForm from './PhotoForm'
 import firebase from "../../utils/firebase"
+import "./style.css"
 
 
 
@@ -16,16 +17,20 @@ class PhotoAlbum extends React.Component {
         this.state = {
         albumName: "",
         userAlbums: [],
-        index: null
+        index: this.props.index
         }
     }
 
     componentDidMount(){
+
       this.getInfo()
     }
 
     getInfo = () => {
+      
       photoAPI.getAlbums(this.props.userName).then(res => {
+
+        console.log(this.props.index)
         console.log(res.data)
         res.data.map((album, index) => {
           let key={index}
@@ -134,15 +139,12 @@ addPic = picture => {
       }
     }
 
-
-  
-
-
-    render() {
-        console.log(this.state)
-        return (
-            <div>
-                <h1>Your Albums</h1>
+    displayIndex = () => {
+      const index = this.state.index
+      if(index === null){
+        return(
+          <div>
+            <h1>Your Albums</h1>
                 <div id="albumsbuttons">
                   {this.state.userAlbums.map((album, index) => {
                     return (<button key={index} onClick={() => {
@@ -151,22 +153,48 @@ addPic = picture => {
                     }}>{album.albumName}</button>)
                   })}
                 </div>
+                <form onSubmit={this.createAlbum}>
+          <h4>Create new album</h4>
+          <label>Album Name</label>
+          <input id="albumName" name="albumName" onChange={this.handleChange} type="text"></input>
+          <input className="submit" type="submit"></input>
+        </form>
+          </div>
 
-                {this.displayAlbum()}
-                
-              <form onSubmit={this.createAlbum}>
-                <h4>Create new album</h4>
-                <label>Album Name</label>
-                <input id="albumName" name="albumName" onChange={this.handleChange} type="text"></input>
-                <input type="submit"></input>
-              </form>
-            </div>
+        )
+      }
+      else {
+        return (
+          <div>
+          <button onClick={() => {this.click(null)}}>Back to Albums</button>
+          {this.displayAlbum()}
+      
+      </div>
+
+        )
+      }
+
+    }
+
+
+  
+
+
+    render() {
+        console.log(this.state)
+        return (
+          <div id="displayDiv">
+            {this.displayIndex()}
+          </div>
+      
         )
     }
 }
 
 PhotoAlbum.props = {
-    userName: PropTypes.String
+    userName: PropTypes.String,
+    index: PropTypes.String,
+    updateIndex: PropTypes.func
 }
 
 export default PhotoAlbum;
