@@ -3,7 +3,11 @@ import axios from 'axios';
 import { request } from 'https';
 import API from '../utils/API';
 import HotelForm from "../components/HotelForm"
+import PreloaderAnimate from "../components/PreloaderAnimation"
 import moment from 'moment';
+import hotel2 from "../images/hotel2.jpg";
+import { Col, Row, Card, CardTitle, Carousel } from "react-materialize";
+
 
 
 let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
@@ -28,7 +32,7 @@ class Hotel extends Component {
             hotelRepsonse: "",
             baseURL: "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2",
             totalURL: "",
-            isLoading: true,
+            isLoading: false,
             error: null
         };
     }
@@ -39,10 +43,8 @@ class Hotel extends Component {
             console.log("THIS IS FROM THE API " + response.data)
             this.setState({
                 tokenerer: response.data,
-                isLoading: false
             })
             console.log("is the token the same " + this.state.tokenerer)
-            // this.hotelCaller();
         })
 
     }
@@ -93,39 +95,47 @@ class Hotel extends Component {
     };
 
     hotelCaller = () => {
-
         const url = this.makeUserCity();
+        this.setState({ isLoading: true }, () => {
+            axios.get(url, { headers: { Authorization: 'JWT ' + this.state.tokenerer } })
+                .then(response => {
+                    this.setState({
+                        superHotel: response.data,
+                        isLoading: false
+                    })
+                    this.renderHotelInfo()
+                }).catch(function (error) {
 
-        axios.get(url, { headers: { Authorization: 'JWT ' + this.state.tokenerer } })
-
-            .then(response => {
-                this.setState({
-                    superHotel: response.data
-                })
-                console.log("0th response: " + response.data)
-                console.log("First Hotel List State: " + this.state.superHotel.comparison[0])
-                console.log("Second trip down the line " + this.state.superHotel.comparison[0].Hotel)
-                console.log("Second trip down the line " + this.state.superHotel.comparison[1].Hotel)
-                console.log("Second trip down the line " + this.state.superHotel.comparison[0].ratings)
-                console.log("Second trip down the line " + this.state.superHotel.comparison[1]["review-highlights"])
-
-                this.renderHotelInfo();
-            }).catch(function (error) {
-
-                console.log("Hotel call errors " + error);
-            });
-
+                    console.log("Hotel call errors " + error);
+                });
+        });
     }
+
+    // preLoaderCircle = () => {
+
+    //     return (
+    //         <div class="progress">
+    //             <div class="indeterminate"></div>
+    //         </div>
+
+    //     )
+    // }
 
     renderHotelInfo = () => {
         console.log("THIS IS FROM RENDER \n" + this.state.superHotel.comparison)
         return (
-
             this.state.superHotel.comparison.map((eachHotel, index) => {
                 return (
-                    <p key={index}>
-                        {eachHotel.Hotel}
-                    </p>
+                    <div className='collection-item'
+                        key={index}>
+                        <ul>
+                            <li><strong>Hotel: </strong> {eachHotel.Hotel}</li>
+                            <li><strong>Amenities: </strong> {eachHotel.amenities}</li>
+                            <li><strong>Stars: </strong> {eachHotel.ratings}</li>
+                        </ul>
+                    </div>
+
+
                 )
             })
         )
@@ -134,9 +144,10 @@ class Hotel extends Component {
     render() {
 
         const truHotel = this.state.superHotel.comparison
+        const checkLoading = this.state.isLoading
         return (
             <div>
-                <h1>Get Hotel</h1>
+                <h1>Find your hotel</h1>
                 <HotelForm
                     handleInputChange={this.handleInputChange}
                     handleFormButton={this.handleFormButton}
@@ -144,14 +155,27 @@ class Hotel extends Component {
                     checkInDate={this.state.checkInDate}
                     checkOutDate={this.state.checkOutDate}
                 />
-                <h1>Hotel Results</h1>
 
                 <div>
                     {truHotel ?
-                        <div>
-                            {this.renderHotelInfo()}
+                        <div className="container">
+                            <div className="collection">
+                                <h1>  Hotel Results</h1><br/>
+                                {this.renderHotelInfo()}
+                            </div>
                         </div>
-                        : <p>No Results</p>
+                        :
+                        (
+                            checkLoading ?
+                                <div className="container">
+                                    <div className="collection">
+                                        <h1>Loading..</h1> <br/>
+                                        <PreloaderAnimate />
+                                    </div>
+                                </div>
+                                :
+                                <p></p>
+                        )
                     }
                 </div>
             </div>
