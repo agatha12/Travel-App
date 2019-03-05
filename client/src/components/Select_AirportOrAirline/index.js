@@ -4,7 +4,7 @@ import { Row, Input } from "react-materialize";
 export function SelectAirlines(props) {
     return (
       <Row>
-        <Input s={8} type='select' icon='local_airport' label="Airline"  defaultValue="" {...props}>
+        <Input s={12} type='select' icon='local_airport' label="Airline"  defaultValue="" {...props}>
           <option value="" disabled >Choose an Airline</option>
           <option value='AA'>(AA) American Airlines</option>
           <option value='DL'>(DL) Delta Air Lines</option>
@@ -30,10 +30,10 @@ export function SelectAirlines(props) {
           <option value='CX'>(CX) Cathay Pacific</option>
           <option value='NQ'>(NQ) Air Japan</option>
           <option value='AI'>(AI) Air India</option>
+          {/* <option value='3'>Option 3</option>
           <option value='3'>Option 3</option>
           <option value='3'>Option 3</option>
-          <option value='3'>Option 3</option>
-          <option value='3'>Option 3</option>
+          <option value='3'>Option 3</option> */}
         </Input>
       </Row>
     )
@@ -42,7 +42,7 @@ export function SelectAirlines(props) {
   export function SelectAirports(props) {
     return (
       <Row>
-        <Input s={8} type='select' icon='work' label="Departing Airport" defaultValue="" {...props}>
+        <Input s={12} type='select' icon='work' label="Departing Airport" defaultValue="" {...props}>
           <option value="" disabled defaultValue>Choose an Airport</option>
           <option value='JFK'>John F Kennedy Airport (JFK)</option>
           <option value='MIA'>Miami International Airport (MIA)</option>
@@ -55,12 +55,12 @@ export function SelectAirlines(props) {
           <option value='MNL'>Ninoy Aquino International Airport (MNL)</option>
           <option value='VCE'>Venice Marco Polo Airport (VCE)</option>
           <option value='AMS'>Amsterdam Airport Schiphol (AMS)</option>
-          <option value='3'>Option 3</option>
-          <option value='3'>Option 3</option>
-          <option value='3'>Option 3</option>
-          <option value='3'>Option 3</option>
-          <option value='3'>Option 3</option>
-          <option value='3'>Option 3</option>
+          <option value='DFW'>Dallas/Fort Worth International Airport (DFW)</option>
+          <option value='PEK'>Beijing Capital International Airport (PEK)</option>
+          <option value='HND'>Tokyo Haneda Airport (HND)</option>
+          <option value='DXB'>Dubai International Airport (DXBd)</option>
+          <option value='ICN'>Seoul Incheon International Airport (ICN)</option>
+          <option value='ORD'>O'Hare International Airport (ORD)</option>
 
         </Input>
       </Row>

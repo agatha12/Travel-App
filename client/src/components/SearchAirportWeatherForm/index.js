@@ -9,6 +9,7 @@ import {SelectAirports} from "../Select_AirportOrAirline"
     return (
         <form>
             <SelectAirports
+            s={props.s}
                 name="airport"
                 label="Enter Airport"
                 icon="cloud"

@@ -14,4 +14,4 @@ router.use("/photos", photoRoute)
 
 
 
-module.exports = router
+module.exports = router;

@@ -6,7 +6,7 @@ import HotelForm from "../components/HotelForm"
 import moment from 'moment';
 
 
-let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
+let queryURL = "https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
 
 
 class Hotel extends Component {
@@ -118,14 +118,12 @@ class Hotel extends Component {
     }
 
     renderHotelInfo = () => {
-        console.log("THIS IS FROM RENDER \n" + this.state.superHotel.comparison)
+        console.log(this.state.superHotel.comparison)
         return (
 
             this.state.superHotel.comparison.map((eachHotel, index) => {
                 return (
-                    <p key={index}>
-                        {eachHotel.Hotel}
-                    </p>
+                    <p key={index}>{eachHotel.Hotel}</p>
                 )
             })
         )
