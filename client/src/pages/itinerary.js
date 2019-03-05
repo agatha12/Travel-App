@@ -1,68 +1,107 @@
 import React, { Component } from "react";
-import { RowContainer, ReactModal, FlightModal, HotelModal, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../components/Input";
+import { RowContainer, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../components/Input";
 import API from "../utils/API";
 import PropTypes from 'prop-types'
-import { Row, Col, Toast } from "react-materialize";
+import { Row, Col} from "react-materialize";
+import Intro from "../components/Intro";
 import SearchFlight from "../components/SearchFlightForm";
 import FlightFormLong from "../components/FlightForm_Long"
+import { AreYouFlying2 } from "../components/AreYouFlying";
+import { FlightModalButton, HotelModalButton, ActivitiesModalButton } from "../components/Modals";
+import NotFlyingForm from "../components/NotFlyingForm";
+import { NewFooter } from "../components/Footer";
 
 class Form extends Component {
-
     state = {
-        // FlightAPIWorked is boolean IF 1 Shows API form if 0 (false) shows long form
-        FlightAPIWorked: 0,
+        // amIFlying is IF 1 Shows API form if 0 (false) shows long form
+        amIFlying: 'No',
+        apiNoResults: '',
+        test: '',
+
         useritinerary: [],
         activityList: [],
+        
+        destination: "",
+
         passengername: "",
         flightnumber: "",
         airport: "",
-        destination: "",
         firstDepDate: "",
         firstDepTime: "",
         firstarrivalDate: "",
         firstarrivalTime: "",
+
         hour: "",
         minute: "",
+
         checkinDate: "",
+        hotelList: [],
         hotelName: "",
         checkinTime: "",
         checkoutDate: "",
         checkoutTime: "",
+
         activityName: "",
         activityDate: "",
         activityTime: "",
+
         seconddepDate: "",
         seconddepTime: "",
+
         secondarrivalDate: "",
-        secondarrivalTime: ""
+        secondarrivalTime: "",
     };
 
     componentDidMount = () => {
         console.log(this.props.userName)
-    }
+    };
 
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
-
+        // console.log(this.state.amIFlying);
     };
 
     handleLoad = event => {
         event.preventDefault();
-    }
-
-    register(name) {
-        console.log(name);
-    }
+    };
 
     getValue = () => {
-        console.log("Hey")
+        console.log(this.state.useritinerary);
     }
 
+    showAddFlightManually = () => {
+        this.setState({ apiNoResults: "disabled" })
+    };
+
+    handleSubmitFlightData = () => {
+    };
+
+    userNotFlying = () => {
+        // if user not flying
+        this.setState({
+            flightnumber: "Not Flying",
+            airport: "None",
+
+            firstDepTime: "N/A",
+            firstarrivalTime: "N/A",
+
+            seconddepTime: "N/A",
+            secondarrivalTime: "N/A",
+        })
+    };
+
+    handleFlightFormApi = event => {
+        event.preventDefault();
+        console.log("clicked on handleFlightFormApi")
+    };
+
     pushActivity = () => {
-        
+
+        alert("Added Event")
+
         console.log("Here");
 
         let act = {
@@ -71,220 +110,172 @@ class Form extends Component {
             activityTime: this.state.act_hour + this.state.act_min + this.state.act_time
         }
 
-        console.log(act)
-
         this.setState({
             activityList: [...this.state.activityList, act]
         })
+    };
+
+
+    pushHotel = () => {
+
+        alert("Added Hotel")
+
+        console.log("Hotel");
+
+        let newHotel = {
+            hotelName: this.state.hotelName,
+            checkinDate: this.state.checkinDate,
+            checkinTime: this.state.check_hour + ":" +this.state.check_min + this.state.in_time,
+            checkoutDate: this.state.checkoutDate,
+            checkoutTime: this.state.out_hour + ":" + this.state.out_min + this.state.out_time
+        }
+
+        this.setState({
+            hotelList: [...this.state.hotelList, newHotel]
+        })
+
     }
 
 
-        handleFormButton = event => {
-            event.preventDefault();
-            alert("You just made an itinerary!")
-            API.saveForm({
-                passengername: this.props.userName,
-                flightnumber: this.state.flightnumber,
-                airport: this.state.airport,
-                destination: this.state.destination,
-                firstDepDate: this.state.firstDepDate,
-                firstDepTime: this.state.dept_hour + ":" + this.state.dept_min + this.state.dept_time,
-                firstarrivalDate: this.state.firstarrivalDate,
-                firstarrivalTime: this.state.arr_hour + ":" + this.state.arr_min + this.state.arr_time,
-                checkinDate: this.state.checkinDate,
-                hotelName: this.state.hotelName,
-                checkinTime: this.state.check_hour + ":" + this.state.check_min + this.state.in_time,
-                checkoutDate: this.state.checkoutDate,
-                checkoutTime: this.state.out_hour + ":" + this.state.out_min + this.state.out_time,
-                seconddepDate: this.state.seconddepDate,
-                seconddepTime: this.state.deptwo_hour + ":" + this.state.deptwo_min + this.state.deptwo_time,
-                secondarrivalDate: this.state.secondarrivalDate,
-                secondarrivalTime: this.state.arrtwo_hour + ":" + this.state.arrtwo_min + this.state.arrtwo_time,
-                activityList: [{
-                    activityName: this.state.activityName,
-                    activityDate: this.state.activityDate,
-                    activityTime: this.state.act_hour + ":" + this.state.act_min + this.state.act_time,
-                }]
-            }).then(res => this.setState({ useritinerary: res.data }))
-                .catch(err => console.log(err));
-        }
+    handleFormButton = event => {
+        event.preventDefault();
+        alert("You just made an itinerary!")
+        API.saveForm({
+            passengername: this.props.userName,
+            flightnumber: this.state.flightnumber,
+            airport: this.state.airport,
+            destination: this.state.destination,
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            firstDepDate: this.state.firstDepDate,
+            firstDepTime: this.state.dept_hour + ":" + this.state.dept_min + this.state.dept_time,
+            firstarrivalDate: this.state.firstarrivalDate,
+            firstarrivalTime: this.state.arr_hour + ":" + this.state.arr_min + this.state.arr_time,
+            hotelList: [...this.state.hotelList],
+            seconddepDate: this.state.seconddepDate,
+            seconddepTime: this.state.deptwo_hour + ":" + this.state.deptwo_min + this.state.deptwo_time,
+            secondarrivalDate: this.state.secondarrivalDate,
+            secondarrivalTime: this.state.arrtwo_hour + ":" + this.state.arrtwo_min + this.state.arrtwo_time,
+            activityList: [...this.state.activityList]
+        }).then(res => this.setState({ useritinerary: res.data }))
+            .catch(err => console.log(err));
+    };
 
-        render() {
+    onRadioChange = e => {
+        //changes string value to an interger. which will be used a boolean value for this.state.amIFlying
+        const yesOrNo = parseInt(e.target.value)
+        // const yesOrNo = e
+        this.setState({ [e.target.name]: yesOrNo })
+    };
+
+    notFlyingForm = () => {
+        return(
+            <NotFlyingForm
+            firstDepDate={this.state.firstDepDate}
+            firstarrivalDate={this.state.firstarrivalDate}
+
+            seconddepDate={this.state.seconddepDate}
+            secondarrivalDate={this.state.secondarrivalDate}
             
+            handleInputChange={this.handleInputChange}
+            />
+        )
+    }
 
-            return (
-                <div id="form-div">
-                    <h3>Itinerary Form</h3>
-                    <RowContainer>
-                        <form>
-                            <Row>
-                                <p>{this.props.userName}</p>
-                                <UserInput
-                                    name="flightnumber"
-                                    label="Flight Number"
-                                    value={this.state.flightnumber}
-                                    onChange={this.handleInputChange} />
-                            </Row>
-                            <Row>
-                                <UserInput
-                                    name="airport"
-                                    label="Airport"
-                                    value={this.state.airport}
-                                    onChange={this.handleInputChange} />
-                                <UserInput
-                                    name="destination"
-                                    label="Destination"
-                                    value={this.state.destination}
-                                    onChange={this.handleInputChange} />
-                            </Row>
-                            <Row onClick={this.handleLoad}>
-                                <Col s={2}>
-                                    {/* ADD FLIGHT */}
-                                    <FlightModal>
-                                        <h4>Departure Date</h4>
+    renderSearchFlight = () => {
+        return (
+            <SearchFlight
+            handleFlightFormApi={this.handleFlightFormApi}
+                handleFormButton={this.handleFlightFormApi}
+                airline={this.state.airline}
+                flNumber={this.state.flNumber}
+                depAirport={this.state.depAirport}
+                year={this.state.year}
+                month={this.state.month}
+                day={this.state.day} 
+            />
+        )
+    };
 
-                                        {this.state.FlightAPIWorked ?
-                                            <SearchFlight
-                                                handleInputChange={this.handleInputChange}
-                                                handleFormButton={this.handleFormButton}
-                                                airline={this.state.airline}
-                                                flNumber={this.state.flNumber}
-                                                depAirport={this.state.depAirport}
-                                                year={this.state.year}
-                                                month={this.state.month}
-                                                day={this.state.day}
-                                            />
-                                            :
-                                            <FlightFormLong
-                                                firstDepDate={this.state.firstDepDate}
-                                                firstDepTime={this.state.firstDepTime}
+    render() {
+        return (
+            <div id="form-div">
+                <RowContainer>
+                    <Row>
+                        <h1>Itinerary Form</h1>
+                        <p>{this.props.userName}</p>
+                    </Row>
+                    <AreYouFlying2
+                        onRadioChange={this.onRadioChange}
+                    />
+                    {this.state.amIFlying === 1 && this.renderSearchFlight()}
+                    {this.state.amIFlying === 0 && this.notFlyingForm()}
+                    <br/>
+                    <Row onClick={this.handleLoad}>
+                        {/* <FlightModalButton
+                            firstDepDate={this.state.firstDepDate}
+                            firstDepTime={this.state.firstDepTime}
 
-                                                firstarrivalDate={this.state.firstarrivalDate}
-                                                firstarrivalTime={this.state.firstarrivalTime}
+                            firstarrivalDate={this.state.firstarrivalDate}
+                            firstarrivalTime={this.state.firstarrivalTime}
 
-                                                seconddepDate={this.state.seconddepDate}
-                                                seconddepTime={this.state.seconddepTime}
+                            seconddepDate={this.state.seconddepDate}
+                            seconddepTime={this.state.seconddepTime}
 
-                                                secondarrivalDate={this.state.secondarrivalDate}
-                                                secondarrivalTime={this.state.secondarrivalTime}
+                            secondarrivalDate={this.state.secondarrivalDate}
+                            secondarrivalTime={this.state.secondarrivalTime}
 
-                                                handleInputChange={this.handleInputChange}
-                                            />
-                                        }
+                            handleInputChange={this.handleInputChange}
+                            apiNoResults={this.apiNoResults}
+                            getValue={this.getValue}
+                        /> */}
+                        <HotelModalButton
+                            hotelName={this.state.hotelName}
 
-                                        <Toast toast="Added Flight" className="button blue darken-1" onClick={this.getValue}>
-                                            Add
-                                        <i className="material-icons right">add_circle</i>
-                                        </Toast>
+                            checkinDate={this.state.checkinDate}
+                            checkinTime={this.state.checkinTime}
 
-                                    </FlightModal>
-                                </Col>
-                                <Col s={2}>
-                                    {/* ADD HOTEL */}
-                                    <HotelModal>
-                                        <h4>Hotel Check-In</h4>
-                                        <Row>
-                                            <ModalInput
-                                                name="hotelName"
-                                                placeholder="Hotel Name"
-                                                value={this.state.hotelName}
-                                                onChange={this.handleInputChange} />
-                                        </Row>
-                                        <SelectDate
-                                            name="checkinDate"
-                                            onChange={this.handleInputChange}
-                                            value={this.state.checkinDate}
-                                            label="Pick a Date" />
+                            checkoutDate={this.checkoutDate}
+                            checkoutTime={this.state.checkoutDate}
 
-                                        <Container value={this.state.checkinTime}>
-                                            <Hour
-                                                onChange={this.handleInputChange}
-                                                name="check_hour" /><Minute
-                                                name="check_min"
-                                                onChange={this.handleInputChange} />
-                                            <Timezone
-                                                name="in_time"
-                                                onChange={this.handleInputChange} />
-                                        </Container>
+                            handleInputChange={this.handleInputChange}
+                            getValue={this.getValue}
+                        />
+                        <ActivitiesModalButton
+                            activityName={this.state.activityName}
+                            activityDate={this.state.activityDate}
+                            activityTime={this.state.activityTime}
 
-                                        <h4>Hotel Check-Out</h4>
-                                        <SelectDate
-                                            name="checkoutDate"
-                                            onChange={this.handleInputChange}
-                                            value={this.state.checkoutDate}
-                                            label="Pick a Date"
-                                        />
-                                        <Container value={this.state.checkoutTime}>
-                                            <Hour
-                                                onChange={this.handleInputChange}
-                                                name="out_hour" /><Minute
-                                                name="out_min"
-                                                onChange={this.handleInputChange} />
-                                            <Timezone
-                                                name="out_time"
-                                                onChange={this.handleInputChange} />
-                                        </Container>
-                                        <Toast toast="Added Hotel" className="button blue darken-1" onClick={this.getValue}>
-                                            Add
-                                    <i className="material-icons right">add_circle</i>
-                                        </Toast>
-                                    </HotelModal>
-                                </Col>
-                                <Col s={2}>
-                                    {/* ADD EVENT */}
-                                    <ReactModal>
-                                        <h4>Activities</h4>
-                                        <Row>
-                                            <ModalInput
-                                                onChange={this.handleInputChange}
-                                                name="activityName"
-                                                value={this.state.activityName}
-                                                placeholder="Activity" />
-                                        </Row>
-                                        <SelectDate
-                                            name="activityDate"
-                                            onChange={this.handleInputChange}
-                                            value={this.state.activityDate}
-                                            placeholder="Pick a Date" />
-
-                                        <Container value={this.state.activityTime}>
-
-                                            <Hour
-                                                onChange={this.handleInputChange}
-                                                name="act_hour" /><Minute
-                                                name="act_min"
-                                                onChange={this.handleInputChange} />
-                                            <Timezone
-                                                name="act_time"
-                                                onChange={this.handleInputChange} />
-                                        </Container>
-                                        <button onClick={this.pushActivity}>
-                                            <i className="material-icons right">add_circle</i>
-                                            Add
-                                    </button>
-                                    </ReactModal>
-                                </Col>
-                            </Row>
-                            <Col s={2}>
-                                <FormButton onClick={this.handleFormButton}>
-                                    Submit
-                        </FormButton>
-                            </Col>
-                        </form>
+                            handleInputChange={this.handleInputChange}
+                            getValue={this.getValue}
+                        />
+                    </Row>
+                    <Row>
                         <Col s={2}>
-                            <a href={"/itinerary/pass/" + this.props.userName}>
-                                <ItineraryButton>Go to Itinerary</ItineraryButton>
-                            </a>
+                            <FormButton onClick={this.handleFormButton}>
+                                Submit
+                        </FormButton>
                         </Col>
-                    </RowContainer>
-                </div >
+                    </Row>
+                    <Col s={2}>
+                        <a href={"/itinerary/pass/" + this.props.userName}>
+                            <ItineraryButton>
+                            <i className="material-icons right">card_travel</i>
+                                View Trips
+                                </ItineraryButton>
+                        </a>
+                    </Col>
+                </RowContainer>
+                <NewFooter>
+                    Test
+                </NewFooter>
+            </div >
+        )
+    };
+}
 
-            )
-        }
-    }
+Form.props = {
+    userName: PropTypes.String
+}
 
-    Form.props = {
-        userName: PropTypes.String
-    }
-
-    export default Form;
+export default Form;

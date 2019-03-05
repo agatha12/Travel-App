@@ -46,6 +46,7 @@ class GetFlights extends Component {
                 console.log(err)
             })
     };
+    
     //Handles form event, lets user know it is checking for flight, then outputs results
     handleFormButton = event => {
         event.preventDefault();
@@ -83,29 +84,7 @@ class GetFlights extends Component {
         let hours = Math.floor(minutes / 60)
         return (`${hours}h ${realmin}m`)
 
-    }
-    // renderFlightInfo = () => {
-    //     // console.log('renderFlightInfo worked')
-    //     // console.log(this.state.response.flightStatuses.length)
-    //     // if  (this.state.response.flightStatuses.length === 0) {
-    //     //     return (
-    //     //         <p>No Result Returned</p>
-    //     //     )
-    //     // }
-    //     // else {
-    //     //     console.log('Time to map')
-    //     //     return (
-    //     //     <p>{this.state.response.flightStatuses[0].arrivalAirportFsCode}</p>
-    //     //     )
-
-    //         this.state.response.flightStatuses.map(eachFlight => {
-    //             // debugger;
-    //             console.log(eachFlight)
-    //             return (<h1>Arriving at: {eachFlight.arrivalAirportFsCode} Airport</h1>
-    //             )
-    //         })
-    //     // }
-    // };
+    };
 
     render() {
         return (

@@ -12,21 +12,26 @@ export function RowContainer(props) {
 export function ReactModal(props) {
   return (
     <Modal
-      trigger={<Button>ADD EVENT
-      <Icon>insert_chart</Icon>
-      </Button>}>
+      header="Activities"
+      fixedFooter
+      trigger={<button className="light-blue lighten-3 waves-effect waves-light btn-small">
+        EVENT
+      <i className="material-icons right">directions_bike</i>
+      </button>}>
       {props.children}
     </Modal>
   )
 }
 
 export function FlightModal(props) {
+  // disabled function until told to do so
   return (
     <Modal
-      trigger={<Button>
-        ADD FLIGHT
-    <i className="material-icons right">add_circle</i>
-      </Button>}>
+      fixedFooter
+      trigger={<button className="light-blue lighten-3 waves-effect waves-light btn-small">
+        FLIGHT
+    <i className="material-icons right">airplanemode_active</i>
+      </button>}>
       {props.children}
     </Modal>
   )
@@ -35,8 +40,11 @@ export function FlightModal(props) {
 export function HotelModal(props) {
   return (
     <Modal
-      trigger={<Button>ADD HOTEL
-    </Button>}>
+      fixedFooter
+      trigger={<button className="light-blue lighten-3 waves-effect waves-light btn-small">
+        HOTEL
+      <i className="material-icons right">hotel</i>
+      </button>}>
       {props.children}
     </Modal>
   )
@@ -45,23 +53,46 @@ export function HotelModal(props) {
 export function UserInput(props) {
   return (
     <Row>
-    <Input s={8} type="text" className="form-control validate"  {...props} />
+      <Input s={10} type="text" className="form-control validate"  {...props} />
     </Row>
   )
+}
 
+export function FlightInput(props) {
+  return (
+    <Row>
+      <Input s={6} icon="airplanemode_active" type="text" className="form-control validate"  {...props} />
+    </Row>
+  ) 
+}
+
+export function AirportInput(props) {
+  return (
+    <Row>
+      <Input s={6} icon="work" type="text" className="form-control validate"  {...props} />
+    </Row>
+  ) 
 }
 
 export function ModalInput(props) {
   return (
-    <Input s={4} type="text" className="form-control validate"  {...props} />
+    <Input s={10} type="text" className="form-control validate"  {...props} />
   )
 }
 
 export function SelectDate(props) {
   return (
     <Row>
-      <Input s={4} name='on' icon="view_comfy" type='date' onChange={function (e, value) { }} {...props} />
+      <Input s={12} name='on' icon="date_range" type='date' onChange={function (e, value) { }} {...props} />
     </Row>
+  )
+}
+
+export function StartDate(props) {
+  return (
+
+    <Input name='on' icon="date_range" type='date' onChange={function (e, value) { }} {...props} />
+
   )
 }
 
@@ -156,7 +187,7 @@ export function Container(props) {
 export function Hour(props) {
   return (
 
-    <Input s={2} type='select' label="Hour" {...props}>
+    <Input s={3} type='select' label="Hour" {...props}>
       <option></option>
       <option>1</option>
       <option>2</option>
@@ -178,7 +209,7 @@ export function Hour(props) {
 export function Minute(props) {
   return (
 
-    <Input s={2} type='select' label="Minute" {...props}>
+    <Input s={3} type='select' label="Minute" {...props}>
       <option></option>
       <option>00</option>
       <option>01</option>
@@ -247,7 +278,7 @@ export function Minute(props) {
 
 export function Timezone(props) {
   return (
-    <Input s={2} type='select' label="Timezone" {...props}>
+    <Input s={3} type='select' label="Timezone" {...props}>
       <option></option>
       <option>AM</option>
       <option>PM</option>
@@ -257,7 +288,7 @@ export function Timezone(props) {
 
 export function FormButton(props) {
   return (
-    <button className="waves-effect waves-light btn-small" {...props}>
+    <button className="light-blue lighten-3 waves-effect waves-light btn-small" {...props}>
       <i className="material-icons right">send</i>
       {props.children}
     </button>
@@ -274,7 +305,7 @@ export function DeleteButton(props) {
 
 export function ItineraryButton(props) {
   return (
-    <button className="waves-effect waves-light btn-small" {...props}>
+    <button className="light-blue lighten-3 waves-effect waves-light btn-small" {...props}>
       {props.children}
     </button>
   )

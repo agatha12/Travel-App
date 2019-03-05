@@ -1,0 +1,17 @@
+#displayDiv{
+    text-align: center;
+}
+button {
+    background-color: skyblue;
+    color: white;
+    border-color: transparent;
+}
+img {
+    margin: 5px;
+}
+
+.submit {
+    background-color: skyblue;
+    color: white;
+    border-color: transparent;
+}

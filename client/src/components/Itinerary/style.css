@@ -1,3 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+
+/* html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+.intro {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    background: url(https://images.unsplash.com/photo-1496046744122-2328018d60b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3008&q=80);
+    display: table;
+    top: 0;
+    background-size: cover;
+}
+
+.intro .inner {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    max-width: none;
+}
+
+.content {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+} */
+
+.trip_header {
+    font-size: 60px;    
+    font-family: 'Fjalla One', sans-serif;
+    padding-left: 15%;
+}
+
+.flight_header {
+    font-size: 60px;    
+    font-family: 'Fjalla One', sans-serif;
+    padding-left: 40%;
+    
+}
+
+.hotel_header {
+    font-size: 60px;
+    font-family: 'Fjalla One', sans-serif;
+    padding-left: 48%;
+    
+}
+
+.events_header {
+    font-size: 60px;
+    font-family: 'Fjalla One', sans-serif;
+    padding-left: 16%;
+}
+
 .cardflight {
  text-align: center;
 }
@@ -6,30 +63,45 @@
     text-align: center;
 }
 
-.deletebutton{
-    position: relative;
-    bottom: 400px;
-    left: 44%;
+.deletebutton {
+    margin-right: 10px;
+}
+
+.updatebutton {
+    margin-right: 15px;
 }
 
 .flight {
-    
-    margin-right: 65%;
-    margin-left: 3%;
+    position: absolute;
+    top: -265px;
+    margin-right: 9%;
+    margin-left: 60%;
     text-align: center;
-    padding-bottom: 5%;
+}
+
+.trip {
+    position: absolute;
+    top: 50px;
+    margin-right: 43%;
+    margin-left: 26%;
+    text-align: center;
 }
 
 .hotel {
-    margin-right: 70%;
+    position: absolute;
+    top: -250px;
+    margin-right: 43%;
+    margin-left: 26%;
     text-align: center;
-    padding-bottom: 5%;
+    
 }
 
-.activities{
-    margin-right: 70%;
+.activities {
     text-align: center;
-    padding-bottom: 5%;
+    position: absolute;
+    top: -565px;
+    margin-right: 9%;
+    margin-left: 60%;
 }
 
 
