@@ -14,8 +14,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(GET_USER("TEXT"))
     dispatch(GET_INDEX("TEXT"))
   },
-  updateIndex: () => {
-    dispatch(UPDATE_INDEX("TEXT"))
+  updateIndex: (index) => {
+    dispatch(UPDATE_INDEX(index))
   }
   
 })
