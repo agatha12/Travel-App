@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { RowContainer, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../components/Input";
 import API from "../utils/API";
 import PropTypes from 'prop-types'
-import { Row, Col} from "react-materialize";
+import { Row, Col } from "react-materialize";
 import Intro from "../components/Intro";
 import SearchFlight from "../components/SearchFlightForm";
 import FlightFormLong from "../components/FlightForm_Long"
 import { AreYouFlying2 } from "../components/AreYouFlying";
 import { FlightModalButton, HotelModalButton, ActivitiesModalButton } from "../components/Modals";
 import NotFlyingForm from "../components/NotFlyingForm";
-import { NewFooter } from "../components/Footer";
+import { GenerateSlider } from "../components/Slider";
+
+
 
 class Form extends Component {
     state = {
@@ -20,7 +22,9 @@ class Form extends Component {
 
         useritinerary: [],
         activityList: [],
-        
+
+        startDate: "",
+        endDate: "",
         destination: "",
 
         passengername: "",
@@ -50,6 +54,7 @@ class Form extends Component {
 
         secondarrivalDate: "",
         secondarrivalTime: "",
+
     };
 
     componentDidMount = () => {
@@ -107,7 +112,7 @@ class Form extends Component {
         let act = {
             activityName: this.state.activityName,
             activityDate: this.state.activityDate,
-            activityTime: this.state.act_hour + this.state.act_min + this.state.act_time
+            activityTime: this.state.act_hour + ":" + this.state.act_min + this.state.act_time
         }
 
         this.setState({
@@ -125,7 +130,7 @@ class Form extends Component {
         let newHotel = {
             hotelName: this.state.hotelName,
             checkinDate: this.state.checkinDate,
-            checkinTime: this.state.check_hour + ":" +this.state.check_min + this.state.in_time,
+            checkinTime: this.state.check_hour + ":" + this.state.check_min + this.state.in_time,
             checkoutDate: this.state.checkoutDate,
             checkoutTime: this.state.out_hour + ":" + this.state.out_min + this.state.out_time
         }
@@ -169,15 +174,15 @@ class Form extends Component {
     };
 
     notFlyingForm = () => {
-        return(
+        return (
             <NotFlyingForm
-            firstDepDate={this.state.firstDepDate}
-            firstarrivalDate={this.state.firstarrivalDate}
+                firstDepDate={this.state.firstDepDate}
+                firstarrivalDate={this.state.firstarrivalDate}
 
-            seconddepDate={this.state.seconddepDate}
-            secondarrivalDate={this.state.secondarrivalDate}
-            
-            handleInputChange={this.handleInputChange}
+                seconddepDate={this.state.seconddepDate}
+                secondarrivalDate={this.state.secondarrivalDate}
+
+                handleInputChange={this.handleInputChange}
             />
         )
     }
@@ -185,32 +190,41 @@ class Form extends Component {
     renderSearchFlight = () => {
         return (
             <SearchFlight
-            handleFlightFormApi={this.handleFlightFormApi}
+                handleFlightFormApi={this.handleFlightFormApi}
                 handleFormButton={this.handleFlightFormApi}
                 airline={this.state.airline}
                 flNumber={this.state.flNumber}
                 depAirport={this.state.depAirport}
                 year={this.state.year}
                 month={this.state.month}
-                day={this.state.day} 
+                day={this.state.day}
             />
         )
     };
 
     render() {
+        console.log(this.state.hotelList)
         return (
             <div id="form-div">
                 <RowContainer>
+                    <GenerateSlider />
                     <Row>
                         <h1>Itinerary Form</h1>
                         <p>{this.props.userName}</p>
                     </Row>
+
+                    <Intro
+                        destination={this.state.destination}
+                        startDate={this.state.startDate}
+                        endDate={this.state.endDate}
+                        handleInputChange={this.handleInputChange} />
+
                     <AreYouFlying2
                         onRadioChange={this.onRadioChange}
                     />
                     {this.state.amIFlying === 1 && this.renderSearchFlight()}
                     {this.state.amIFlying === 0 && this.notFlyingForm()}
-                    <br/>
+                    <br />
                     <Row onClick={this.handleLoad}>
                         {/* <FlightModalButton
                             firstDepDate={this.state.firstDepDate}
@@ -240,35 +254,33 @@ class Form extends Component {
 
                             handleInputChange={this.handleInputChange}
                             getValue={this.getValue}
+                            pushHotel={() => this.pushHotel()}
                         />
                         <ActivitiesModalButton
                             activityName={this.state.activityName}
                             activityDate={this.state.activityDate}
                             activityTime={this.state.activityTime}
-
                             handleInputChange={this.handleInputChange}
                             getValue={this.getValue}
+                            pushActivity={() => this.pushActivity()}
                         />
                     </Row>
                     <Row>
-                        <Col s={2}>
+                        <Col>
                             <FormButton onClick={this.handleFormButton}>
                                 Submit
                         </FormButton>
                         </Col>
-                    </Row>
-                    <Col s={2}>
-                        <a href={"/itinerary/pass/" + this.props.userName}>
-                            <ItineraryButton>
-                            <i className="material-icons right">card_travel</i>
-                                View Trips
+                        <Col>
+                            <a href={"/itinerary/pass/" + this.props.userName}>
+                                <ItineraryButton>
+                                    <i className="material-icons right">card_travel</i>
+                                    View Trips
                                 </ItineraryButton>
-                        </a>
-                    </Col>
+                            </a>
+                        </Col>
+                    </Row>
                 </RowContainer>
-                <NewFooter>
-                    Test
-                </NewFooter>
             </div >
         )
     };

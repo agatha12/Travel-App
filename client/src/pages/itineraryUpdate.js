@@ -63,9 +63,9 @@ class Update extends Component {
         const { flightnumber, airport, destination,
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
-            secondarrivalDate, hotelList
-            // hotelName, checkinDate, checkinTime,
-            // checkoutDate, checkoutTime, hotelList 
+            secondarrivalDate, hotelList,
+            hotelName, checkinDate, checkinTime,
+            checkoutDate, checkoutTime
             } = this.state.itinerary
 
         alert("Update Complete");
@@ -74,9 +74,9 @@ class Update extends Component {
             flightnumber, airport, destination,
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
-            secondarrivalDate, hotelList
-            // hotelName, checkinDate, checkinTime,
-            // checkoutDate, checkoutTime
+            secondarrivalDate, hotelList,
+            hotelName, checkinDate, checkinTime,
+            checkoutDate, checkoutTime
         })
             .then((result) => {
                 console.log(result.data)
@@ -155,14 +155,14 @@ class Update extends Component {
 
                         <Col s={2}>
                             {/* ADD HOTEL */}
-                            {/* <HotelModal>
+                            <HotelModal>
                                 <h4>Hotel Check-In</h4>
 
                                 <label>Hotel Name</label>
                                 <Row>
                                     <ModalInput
                                         name="hotelName"
-                                        value={this.state.itinerary.hotelName}
+                                        value={this.state.itinerary.hotelList.hotelName}
                                         onChange={this.onChange} />
                                 </Row>
 
@@ -170,12 +170,12 @@ class Update extends Component {
                                 <SelectDate
                                     name="checkinDate"
                                     onChange={this.onChange}
-                                    value={this.state.itinerary.checkinDate} />
+                                    value={this.state.itinerary.hotelList.checkinDate} />
 
                                 <label>Check-in Time</label>
                                 <UserInput
                                     name="checkinTime"
-                                    value={this.state.itinerary.checkinTime}
+                                    value={this.state.itinerary.hotelList.checkinTime}
                                     onChange={this.onChange} />
 
                                 <h4>Hotel Check-Out</h4>
@@ -183,19 +183,19 @@ class Update extends Component {
                                 <SelectDate
                                     name="checkoutDate"
                                     onChange={this.onChange}
-                                    value={this.state.itinerary.checkoutDate} />
+                                    value={this.state.itinerary.hotelList.checkoutDate} />
 
                                 <label>Check-out Time</label>
                                 <UserInput
                                     name="checkoutTime"
-                                    value={this.state.itinerary.checkoutTime}
+                                    value={this.state.itinerary.hotelList.checkoutTime}
                                     onChange={this.onChange} />
 
                                 <Toast toast="Integrate Changes" className="button blue darken-1">
                                     Update
                                     <i className="material-icons right">add_circle</i>
                                 </Toast>
-                            </HotelModal> */}
+                            </HotelModal>
                         </Col>
                         <Col s={2}>
                             {/* ADD EVENT */}
