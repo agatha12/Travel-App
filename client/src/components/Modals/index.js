@@ -47,16 +47,17 @@ export function HotelModalButton(props) {
         hotelName,
         checkinDate, checkinTime,
         checkoutDate, checkoutTime,
-        handleInputChange,
+        handleInputChange, pushHotel
     } = props;
     return (
-        <Col s={6}>
+        <Col s={2}>
             <HotelModal>
                 <h4>Hotel Check-In</h4>
                 <div className="container">
                     <ModalInput
                         name="hotelName"
                         placeholder="Hotel Name"
+                        icon="room_service"
                         value={hotelName}
                         onChange={handleInputChange} />
                 </div>
@@ -110,9 +111,9 @@ export function HotelModalButton(props) {
                     floating
                     icon="add"
                     className='btn-floating btn-large waves-effect waves-light red sticky'
-                    onClick={() => { window.Materialize.toast('Hotel Added', 1000) }}
+                    onClick = {props.pushHotel}
+                    // onClick={() => { window.Materialize.toast('Hotel Added', 1000) }}
                 />
-
             </HotelModal>
         </Col>
     )
@@ -126,7 +127,7 @@ export function ActivitiesModalButton(props) {
     } = props;
 
     return (
-        <Col s={6}>
+        <Col s={2}>
             <ReactModal>
                 <br/>
                 <ModalInput
@@ -160,7 +161,7 @@ export function ActivitiesModalButton(props) {
                     floating
                     icon="add"
                     className='btn-floating btn-large waves-effect waves-light red sticky'
-                    onClick={() => { window.Materialize.toast('Activity Added', 1000) }}
+                    onClick={props.pushActivity}
                 />
             </ReactModal>
         </Col>

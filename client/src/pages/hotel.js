@@ -5,7 +5,7 @@ import API from '../utils/API';
 import HotelForm from "../components/HotelForm"
 import PreloaderAnimate from "../components/PreloaderAnimation"
 import moment from 'moment';
-import hotel2 from "../images/hotel2.jpg";
+// import hotel2 from "../images/hotel2.jpg";
 import { Col, Row, Card, CardTitle, Carousel } from "react-materialize";
 
 

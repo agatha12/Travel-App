@@ -19,7 +19,7 @@ export default function (props) {
                         label="Destination" />
                 </Col>
             </Row>
-            <Row>
+            {/* <Row>
                 <Col s={3}>
                     <StartDate
                         name="startDate"
@@ -36,7 +36,7 @@ export default function (props) {
                         label="End Date" />
 
                 </Col>
-            </Row>
+            </Row> */}
         </div>
     )
 
