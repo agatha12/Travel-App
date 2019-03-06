@@ -5,12 +5,11 @@ import API from '../utils/API';
 import HotelForm from "../components/HotelForm"
 import PreloaderAnimate from "../components/PreloaderAnimation"
 import moment from 'moment';
-// import hotel2 from "../images/hotel2.jpg";
 import { Col, Row, Card, CardTitle, Carousel } from "react-materialize";
 
 
 
-let queryURL = "https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
+let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
 
 
 class Hotel extends Component {
@@ -21,6 +20,7 @@ class Hotel extends Component {
             tokenerer: "",
             userCity: "",
             superHotel: [],
+            hotelLength: "",
             checkInDate: "",
             startYear: "",
             startMonth: "",
@@ -67,7 +67,6 @@ class Hotel extends Component {
         let checkOutYearFormat = localCheckOutDate.format('YYYY');
         let checkOutMonthFormat = localCheckOutDate.format('MM');
         let checkOutDayFormat = localCheckOutDate.format('DD');
-        // console.log(firstDepDate.format('L'));
         this.setState({
             startYear: checkInYearFormat,
             startMonth: checkInMonthFormat,
@@ -78,13 +77,10 @@ class Hotel extends Component {
         });
     };
 
-    // let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
-
 
     makeUserCity = () => {
         const { baseURL, userCity, startYear, startMonth, startDay, endYear, endMonth, endDay } = this.state;
         const totalURL = `${baseURL}/${userCity}/${startYear}-${startMonth}-${startDay}/${endYear}-${endMonth}-${endDay}`;
-        console.log("YOU MADE THIS URL " + totalURL);
         return totalURL;
     };
 
@@ -106,35 +102,29 @@ class Hotel extends Component {
                     this.renderHotelInfo()
                 }).catch(function (error) {
 
-                    console.log("Hotel call errors " + error);
                 });
         });
     }
 
-    // preLoaderCircle = () => {
-
-    //     return (
-    //         <div class="progress">
-    //             <div class="indeterminate"></div>
-    //         </div>
-
-    //     )
-    // }
-
     renderHotelInfo = () => {
-        console.log(this.state.superHotel.comparison)
         return (
             this.state.superHotel.comparison.map((eachHotel, index) => {
                 return (
-
-                    <div className='collection-item'
+                    <div className='collection-item amber accent-2'
                         key={index}>
-                        <ul>
-                            <li><strong>Hotel: </strong> {eachHotel.Hotel}</li>
-                            <li><strong>Amenities: </strong> {eachHotel.amenities}</li>
-                            <li><strong>Stars: </strong> {eachHotel.ratings}</li>
-                        </ul>
+                        <Col m={6} s={12}>
+                            <Card textClassName='black-text' title={eachHotel.Hotel} actions={[<strong>Vendor: {eachHotel.vendor2}</strong>]}>
+                                <ul>
+                                    <li><strong>Amenities: </strong> {eachHotel.amenities} , {eachHotel["amenities(Executive)"]} , {eachHotel.features}</li>
+                                    <br />
+                                    <li><strong>Stars: </strong> {eachHotel.ratings}</li>
+                                    <br />
+                                    <li><strong>Price: </strong>{eachHotel["vendor2-price"]}</li>
+                                </ul>
+                            </Card>
+                        </Col>
                     </div>
+
 
                 )
             })
@@ -147,7 +137,6 @@ class Hotel extends Component {
         const checkLoading = this.state.isLoading
         return (
             <div>
-                <h1>Find your hotel</h1>
                 <HotelForm
                     handleInputChange={this.handleInputChange}
                     handleFormButton={this.handleFormButton}
@@ -155,21 +144,25 @@ class Hotel extends Component {
                     checkInDate={this.state.checkInDate}
                     checkOutDate={this.state.checkOutDate}
                 />
-
+                <br />
                 <div>
                     {truHotel ?
-                        <div className="container">
-                            <div className="collection">
-                                <h1>  Hotel Results</h1><br/>
+                        <div className="container amber accent-2">
+                            <div className="collection amber accent-2">
+                                <blockquote>
+                                <br /><h4>{truHotel.length} hotel results</h4><br />
+                                </blockquote>
                                 {this.renderHotelInfo()}
                             </div>
                         </div>
                         :
                         (
                             checkLoading ?
-                                <div className="container">
+                                <div className="container amber accent-2">
                                     <div className="collection">
-                                        <h1>Loading..</h1> <br/>
+                                        <blockquote>
+                                        <h4>Loading..</h4> <br />
+                                        </blockquote>
                                         <PreloaderAnimate />
                                     </div>
                                 </div>
