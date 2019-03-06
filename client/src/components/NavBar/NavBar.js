@@ -3,6 +3,7 @@ import './NavBar.css';
 import PropTypes from 'prop-types'
 import ModalContainer from "./modalContainer"
 import firebase from "../../utils/firebase"
+import { Dropdown, Button, NavItem } from 'react-materialize'
 
 
 
@@ -39,6 +40,10 @@ class NavBar extends Component {
     firebase.signup(this.state.username, this.state.password)
   }
 
+  passwordReset = () => {
+    firebase.passwordReset(this.state.username)
+  }
+
   _getStateButtons = () => {
     if (this.props.userName === "") {
         let path = window.location.pathname
@@ -54,20 +59,28 @@ class NavBar extends Component {
           password={this.state.password}
           username={this.state.username}
           currentUser={this.props.userName}
+          passwordReset={this.passwordReset}
         ></ModalContainer></li>
         </ul>
       )
     } else {
       return (
-      <ul id="nav-mobile" className="right">
-      <li><a href="/">Home</a></li>
-      <li><a href="/itinerary">Itinerary</a></li>
-      <li><a href="/getflights">Flight Search</a></li>
-      <li><a href="/getairportweather">Airport Weather</a></li>
-      <li><a href="/gethotel">Hotel Search</a></li>
-      <li><a href="/photoAlbum">Photo Album</a></li>
-      <li id="buttonLi"><button id="logoutButton" onClick={firebase.logout}>Logout</button></li>
-      </ul>)
+      <div  id="drop">
+      <Dropdown trigger={
+        <Button id="menu">Menu</Button>
+      }>
+      <NavItem className="navItem" href="/">Home</NavItem>
+      <NavItem className="navItem" href="/itinerary">Itinerary</NavItem>
+      {/* <NavItem divider /> */}
+      <NavItem className="navItem blue-text text-darken-2" href="/getflights">Flight Search</NavItem>
+      <NavItem  className="navItem" href="/getairportweather">Airport Weather</NavItem>
+      <NavItem  className="navItem" href="/gethotel">Hotel Search</NavItem>
+      <NavItem className="navItem" href="/photoAlbum">Photo Album</NavItem>
+      <NavItem className="navItem"><button id="logoutButton" onClick={firebase.logout}>Logout</button></NavItem>
+    </Dropdown>
+    </div>
+      
+      )
     }
 
   }
@@ -77,7 +90,7 @@ class NavBar extends Component {
       <div>
         <nav>
           <div className="nav-wrapper">
-            <a href="/" className="brand-logo hide-on-med-and-down">Travel App</a>
+            <a href="/" className="brand-logo left">Trip Pal</a>
 
             
              

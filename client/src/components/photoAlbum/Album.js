@@ -6,10 +6,10 @@ const Album = (props) => {
 return (
     <div>
 <h3>{props.name}</h3>
-<button id="deleteAlbum" onClick={() => {photoAPI.deleteAlbum(props.id).then(window.location.replace("/photoAlbum"))}}>Delete Album</button>
+<button id="deleteAlbum" onClick={() => {photoAPI.deleteAlbum(props.id).then( props.afterAlbumDelete())}}>Delete Album</button>
 
 {props.photos.map((photo, index) => {
-    //console.log(props.photos)
+
     return(
         <div id="PhotoDiv" key={index}>
     <img alt="" src={photo.URL}></img><br></br>
