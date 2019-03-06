@@ -4,8 +4,7 @@ import { Row, Col, Button, Toast, Divider } from "react-materialize";
 import { SelectAirlines, SelectAirports } from "../Select_AirportOrAirline"
 
 export default function (props) {
-    // This form component  will take input and call a function (used to get flight)
-    //deconstruction 
+    // This form component  will take input and call a function (used to get flight) 
     const {
         handleInputChange,
         airline, flNumber,
@@ -41,7 +40,7 @@ export default function (props) {
                         name="depDate"
                         onChange={handleInputChange}
                         value={depDate}
-                        label="Pick a Date" />
+                        label="Flying when?" />
                 </Col>
                 <Col s={6}>
                     <SelectAirports
