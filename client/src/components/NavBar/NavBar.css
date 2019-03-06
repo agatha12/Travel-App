@@ -6,3 +6,23 @@
     background-color: transparent;
     border-color: transparent;
 }
+
+#drop {
+    float: right;
+}
+#menu {   
+     background-color: skyblue;
+     border-color: transparent;
+     box-shadow: 0px;
+    }
+li {
+    background-color:skyblue;
+}
+
+#modalLi {
+    height: 40px;
+}
+.modalButton {
+    background-color: skyblue;
+    margin: 2px;
+}

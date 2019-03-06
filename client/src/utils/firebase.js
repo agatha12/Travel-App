@@ -24,11 +24,9 @@ export default {
 
     auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        console.log(firebaseUser.email)
         handleChange(firebaseUser.email)
       }
       else {
-        console.log("you are logged out")
         handleChange("")
 
       }
@@ -38,8 +36,9 @@ export default {
   },
 
   login: function (email, password) {
-    console.log(email, password)
-    auth.signInWithEmailAndPassword(email, password);
+
+    auth.signInWithEmailAndPassword(email, password)
+
 
 
   },
@@ -54,16 +53,30 @@ export default {
     auth.signOut()
   },
 
+  passwordReset : function (userEmail) {
+
+var emailAddress = userEmail;
+
+auth.sendPasswordResetEmail(emailAddress).then(function() {
+  alert(`A password reste email has been sent to ${emailAddress}`)
+}).catch(function(error) {
+  alert(error)
+});
+
+  },
+
   upload: function (picture, user, albumName, id, currentPhotos) {
-    console.log(picture)
-    // new Date().getTime()
+
     let storageRef = firebase.storage().ref(`photos/${user}/${albumName}/${picture.name}`)
     let task = storageRef.put(picture)
 
     task.on('state_changed',
       function progress(snapshot) {
-        //document.getElementById("progressDiv").empty()
-        document.getElementById("progressDiv").append("Your photo is uploading...")
+        let uploader = document.getElementById("uploader")
+        let percentage = (snapshot.bytesTransferred /
+          snapshot.totalBytes) * 100;
+          uploader.value = percentage
+
 
       },
       function error(err) {
@@ -99,14 +112,11 @@ export default {
 
       let newArray = currentPhotos
       currentPhotos.splice((index), 1)
-      console.log(index)
-      console.log(newArray)
-      console.log(currentPhotos)
       photoAPI.updateForm(id, newArray);
       window.location.replace("/photoAlbum")
 
     }).catch(function (error) {
-      // Uh-oh, an error occurred!
+      console.log(error)
     });
   }
 
