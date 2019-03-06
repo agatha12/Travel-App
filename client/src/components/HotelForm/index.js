@@ -11,9 +11,11 @@ export default function (props) {
     } = props;
     // const { handleInputChange, airline, flNumber, year, month, day, depAirport, handleFormButton } = props
     return (
+        <div class='container'>
         <form>
+        <h4>Find your hotel</h4>
             <UserInput
-                s={8}
+                s={4}
                 icon="location_city"
                 name="userCity"
                 placeholder="Where do you want to go?"
@@ -22,16 +24,15 @@ export default function (props) {
             />
             <br />
             <SelectDate
-                s={8}
+                s={4}
                 name="checkInDate"
                 onChange={handleInputChange}
                 value={checkInDate}
                 label="Pick a Date"
-                placeholder
             />
             <br />
             <SelectDate
-                s={8}
+                s={4}
                 name="checkOutDate"
                 onChange={handleInputChange}
                 value={checkOutDate}
@@ -41,5 +42,6 @@ export default function (props) {
                 Submit
             </FormButton>
         </form>
+        </div>
     )
 }
