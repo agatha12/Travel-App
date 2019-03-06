@@ -15,14 +15,12 @@ const PhotoForm = (props) => {
                     <input onChange={(event) => {
                         props.displayPicture(event)
                     }} type="file" className="form-control"></input>
-                    <label>Album Name</label>
-                    <input onChange={props.handleChange} type="text" name="albumName"></input>
+                    
                 <input  type="submit" className="submit"></input>               
-                <div id="progressDiv"></div>
-                <PreviewPicture 
-                pictureURL={props.pictureURL}/>
-                <PreviewPicture 
-                pictureURL={props.img}/>
+                <div id="progressDiv">
+                <progress value="0" max="100" id="uploader">0%</progress>
+                </div>
+              
                 
                  </form>
 

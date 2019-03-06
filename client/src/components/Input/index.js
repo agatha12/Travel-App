@@ -76,7 +76,7 @@ export function AirportInput(props) {
 
 export function ModalInput(props) {
   return (
-    <Input s={10} type="text" className="form-control validate"  {...props} />
+    <Input type="text" className="form-control validate"  {...props} />
   )
 }
 
@@ -288,7 +288,8 @@ export function Timezone(props) {
 
 export function FormButton(props) {
   return (
-    <button className="light-blue lighten-3 waves-effect waves-light btn-small" {...props}>
+    // className="light-blue lighten-3 waves-effect waves-light btn-small" 
+    <button {...props}>
       <i className="material-icons right">send</i>
       {props.children}
     </button>
@@ -305,6 +306,7 @@ export function DeleteButton(props) {
 
 export function ItineraryButton(props) {
   return (
+    
     <button className="light-blue lighten-3 waves-effect waves-light btn-small" {...props}>
       {props.children}
     </button>

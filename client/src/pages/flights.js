@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import moment from 'moment';
 import API from "../utils/API";
-import SearchFlightForm from "../components/SearchFlightForm"
+import SearchFlightForm from "../components/SearchFlightForm";
+import PreloaderAnimate from "../components/PreloaderAnimation"
 
 class GetFlights extends Component {
     state = {
@@ -13,10 +14,12 @@ class GetFlights extends Component {
         day: '',
         depAirport: '',
         depDate: '',
+        isLoaded: false
     }
     // Get flight from api get result into response
     searchFlight = () => {
-        let flightInfo;
+        this.setState({isLoaded: true})
+        let response;
         const { airline, flNumber, year, month, day, depAirport } = this.state;
         console.log(airline, flNumber, year, month, day, depAirport);
         API.searchFlight(
@@ -29,16 +32,19 @@ class GetFlights extends Component {
                 depAirport: depAirport
             })
             .then(res => {
-                flightInfo = res.data;
+                response = res.data;
                 // if (res) {
                 //     console.log('response attained')
                 // }
                 // Lets developer know what the error is
-                if (res.data.error) {
-                    console.log(res.data.error.errorMessage)
+                if (response.error) {
+                    console.log(response.error.errorMessage)
                 }
                 // console.log(flightInfo.flightStatuses.length)
-                this.setState({ response: flightInfo })
+                this.setState({
+                    response: response,
+                    isLoaded: false
+                 })
 
             })
             .catch(function (err) {
@@ -48,9 +54,9 @@ class GetFlights extends Component {
     };
     
     //Handles form event, lets user know it is checking for flight, then outputs results
-    handleFormButton = event => {
+    handleFlightFormApi = event => {
         event.preventDefault();
-        alert("Checking for Flight");
+        // alert("Checking for Flight");
         this.searchFlight();
     };
     // Boilerplate - handles user changes
@@ -92,7 +98,7 @@ class GetFlights extends Component {
                 <h1>Get Flight</h1>
                 <SearchFlightForm
                     handleInputChange={this.handleInputChange}
-                    handleFormButton={this.handleFormButton}
+                    handleFlightFormApi={this.handleFlightFormApi}
                     airline={this.state.airline}
                     flNumber={this.state.flNumber}
                     depAirport={this.state.depAirport}
@@ -104,10 +110,16 @@ class GetFlights extends Component {
                 {/* if there is an error then it will return 'Error' */}
                 {this.state.response.error ? <h4>Error: Bad Response </h4> : <h4>Results Here</h4>}
                 {/* If there is a flight status and it is empty return no results. if there is something then output  */}
-                {this.state.response.flightStatuses ?
+
+                {this.state.response.flightStatuses ? 
                     (this.state.response.flightStatuses.length === 0 ?
                         <p>No Results</p>
-                        :
+                        : this.isLoaded ?
+                        <div>
+                        <h2>Checking for Flight</h2>
+                        <PreloaderAnimate/>
+                        </div>
+                         :
                         this.state.response.flightStatuses.map((eachFlight => {
                             return (
                                 <div key={eachFlight.flightId}>

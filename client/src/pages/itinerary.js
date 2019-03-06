@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { RowContainer, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../components/Input";
 import API from "../utils/API";
 import PropTypes from 'prop-types'
-import { Row, Col} from "react-materialize";
+import { Row, Col } from "react-materialize";
 import Intro from "../components/Intro";
-import SearchFlight from "../components/SearchFlightForm";
 import FlightFormLong from "../components/FlightForm_Long"
 import { AreYouFlying2 } from "../components/AreYouFlying";
 import { FlightModalButton, HotelModalButton, ActivitiesModalButton } from "../components/Modals";
 import NotFlyingForm from "../components/NotFlyingForm";
-import { NewFooter } from "../components/Footer";
+import { GenerateSlider } from "../components/Slider";
+import SearchFlightForm from "../components/SearchFlightForm"
+import moment from 'moment';
 
 class Form extends Component {
     state = {
@@ -18,9 +19,20 @@ class Form extends Component {
         apiNoResults: '',
         test: '',
 
+        response: {},
+        airline: '',
+        flNumber: '',
+        year: '',
+        month: '',
+        day: '',
+        depAirport: '',
+        depDate: '',
+
         useritinerary: [],
         activityList: [],
-        
+
+        startDate: "",
+        endDate: "",
         destination: "",
 
         passengername: "",
@@ -50,6 +62,76 @@ class Form extends Component {
 
         secondarrivalDate: "",
         secondarrivalTime: "",
+
+    };
+
+    // Get flight from api get result into response
+    searchFlight = () => {
+        let response;
+        const { airline, flNumber, year, month, day, depAirport } = this.state;
+        console.log(airline, flNumber, year, month, day, depAirport);
+        API.searchFlight(
+            {
+                airline: airline,
+                flNumber: flNumber,
+                year: year,
+                month: month,
+                day: day,
+                depAirport: depAirport
+            })
+            .then(res => {
+                response = res.data;
+                // if (res) {
+                //     console.log('response attained')
+                // }
+                // Lets developer know what the error is
+                if (response.error || (response.flightStatuses.length === 0)) {
+                    console.log(res.data.error.errorMessage)
+                    this.setState({
+                        response: response,
+                        apiNoResults: 0,
+                    })
+                } else {
+                    let eachFlight = response.flightStatuses[0];
+                    // console.log(flightInfo.flightStatuses.length)
+                    this.setState({
+                        response: response,
+                        apiNoResults: 1,
+                        flightnumber: (this.state.airline+this.state.flNumber),
+                        airport: eachFlight.departureAirportFsCode,
+                        firstDepDate: eachFlight.departureDate.dateLocal,
+                        firstDepTime: moment(eachFlight.departureDate.dateLocal).format('LT'),
+                        firstarrivalDate: eachFlight.arrivalDate.dateLocal,
+                        firstarrivalTime: moment(eachFlight.arrivalDate.dateLocal).format('LT'),
+
+                    })
+                }
+
+
+            })
+            .catch(function (err) {
+                console.log('ERROR')
+                console.log(err)
+            })
+    };
+    //Handles form event, lets user know it is checking for flight, then outputs results
+    handleFlightFormApi = event => {
+        event.preventDefault();
+        alert("Checking for Flight");
+        this.searchFlight();
+    };
+    // Changes firstDepDate into 3 parts: year, month, day
+    changeDateWithMoment = () => {
+        let firstDepDate = moment(this.state.depDate, 'DD MMMM YYYY');
+        let yearFormat = firstDepDate.format('YYYY');
+        let monthFormat = firstDepDate.format('MM');
+        let dayFormat = firstDepDate.format('DD');
+        // console.log(firstDepDate.format('L'));
+        this.setState({
+            year: yearFormat,
+            month: monthFormat,
+            day: dayFormat
+        });
     };
 
     componentDidMount = () => {
@@ -61,7 +143,9 @@ class Form extends Component {
         this.setState({
             [name]: value
         });
-        // console.log(this.state.amIFlying);
+        this.changeDateWithMoment();
+
+        console.log(this.state);
     };
 
     handleLoad = event => {
@@ -81,6 +165,7 @@ class Form extends Component {
 
     userNotFlying = () => {
         // if user not flying
+
         this.setState({
             flightnumber: "Not Flying",
             airport: "None",
@@ -95,11 +180,11 @@ class Form extends Component {
 
     handleFlightFormApi = event => {
         event.preventDefault();
-        console.log("clicked on handleFlightFormApi")
+        console.log("clicked on handleFlightFormApi");
+        this.searchFlight();
     };
 
     pushActivity = () => {
-
         alert("Added Event")
 
         console.log("Here");
@@ -107,7 +192,7 @@ class Form extends Component {
         let act = {
             activityName: this.state.activityName,
             activityDate: this.state.activityDate,
-            activityTime: this.state.act_hour + this.state.act_min + this.state.act_time
+            activityTime: this.state.act_hour + ":" + this.state.act_min + this.state.act_time
         }
 
         this.setState({
@@ -125,7 +210,7 @@ class Form extends Component {
         let newHotel = {
             hotelName: this.state.hotelName,
             checkinDate: this.state.checkinDate,
-            checkinTime: this.state.check_hour + ":" +this.state.check_min + this.state.in_time,
+            checkinTime: this.state.check_hour + ":" + this.state.check_min + this.state.in_time,
             checkoutDate: this.state.checkoutDate,
             checkoutTime: this.state.out_hour + ":" + this.state.out_min + this.state.out_time
         }
@@ -134,8 +219,7 @@ class Form extends Component {
             hotelList: [...this.state.hotelList, newHotel]
         })
 
-    }
-
+    };
 
     handleFormButton = event => {
         event.preventDefault();
@@ -169,48 +253,83 @@ class Form extends Component {
     };
 
     notFlyingForm = () => {
-        return(
+        return (
             <NotFlyingForm
-            firstDepDate={this.state.firstDepDate}
-            firstarrivalDate={this.state.firstarrivalDate}
+                firstDepDate={this.state.firstDepDate}
+                firstarrivalDate={this.state.firstarrivalDate}
 
-            seconddepDate={this.state.seconddepDate}
-            secondarrivalDate={this.state.secondarrivalDate}
-            
-            handleInputChange={this.handleInputChange}
+                seconddepDate={this.state.seconddepDate}
+                secondarrivalDate={this.state.secondarrivalDate}
+
+                handleInputChange={this.handleInputChange}
             />
         )
+    };
+
+    renderLongForm = () => {
+        return (
+            <FlightFormLong
+            firstDepDate={this.state.firstDepDate}
+            firstDepTime={this.state.firstDepTime}
+
+            firstarrivalDate={this.state.firstarrivalDate}
+            firstarrivalTime={this.statefirstarrivalTime}
+
+            seconddepDate={this.state.seconddepDate}
+            seconddepTime={this.state.seconddepTime}
+
+            secondarrivalDate={this.state.secondarrivalDate}
+            secondarrivalTime={this.state.secondarrivalTime}
+
+            handleInputChange={this.handleInputChange}
+        />
+        )
+
     }
 
     renderSearchFlight = () => {
         return (
-            <SearchFlight
-            handleFlightFormApi={this.handleFlightFormApi}
-                handleFormButton={this.handleFlightFormApi}
+            <SearchFlightForm
+                handleFlightFormApi={this.handleFlightFormApi}
+                handleInputChange={this.handleInputChange}
                 airline={this.state.airline}
                 flNumber={this.state.flNumber}
                 depAirport={this.state.depAirport}
                 year={this.state.year}
                 month={this.state.month}
-                day={this.state.day} 
+                day={this.state.day}
+                depDate={this.state.depDate}
             />
         )
     };
 
     render() {
+        // console.log(this.state.hotelList)
         return (
             <div id="form-div">
+
                 <RowContainer>
+                    <GenerateSlider />
                     <Row>
                         <h1>Itinerary Form</h1>
                         <p>{this.props.userName}</p>
                     </Row>
-                    <AreYouFlying2
+
+                    <Intro
+                        destination={this.state.destination}
+                        startDate={this.state.startDate}
+                        endDate={this.state.endDate}
+                        handleInputChange={this.handleInputChange} />
+
+                    {/* <AreYouFlying2
+                        // value={this.amIFlying}
                         onRadioChange={this.onRadioChange}
-                    />
-                    {this.state.amIFlying === 1 && this.renderSearchFlight()}
-                    {this.state.amIFlying === 0 && this.notFlyingForm()}
-                    <br/>
+                    /> */}
+                        {/* {this.state.amIFlying === 1 && this.renderSearchFlight()} */}
+                        {this.renderLongForm()}
+                    {/* {this.state.amIFlying === 1 && this.renderLongForm()}
+                    {this.state.amIFlying === 0 && this.notFlyingForm()} */}
+                    <br />
                     <Row onClick={this.handleLoad}>
                         {/* <FlightModalButton
                             firstDepDate={this.state.firstDepDate}
@@ -240,35 +359,37 @@ class Form extends Component {
 
                             handleInputChange={this.handleInputChange}
                             getValue={this.getValue}
+                            pushHotel={() => this.pushHotel()}
                         />
                         <ActivitiesModalButton
                             activityName={this.state.activityName}
                             activityDate={this.state.activityDate}
                             activityTime={this.state.activityTime}
-
                             handleInputChange={this.handleInputChange}
                             getValue={this.getValue}
+                            pushActivity={() => this.pushActivity()}
                         />
                     </Row>
                     <Row>
-                        <Col s={2}>
+                        <Col>
                             <FormButton onClick={this.handleFormButton}>
                                 Submit
                         </FormButton>
                         </Col>
                     </Row>
-                    <Col s={2}>
-                        <a href={"/itinerary/pass/" + this.props.userName}>
-                            <ItineraryButton>
-                            <i className="material-icons right">card_travel</i>
-                                View Trips
+                    <div className="divider"></div>
+                    <br />
+                    <Row>
+                        <Col s={2}>
+                            <a href={"/itinerary/pass/" + this.props.userName}>
+                                <ItineraryButton>
+                                    <i className="material-icons right">card_travel</i>
+                                    View Trips
                                 </ItineraryButton>
-                        </a>
-                    </Col>
+                            </a>
+                        </Col>
+                    </Row>
                 </RowContainer>
-                <NewFooter>
-                    Test
-                </NewFooter>
             </div >
         )
     };

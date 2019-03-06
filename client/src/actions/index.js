@@ -21,8 +21,9 @@ export const CLOSE_MODAL = () => ({
     type:   'CLOSE_MODAL',
 })
 
-export const UPDATE_INDEX = () => ({
-    type: 'UPDATE_INDEX'
+export const UPDATE_INDEX = text => ({
+    type: 'UPDATE_INDEX',
+    text
 })
 export const GET_INDEX = () => ({
     type:   'GET_INDEX',

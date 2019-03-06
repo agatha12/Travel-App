@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import Item from '../components/Itinerary/item';
-import { NewFooter } from "../components/Footer";
+
 
 class Itinerary extends Component {
 
@@ -62,7 +62,8 @@ class Itinerary extends Component {
                 {this.state.itinerary.length === 0 ?
                     (<div className="no_trip">
                         <h3 className="text-center">You haven't added a trip.</h3>
-                        <a href="/itinerary"><button className='light-blue lighten-3 btn-small'>
+                        <a href="/itinerary">
+                        <button className='light-blue lighten-3 btn-small'>
                         <i className="material-icons right">card_travel</i>
                         Itinerary
                         </button></a>
@@ -73,10 +74,6 @@ class Itinerary extends Component {
                             
                         </div>
                     )}
-                <br />
-                <NewFooter>
-                    Test
-                </NewFooter>
             </div>
         )
     }

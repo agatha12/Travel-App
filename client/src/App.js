@@ -14,6 +14,7 @@ import HomeContainer from './pages/Home/Home'
 import NavContainer from "./components/NavBar/NavContainer"
 import PhotoAlbumContainer from './pages/photoAlbum'
 import { Provider } from "react-redux";
+import { NewFooter } from "./components/Footer"
 import testpage from "./pages/testpage"
 
 const App = ({ store }) => (
@@ -32,6 +33,7 @@ const App = ({ store }) => (
         <Route exact path = "/photoAlbum" component= {PhotoAlbumContainer} />
         <Route component={NoMatch} />
     </Switch>
+    <NewFooter>Test</NewFooter>
     </div>
     </Router>
   </Provider>
