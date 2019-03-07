@@ -2,3 +2,6 @@
     color: skyblue;
     text-align: center;
 }
+.slider {
+    z-index: -1;
+}
