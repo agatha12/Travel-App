@@ -1,10 +1,11 @@
 import React from "react";
 import { Row, Input } from "react-materialize";
+import "./style.css";
 
 export function SelectAirlines(props) {
     return (
       <Row>
-        <Input s={12} type='select' icon='local_airport' label="Airline"  defaultValue="" {...props}>
+        <Input s={12} id="input" type='select' icon='local_airport' label="Airline"  defaultValue="" {...props}>
           <option value="" disabled >Choose an Airline</option>
           <option value='AA'>(AA) American Airlines</option>
           <option value='NQ'>(NQ) Air Japan</option>
