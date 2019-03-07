@@ -5,9 +5,30 @@ button {
     background-color: skyblue;
     color: white;
     border-color: transparent;
+    margin:5px;
 }
+.albumButton{
+    margin: 10px;
+    font-size: 40px;
+    padding: 10px;
+}
+
+.albumButtonDiv {
+    float: left;
+}
+#albumButtons {
+    width: 550px;
+    margin: 0 auto;
+}
+#albumsBack{
+    float: left;
+}
+
 img {
     margin: 5px;
+}
+#albumForm {
+    margin: 0 auto;
 }
 
 .submit {
@@ -15,3 +36,9 @@ img {
     color: white;
     border-color: transparent;
 }
+#albumName {
+    width: 300px;
+}
+/* .photo {
+    float: left;
+} */

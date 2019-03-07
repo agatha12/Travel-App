@@ -41,8 +41,8 @@ class NavModal extends React.Component {
              <div id="logindiv">
             <h1>Travel App</h1>
             <h4>Sign In</h4>
-                <input onChange={this.props.handleInputChange} name="username" id="username" placeholder="username" value={this.props.username}></input><br></br>
-                <input onChange={this.props.handleInputChange} name="password" type="text" id="password" placeholder="password" value={this.props.password}></input><br></br>
+                <input onChange={this.props.handleInputChange} name="username" id="username" placeholder="email" value={this.props.username}></input><br></br>
+                <input onChange={this.props.handleInputChange} name="password" type="text" id="password" placeholder="password (must be at least 6 characters long)" value={this.props.password}></input><br></br>
                 <button onClick={this.props.login} className="modalButton" id="loginbutton">Log In</button>
                 <button onClick={this.props.signup} className="modalButton"  id="signupbutton">Sign Up</button>
                 <button onClick={this.props.passwordReset} className="modalButton" >Forgot your password?</button>

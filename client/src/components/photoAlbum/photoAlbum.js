@@ -157,18 +157,23 @@ class PhotoAlbum extends React.Component {
       return (
         <div>
           <h1>Your Albums</h1>
-          <div id="albumsbuttons">
+          <div id="albumButtons">
             {this.state.userAlbums.map((album, index) => {
-              return (<button key={index} onClick={() => {
+              return (<div className="albumButtonDiv" key={index}>
+              <button className="albumButton" onClick={() => {
 
                 this.click(index)
-              }}>{album.albumName}</button>)
+              }}>{album.albumName}</button>
+              <p>{this.state.userAlbums[index].photos.length} photos</p>
+              </div>
+              )
             })}
-          </div>
-          <form onSubmit={this.createAlbum}>
+          </div><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br>
+          <form id="albumForm" onSubmit={this.createAlbum}>
             <h4>Create new album</h4>
-            <label>Album Name</label>
-            <input id="albumName" name="albumName" onChange={this.handleChange} type="text"></input>
+            <label>Album Name</label><br></br>
+            <input id="albumName" name="albumName" onChange={this.handleChange} type="text"></input><br></br>
             <input className="submit" type="submit"></input>
           </form>
         </div>
@@ -178,7 +183,7 @@ class PhotoAlbum extends React.Component {
     else {
       return (
         <div>
-          <button onClick={() => { this.click(null) }}>Back to Albums</button>
+          <button id="albumsBack" onClick={() => { this.click(null) }}>Back to Albums</button><br></br>
           {this.displayAlbum()}
 
         </div>
