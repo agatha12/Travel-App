@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Input, Col, Toast, Button } from "react-materialize";
+import { Row, Input, Col, Toast, Button, Chip } from "react-materialize";
 import FlightFormLong from "../FlightForm_Long";
 import { RowContainer, ReactModal, FlightModal, HotelModal, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../Input";
 
@@ -16,9 +16,9 @@ export function FlightModalButton(props) {
     } = props;
 
     return (
-        <Col s={5}>
+        <Col s={2}>
             <FlightModal disabled={apiNoResults} >
-                <h4>Departure Date</h4>
+
                 <FlightFormLong
                     firstDepDate={firstDepDate}
                     firstDepTime={firstDepTime}
@@ -34,9 +34,13 @@ export function FlightModalButton(props) {
 
                     handleInputChange={handleInputChange}
                 />
-                <Toast toast="Added Flight" className="button blue darken-1" onClick={getValue}>
-                    Add<i className="material-icons right">add_circle</i>
-                </Toast>
+                <Button
+                    floating
+                    icon="add"
+                    className='btn-floating btn-large waves-effect waves-light red sticky'
+                    onClick={props.getValue}
+                />
+                
             </FlightModal>
         </Col>
     )
@@ -53,6 +57,7 @@ export function HotelModalButton(props) {
         <Col s={2}>
             <HotelModal>
                 <h4>Hotel Check-In</h4>
+                <Chip>You can add multiple hotel bookings as you add through.</Chip>
                 <div className="container">
                     <ModalInput
                         name="hotelName"
@@ -127,15 +132,18 @@ export function ActivitiesModalButton(props) {
     } = props;
 
     return (
-        <Col s={2}>
+        <Col>
             <ReactModal>
                 <br/>
+                <Chip>You can add multiple activities for each trip!</Chip>
+                <Row>
                 <ModalInput
                     onChange={handleInputChange}
                     name="activityName"
                     value={activityName}
+                    icon="directions_walk"
                     placeholder="Activity" />
-
+                </Row>
                 <Row>
                     <Col s={6}>
                         <SelectDate

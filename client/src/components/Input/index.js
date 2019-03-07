@@ -308,6 +308,7 @@ export function ItineraryButton(props) {
     
     <button className="light-blue lighten-3 waves-effect waves-light btn-small" {...props}>
       {props.children}
+      <i className="material-icons right">trending_flat</i>
     </button>
   )
 }
