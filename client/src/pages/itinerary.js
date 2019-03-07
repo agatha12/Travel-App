@@ -97,13 +97,12 @@ class Form extends Component {
                     this.setState({
                         response: response,
                         apiNoResults: 1,
-                        flightnumber: (this.state.airline+this.state.flNumber),
+                        flightnumber: (this.state.airline + this.state.flNumber),
                         airport: eachFlight.departureAirportFsCode,
                         firstDepDate: eachFlight.departureDate.dateLocal,
                         firstDepTime: moment(eachFlight.departureDate.dateLocal).format('LT'),
                         firstarrivalDate: eachFlight.arrivalDate.dateLocal,
                         firstarrivalTime: moment(eachFlight.arrivalDate.dateLocal).format('LT'),
-
                     })
                 }
 
@@ -165,7 +164,6 @@ class Form extends Component {
 
     userNotFlying = () => {
         // if user not flying
-
         this.setState({
             flightnumber: "Not Flying",
             airport: "None",
@@ -269,22 +267,21 @@ class Form extends Component {
     renderLongForm = () => {
         return (
             <FlightFormLong
-            firstDepDate={this.state.firstDepDate}
-            firstDepTime={this.state.firstDepTime}
+                firstDepDate={this.state.firstDepDate}
+                firstDepTime={this.state.firstDepTime}
 
-            firstarrivalDate={this.state.firstarrivalDate}
-            firstarrivalTime={this.statefirstarrivalTime}
+                firstarrivalDate={this.state.firstarrivalDate}
+                firstarrivalTime={this.statefirstarrivalTime}
 
-            seconddepDate={this.state.seconddepDate}
-            seconddepTime={this.state.seconddepTime}
+                seconddepDate={this.state.seconddepDate}
+                seconddepTime={this.state.seconddepTime}
 
-            secondarrivalDate={this.state.secondarrivalDate}
-            secondarrivalTime={this.state.secondarrivalTime}
+                secondarrivalDate={this.state.secondarrivalDate}
+                secondarrivalTime={this.state.secondarrivalTime}
 
-            handleInputChange={this.handleInputChange}
-        />
+                handleInputChange={this.handleInputChange}
+            />
         )
-
     }
 
     renderSearchFlight = () => {
@@ -307,12 +304,14 @@ class Form extends Component {
         // console.log(this.state.hotelList)
         return (
             <div id="form-div">
-
                 <RowContainer>
-                    <GenerateSlider />
+                    <GenerateSlider/>
+                <div className="container">
                     <Row>
+                        <Col className="col s6 offset-s6">
                         <h1>Itinerary Form</h1>
                         <p>{this.props.userName}</p>
+                        </Col>
                     </Row>
 
                     <Intro
@@ -320,34 +319,17 @@ class Form extends Component {
                         startDate={this.state.startDate}
                         endDate={this.state.endDate}
                         handleInputChange={this.handleInputChange} />
-
                     {/* <AreYouFlying2
                         // value={this.amIFlying}
                         onRadioChange={this.onRadioChange}
                     /> */}
-                        {/* {this.state.amIFlying === 1 && this.renderSearchFlight()} */}
-                        {this.renderLongForm()}
+                    {/* {this.state.amIFlying === 1 && this.renderSearchFlight()} */}
+                    {this.renderLongForm()}
                     {/* {this.state.amIFlying === 1 && this.renderLongForm()}
                     {this.state.amIFlying === 0 && this.notFlyingForm()} */}
+                    </div>
                     <br />
                     <Row onClick={this.handleLoad}>
-                        {/* <FlightModalButton
-                            firstDepDate={this.state.firstDepDate}
-                            firstDepTime={this.state.firstDepTime}
-
-                            firstarrivalDate={this.state.firstarrivalDate}
-                            firstarrivalTime={this.state.firstarrivalTime}
-
-                            seconddepDate={this.state.seconddepDate}
-                            seconddepTime={this.state.seconddepTime}
-
-                            secondarrivalDate={this.state.secondarrivalDate}
-                            secondarrivalTime={this.state.secondarrivalTime}
-
-                            handleInputChange={this.handleInputChange}
-                            apiNoResults={this.apiNoResults}
-                            getValue={this.getValue}
-                        /> */}
                         <HotelModalButton
                             hotelName={this.state.hotelName}
 
@@ -393,7 +375,7 @@ class Form extends Component {
             </div >
         )
     };
-}
+}; 
 
 Form.props = {
     userName: PropTypes.String
