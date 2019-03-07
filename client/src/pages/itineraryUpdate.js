@@ -32,25 +32,13 @@ class Update extends Component {
             secondarrivalDate: '',
             secondarrivalTime: '',
             
-            hotelList: [
-                {
-                    hotelName: '',
-                    checkinDate: '',
-                    checkinTime: '',
-                    checkoutTime: '',
-                    checkoutDate: ''
-                }
-            ],
+            hotelList: [],
 
-            activityList: [
-                {
-                    activityName: '',
-                    activityDate: '',
-                    activityTime: ''
-                }
-            ]
+            activityList: []
 
-        }
+        },
+        newHotelList: [],
+        newActivityList: []
     }
 
     componentDidMount() {
@@ -61,7 +49,9 @@ class Update extends Component {
     // gets user info for specific _id
     getuserInput() {
         API.getForm(this.props.match.params.id)
-            .then(res => this.setState({ itinerary: res.data }))
+            .then(res => this.setState({ itinerary: res.data,
+                                         newHotelList: res.data.hotelList,
+                                         newActivityList: res.data.activityList }))
             .catch(err => console.log(err));
     };
 
@@ -86,7 +76,7 @@ class Update extends Component {
             destination,flightnumber, airport, 
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
-            secondarrivalDate, secondarrivalTime, hotelList,
+            secondarrivalDate, secondarrivalTime, hotelList, activityList,
             // hotelName, checkinDate, checkinTime,
             // checkoutDate, checkoutTime
         } = this.state.itinerary
@@ -99,6 +89,7 @@ class Update extends Component {
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
             secondarrivalDate, secondarrivalTime, hotelList,
+            activityList,
             // hotelName, checkinDate, checkinTime,
             // checkoutDate, checkoutTime
         }).then((result) => {
@@ -107,7 +98,29 @@ class Update extends Component {
             })
         console.log(this.state)
     }
+    delHotel = index => {
+        console.log(index)
+        console.log(this.state.itinerary.hotelList[index])
+        let newArray = this.state.itinerary.hotelList
+        newArray.splice((index), 1)
+        
+         this.setState({
+             newHotelList: newArray
+             
+         })
+    }
 
+    delActivity = index => {
+        console.log(index)
+        console.log(this.state.itinerary.activityList[index])
+        let newArray = this.state.itinerary.activityList
+        newArray.splice((index), 1)
+        
+         this.setState({
+             newActivityList: newArray
+             
+         })
+    }
     render() {
         
         console.log(this.state.itinerary)
@@ -134,11 +147,13 @@ class Update extends Component {
                     secondarrivalDate={this.state.itinerary.secondarrivalDate}
                     secondarrivalTime={this.state.itinerary.secondarrivalTime}
                     
-                    hotelList={this.state.itinerary.hotelList}
-                    activityList={this.state.itinerary.activityList}
+                    hotelList={this.state.newHotelList}
+                    activityList={this.state.newActivityList}
 
                     handleUpdate={this.handleUpdate}
-                    onChange={this.onChange} />
+                    onChange={this.onChange} 
+                    delHotel ={this.delHotel}
+                    delActivity={this.delActivity}/>
             </div>
 
         )
