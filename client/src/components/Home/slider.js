@@ -38,7 +38,7 @@ export function HomeSlider(props) {
                 src={Japan2}
                 title=""
                 placement="right">
-                Travel Pal is always by your side
+                Trip Pal is always by your side
             </Slide>
         </Slider>
     )
