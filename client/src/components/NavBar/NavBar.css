@@ -10,12 +10,14 @@
 #drop {
     float: right;
     color:white;
+    width: 200px;
 
 }
 #menu {   
      background-color: skyblue;
      border-color: transparent;
      box-shadow: 0px;
+     width: 200px;
     }
 .navItem {
     background-color:skyblue;
@@ -41,4 +43,5 @@
     height: 100%;
     margin-top: 0px;
     text-align: center;
+    width: 200px;
 }
