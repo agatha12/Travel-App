@@ -4,9 +4,9 @@ import photoAPI from '../../utils/photoAPI';
 
 const Album = (props) => {
 return (
-    <div>
+    <div className="photo">
 <h3>{props.name}</h3>
-<button id="deleteAlbum" onClick={() => {photoAPI.deleteAlbum(props.id).then( props.afterAlbumDelete())}}>Delete Album</button>
+
 
 {props.photos.map((photo, index) => {
 
@@ -17,6 +17,9 @@ return (
     </div>
     )
 })}
+
+    <h4>Delete this album</h4>
+    <button id="deleteAlbum" onClick={() => {photoAPI.deleteAlbum(props.id).then( props.afterAlbumDelete())}}>Delete Album</button>
 
     </div>
 )
