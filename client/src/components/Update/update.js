@@ -7,7 +7,7 @@ const UpdateItem = props => {
         <div id="form-div">
             <h4>Hey {props.passengername}</h4>
 
-            <h4>Trip to {props.destination}</h4>
+            <h5>You can update your trip to {props.destination}</h5>
             <RowContainer>
                 <form>
                     <Row>
@@ -21,7 +21,25 @@ const UpdateItem = props => {
                                 onChange={props.onChange} />
                         </Col>
                     </Row>
-                    <Col s={2}>
+                    <Row>
+                        <Col s={3}>
+                            <label>Start Date</label>
+                            <SelectDate
+                                name="startDate"
+                                icon="public"
+                                value={props.startDate}
+                                onChange={props.onChange} />
+                        </Col>
+                        <Col s={3}>
+                            <label>End Date</label>
+                            <SelectDate
+                                name="endDate"
+                                icon="public"
+                                value={props.endDate}
+                                onChange={props.onChange} />
+                        </Col>
+                    </Row>
+                    <Col>
                         <FlightModal>
                             <Row>
                                 <h4>Flight Details</h4>
@@ -130,7 +148,7 @@ const UpdateItem = props => {
                         </FlightModal>
                     </Col>
 
-                    <Col s={2}>
+                    <Col>
                         <HotelModal>
 
                             {props.hotelList.map((hotel, i) =>
@@ -207,7 +225,7 @@ const UpdateItem = props => {
                                             <SelectDate
                                                 name="activityDate"
                                                 onChange={props.onChange}
-                                                value={act.activityDate}/>
+                                                value={act.activityDate} />
                                         </Col>
                                         <Col>
                                             <UserInput
@@ -224,18 +242,22 @@ const UpdateItem = props => {
                             </Toast>
                         </ReactModal>
                     </Col>
-                    <Col s={2}>
-                        <FormButton onClick={props.handleUpdate}>
-                            Update
-                        </FormButton>
-                    </Col>
                 </form>
-                <Col s={2}>
-                    <a href={"/itinerary/pass/" + props.passengername}>
-                        <ItineraryButton>Go to Itinerary</ItineraryButton>
-                    </a>
-                </Col>
             </RowContainer>
+            <div className="divider"></div>
+            <br />
+            <Col>
+                <FormButton onClick={props.handleUpdate}>
+                    Update
+                </FormButton>
+            </Col>
+            <br />
+            <Col>
+                <a href={"/itinerary/pass/" + props.passengername}>
+                    <ItineraryButton>VIEW </ItineraryButton>
+                </a>
+            </Col>
+
         </div >
     )
 }

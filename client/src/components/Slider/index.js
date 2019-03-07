@@ -24,7 +24,6 @@ export function GenerateSlider(props) {
                 src={Japan2}
                 title=""
                 placement="right">
-                Here's our small slogan.
             </Slide>
         </Slider>
     )

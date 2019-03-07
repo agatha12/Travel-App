@@ -10,7 +10,7 @@ export default function (props) {
     return (
         <div>
             <Row>
-                <Col s={4}>
+                <Col s={5}>
                     <UserInput
                         name="destination"
                         onChange={handleInputChange}
@@ -19,7 +19,7 @@ export default function (props) {
                         label="Destination" />
                 </Col>
             </Row>
-            {/* <Row>
+            <Row>
                 <Col s={3}>
                     <StartDate
                         name="startDate"
@@ -36,7 +36,7 @@ export default function (props) {
                         label="End Date" />
 
                 </Col>
-            </Row> */}
+            </Row>
         </div>
     )
 

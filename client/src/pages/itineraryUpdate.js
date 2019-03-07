@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import PropTypes from 'prop-types'
 import { Row, Col, Toast } from "react-materialize";
-import { RowContainer, ReactModal, FlightModal, HotelModal, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../components/Input";
+import {Third} from "../components/ThirdSlider"
 // import SearchFlight from "../components/SearchFlightForm";
 // import FlightForm_Long from "../components/FlightForm_Long";
 import "./style.css";
@@ -16,11 +16,12 @@ class Update extends Component {
     state = {
         
         itinerary: {
-            flightnumber: '',
-            airport: '',
             destination: '',
-            popcorn: '',
+            startDate: '',
+            endDate: '',
 
+            flightnumber: '',
+            airport: '',            
             firstDepDate: '',
             firstDepTime: '',
             firstarrivalDate: '',
@@ -81,7 +82,8 @@ class Update extends Component {
 
         e.preventDefault();
 
-        const { flightnumber, airport, destination,
+        const { startDate, endDate, 
+            destination,flightnumber, airport, 
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
             secondarrivalDate, secondarrivalTime, hotelList,
@@ -92,6 +94,7 @@ class Update extends Component {
         alert("Update Complete");
 
         API.updateForm(this.props.match.params.id, {
+            startDate, endDate,
             flightnumber, airport, destination,
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
@@ -111,12 +114,16 @@ class Update extends Component {
         
         return (
             <div>
+                <Third/>
                 <UpdateItem
                     passengername={this.state.itinerary.passengername}
+                    
                     destination={this.state.itinerary.destination}
+                    startDate={this.state.itinerary.startDate}
+                    endDate={this.state.itinerary.endDate}
+
                     flightnumber={this.state.itinerary.flightnumber}
                     airport={this.state.itinerary.airport}
-
                     firstDepDate={this.state.itinerary.firstDepDate}
                     firstDepTime={this.state.itinerary.firstDepTime}
                     firstarrivalDate={this.state.itinerary.firstarrivalDate}

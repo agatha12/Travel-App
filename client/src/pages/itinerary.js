@@ -8,7 +8,7 @@ import FlightFormLong from "../components/FlightForm_Long"
 import { AreYouFlying2 } from "../components/AreYouFlying";
 import { FlightModalButton, HotelModalButton, ActivitiesModalButton } from "../components/Modals";
 import NotFlyingForm from "../components/NotFlyingForm";
-import { GenerateSlider } from "../components/Slider";
+import { SecondSlider } from "../components/Slider2";
 import SearchFlightForm from "../components/SearchFlightForm"
 import moment from 'moment';
 
@@ -305,68 +305,87 @@ class Form extends Component {
         return (
             <div id="form-div">
                 <RowContainer>
-                    <GenerateSlider/>
-                <div className="container">
-                    <Row>
-                        <Col className="col s6 offset-s6">
-                        <h1>Itinerary Form</h1>
-                        <p>{this.props.userName}</p>
-                        </Col>
-                    </Row>
+                    <SecondSlider />
+                    <div className="container">
+                        <Row>
+                            <Col className="col s4">
 
-                    <Intro
-                        destination={this.state.destination}
-                        startDate={this.state.startDate}
-                        endDate={this.state.endDate}
-                        handleInputChange={this.handleInputChange} />
-                    {/* <AreYouFlying2
+                                <h5>Hello, {this.props.userName}. Let's start your trip!</h5>
+                            </Col>
+                        </Row>
+
+                        <Intro
+                            destination={this.state.destination}
+                            startDate={this.state.startDate}
+                            endDate={this.state.endDate}
+                            handleInputChange={this.handleInputChange} />
+                        {/* <AreYouFlying2
                         // value={this.amIFlying}
                         onRadioChange={this.onRadioChange}
                     /> */}
-                    {/* {this.state.amIFlying === 1 && this.renderSearchFlight()} */}
-                    {this.renderLongForm()}
-                    {/* {this.state.amIFlying === 1 && this.renderLongForm()}
+                        {/* {this.state.amIFlying === 1 && this.renderSearchFlight()} */}
+                        {/* {this.renderLongForm()} */}
+                        {/* {this.state.amIFlying === 1 && this.renderLongForm()}
                     {this.state.amIFlying === 0 && this.notFlyingForm()} */}
                     </div>
                     <br />
                     <Row onClick={this.handleLoad}>
-                        <HotelModalButton
-                            hotelName={this.state.hotelName}
+                        <Col className="col s9">
+                            <FlightModalButton
+                                firstDepDate={this.state.firstDepDate}
+                                firstDepTime={this.state.firstDepTime}
 
-                            checkinDate={this.state.checkinDate}
-                            checkinTime={this.state.checkinTime}
+                                firstarrivalDate={this.state.firstarrivalDate}
+                                firstarrivalTime={this.state.firstarrivalTime}
 
-                            checkoutDate={this.checkoutDate}
-                            checkoutTime={this.state.checkoutDate}
+                                seconddepDate={this.state.seconddepDate}
+                                seconddepTime={this.state.seconddepTime}
 
-                            handleInputChange={this.handleInputChange}
-                            getValue={this.getValue}
-                            pushHotel={() => this.pushHotel()}
-                        />
-                        <ActivitiesModalButton
-                            activityName={this.state.activityName}
-                            activityDate={this.state.activityDate}
-                            activityTime={this.state.activityTime}
-                            
-                            handleInputChange={this.handleInputChange}
-                            getValue={this.getValue}
-                            pushActivity={() => this.pushActivity()}
-                        />
+                                secondarrivalDate={this.state.secondarrivalDate}
+                                secondarrivalTime={this.state.secondarrivalTime}
+
+                                handleInputChange={this.handleInputChange}
+
+                            />
+
+                            <HotelModalButton
+                                hotelName={this.state.hotelName}
+
+                                checkinDate={this.state.checkinDate}
+                                checkinTime={this.state.checkinTime}
+
+                                checkoutDate={this.checkoutDate}
+                                checkoutTime={this.state.checkoutDate}
+
+                                handleInputChange={this.handleInputChange}
+                                getValue={this.getValue}
+                                pushHotel={() => this.pushHotel()}
+                            />
+                            <ActivitiesModalButton
+                                activityName={this.state.activityName}
+                                activityDate={this.state.activityDate}
+                                activityTime={this.state.activityTime}
+
+                                handleInputChange={this.handleInputChange}
+                                getValue={this.getValue}
+                                pushActivity={() => this.pushActivity()}
+                            />
+                        </Col>
                     </Row>
+
+                    <div className="divider"></div>
+                    <br />
                     <Row>
                         <Col>
                             <FormButton onClick={this.handleFormButton}>
                                 Submit
-                        </FormButton>
+                            </FormButton>
                         </Col>
                     </Row>
-                    <div className="divider"></div>
-                    <br />
                     <Row>
-                        <Col s={2}>
+                        <Col>
                             <a href={"/itinerary/pass/" + this.props.userName}>
                                 <ItineraryButton>
-                                    <i className="material-icons right">card_travel</i>
                                     View Trips
                                 </ItineraryButton>
                             </a>
@@ -376,7 +395,7 @@ class Form extends Component {
             </div >
         )
     };
-}; 
+};
 
 Form.props = {
     userName: PropTypes.String
