@@ -57,7 +57,7 @@ export function HotelModalButton(props) {
         <Col s={2}>
             <HotelModal>
                 <h4>Hotel Check-In</h4>
-                <Chip>You can add multiple hotel bookings as you add through.</Chip>
+                <Chip>You can add multiple hotel bookings for each trip!</Chip>
                 <div className="container">
                     <ModalInput
                         name="hotelName"
