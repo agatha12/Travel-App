@@ -120,7 +120,7 @@ class PhotoAlbum extends React.Component {
   }
 
   displayAlbum = () => {
-    if (this.state.index !== null) {
+    if (this.state.index !== null && this.state.userAlbums.length > 0) {
       let index = this.state.index
       let name = this.state.userAlbums[index].albumName
       let photos = this.state.userAlbums[index].photos
@@ -153,7 +153,7 @@ class PhotoAlbum extends React.Component {
 
   displayIndex = () => {
     const index = this.state.index
-    if (index === null) {
+    if (index === null || this.state.userAlbums.length === 0) {
       return (
         <div>
           <h1>Your Albums</h1>
