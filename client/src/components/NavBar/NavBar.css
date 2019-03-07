@@ -22,6 +22,7 @@
     color: white;
     padding-top: 0px;
 
+
 }
 
 #modalLi {
@@ -34,3 +35,10 @@
 .textP {
     color: white;
 } 
+.dropdown-content li>a, .dropdown-content li>span {
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    margin-top: 0px;
+    text-align: center;
+}

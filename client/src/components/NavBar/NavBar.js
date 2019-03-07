@@ -70,7 +70,7 @@ class NavBar extends Component {
       <Dropdown trigger={
         <Button id="menu">Menu</Button>
       }>
-      <NavItem textclassName="navItem" href="/"><p className="textP">Home</p></NavItem>
+      <NavItem className="navItem" href="/"><p className="textP">Home</p></NavItem>
       <NavItem className="navItem" href="/itinerary"><p className="textP">Add Trip</p></NavItem>
       <NavItem className="navItem" href={`/itinerary/pass/${this.props.userName}`}><p className="textP">View Trips</p></NavItem>
       {/* <NavItem divider /> */}
