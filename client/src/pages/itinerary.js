@@ -347,6 +347,7 @@ class Form extends Component {
                             activityName={this.state.activityName}
                             activityDate={this.state.activityDate}
                             activityTime={this.state.activityTime}
+                            
                             handleInputChange={this.handleInputChange}
                             getValue={this.getValue}
                             pushActivity={() => this.pushActivity()}
