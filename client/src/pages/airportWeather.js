@@ -120,7 +120,7 @@ class getAirportWeather extends Component {
                         <h5>{eachWeather.day}</h5>
                         <p>Forcast: {eachWeather.forecast}</p>
                         <p>From: {moment(eachWeather.start).format('LT')} to {moment(eachWeather.end).format('LT')}</p>
-                        <p>Conditions: {eachWeather.tags[0].value}  {this.weatherConditions(eachWeather.tags[0].value)}</p>
+                        <p>Conditions: {eachWeather.tags[0].value} {this.weatherConditions(eachWeather.tags[0].value)}</p>
                         <br />
                     </div>)
             })
