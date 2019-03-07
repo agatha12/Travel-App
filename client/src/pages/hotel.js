@@ -8,10 +8,6 @@ import moment from 'moment';
 import { Col, Row, Card, CardTitle, Carousel } from "react-materialize";
 
 
-
-let queryURL = "https://cors-anywhere.herokuapp.com/https://api.makcorps.com/enterprise/v2/miami/2019-05-10/2019-05-17"
-
-
 class Hotel extends Component {
     constructor(props) {
         super(props);
@@ -40,11 +36,9 @@ class Hotel extends Component {
     componentDidMount() {
 
         API.searchHotel().then(response => {
-            console.log("THIS IS FROM THE API " + response.data)
             this.setState({
                 tokenerer: response.data,
             })
-            console.log("is the token the same " + this.state.tokenerer)
         })
 
     }
@@ -99,6 +93,7 @@ class Hotel extends Component {
                         superHotel: response.data,
                         isLoading: false
                     })
+                    console.log(this.state.superHotel.comparison)
                     this.renderHotelInfo()
                 }).catch(function (error) {
 
@@ -110,12 +105,13 @@ class Hotel extends Component {
         return (
             this.state.superHotel.comparison.map((eachHotel, index) => {
                 return (
-                    <div className='collection-item amber accent-2'
+                    <div className='collection-item grey lighten-3'
                         key={index}>
                         <Col m={6} s={12}>
                             <Card textClassName='black-text' title={eachHotel.Hotel} actions={[<strong>Vendor: {eachHotel.vendor2}</strong>]}>
                                 <ul>
-                                    <li><strong>Amenities: </strong> {eachHotel.amenities} , {eachHotel["amenities(Executive)"]} , {eachHotel.features}</li>
+                                    <br />
+                                    <li><strong>Amenities: </strong> {eachHotel.amenities}, {eachHotel["amenities(Executive)"]}, {eachHotel.features}</li>
                                     <br />
                                     <li><strong>Stars: </strong> {eachHotel.ratings}</li>
                                     <br />
@@ -137,20 +133,22 @@ class Hotel extends Component {
         const checkLoading = this.state.isLoading
         return (
             <div>
-                <HotelForm
-                    handleInputChange={this.handleInputChange}
-                    handleFormButton={this.handleFormButton}
-                    userCity={this.state.userCity}
-                    checkInDate={this.state.checkInDate}
-                    checkOutDate={this.state.checkOutDate}
-                />
+                <div className="center">
+                    <HotelForm
+                        handleInputChange={this.handleInputChange}
+                        handleFormButton={this.handleFormButton}
+                        userCity={this.state.userCity}
+                        checkInDate={this.state.checkInDate}
+                        checkOutDate={this.state.checkOutDate}
+                    />
+                </div>
                 <br />
                 <div>
                     {truHotel ?
-                        <div className="container amber accent-2">
-                            <div className="collection amber accent-2">
+                        <div className="container grey lighten-3">
+                            <div className="collection grey lighten-3">
                                 <blockquote>
-                                <br /><h4>{truHotel.length} hotel results</h4><br />
+                                    <br /><h4>{truHotel.length} hotel results</h4><br />
                                 </blockquote>
                                 {this.renderHotelInfo()}
                             </div>
@@ -158,10 +156,10 @@ class Hotel extends Component {
                         :
                         (
                             checkLoading ?
-                                <div className="container amber accent-2">
+                                <div className="container grey lighten-3">
                                     <div className="collection">
                                         <blockquote>
-                                        <h4>Loading..</h4> <br />
+                                            <h4>Loading..</h4> <br />
                                         </blockquote>
                                         <PreloaderAnimate />
                                     </div>

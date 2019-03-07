@@ -33,7 +33,9 @@ const App = ({ store }) => (
         <Route exact path = "/photoAlbum" component= {PhotoAlbumContainer} />
         <Route component={NoMatch} />
     </Switch>
-    <NewFooter>Test</NewFooter>
+    <div className="fixed-bottom">
+    <NewFooter />
+    </div>
     </div>
     </Router>
   </Provider>
