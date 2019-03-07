@@ -9,6 +9,8 @@
 
 #drop {
     float: right;
+    color:white;
+
 }
 #menu {   
      background-color: skyblue;
@@ -17,6 +19,9 @@
     }
 .navItem {
     background-color:skyblue;
+    color: white;
+    padding-top: 0px;
+
 }
 
 #modalLi {
@@ -26,3 +31,6 @@
     background-color: skyblue;
     margin: 2px;
 }
+.textP {
+    color: white;
+} 

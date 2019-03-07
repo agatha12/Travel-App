@@ -45,6 +45,7 @@ class NavBar extends Component {
   }
 
   _getStateButtons = () => {
+    const itinpath = "/itinerary/pass/"+this.props.userName
     if (this.props.userName === "") {
         let path = window.location.pathname
           if (path !== "/"){
@@ -69,13 +70,14 @@ class NavBar extends Component {
       <Dropdown trigger={
         <Button id="menu">Menu</Button>
       }>
-      <NavItem className="navItem" href="/">Home</NavItem>
-      <NavItem className="navItem" href="/itinerary">Itinerary</NavItem>
+      <NavItem textclassName="navItem" href="/"><p className="textP">Home</p></NavItem>
+      <NavItem className="navItem" href="/itinerary"><p className="textP">Add Trip</p></NavItem>
+      <NavItem className="navItem" href={`/itinerary/pass/${this.props.userName}`}><p className="textP">View Trips</p></NavItem>
       {/* <NavItem divider /> */}
-      <NavItem className="navItem blue-text text-darken-2" href="/getflights">Flight Search</NavItem>
-      <NavItem  className="navItem" href="/getairportweather">Airport Weather</NavItem>
-      <NavItem  className="navItem" href="/gethotel">Hotel Search</NavItem>
-      <NavItem className="navItem" href="/photoAlbum">Photo Album</NavItem>
+      <NavItem className="navItem" href="/getflights"><p className="textP">Flight Search</p></NavItem>
+      <NavItem  className="navItem" href="/getairportweather"><p className="textP">Airport Weather</p></NavItem>
+      <NavItem  className="navItem" href="/gethotel"><p className="textP">Hotel Search</p></NavItem>
+      <NavItem className="navItem" href="/photoAlbum"><p className="textP">Photo Album</p></NavItem>
       <NavItem className="navItem"><button id="logoutButton" onClick={firebase.logout}>Logout</button></NavItem>
     </Dropdown>
     </div>
