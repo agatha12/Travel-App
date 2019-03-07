@@ -288,8 +288,7 @@ export function Timezone(props) {
 
 export function FormButton(props) {
   return (
-    // className="light-blue lighten-3 waves-effect waves-light btn-small" 
-    <button {...props}>
+    <button className="light-blue lighten-3 waves-effect waves-light btn-small" {...props}>
       <i className="material-icons right">send</i>
       {props.children}
     </button>

@@ -40,15 +40,17 @@ class Itinerary extends Component {
                 destination={item.destination}
                 startDate={item.startDate}
                 endDate={item.endDate}
+                airport={item.airport}
+                flightnumber={item.flightnumber}
+
                 firstDepDate={item.firstDepDate}
                 firstDepTime={item.firstDepTime}
-                airport={item.airport}
                 firstarrivalDate={item.firstarrivalDate}
                 firstarrivalTime={item.firstarrivalTime}
                 seconddepDate={item.seconddepDate}
                 seconddepTime={item.seconddepTime}
                 secondarrivalTime={item.secondarrivalTime}
-                flightnumber={item.flightnumber}
+                
                 activityList={item.activityList}
                 hotelList = {item.hotelList}
                 deleteIti={() => this.deleteIti(item._id)} />
