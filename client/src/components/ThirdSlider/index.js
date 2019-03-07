@@ -10,7 +10,7 @@ export function Third(props) {
             <Slide
                 className="slider"
                 src={Update}>
-                <h1 className="slider">Update Itinerary</h1>
+                <p className="slider">Update Itinerary</p>
             </Slide>
         </Slider>
     )

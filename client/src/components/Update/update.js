@@ -161,7 +161,8 @@ const UpdateItem = props => {
                                             name="hotelName"
                                             icon="room_service"
                                             value={hotel.hotelName}
-                                            onChange={props.onChange} />
+                                            // onChange={props.onChange} 
+                                            />
                                     </Row>
                                     <Row>
                                         <Col>
@@ -169,7 +170,8 @@ const UpdateItem = props => {
                                             <SelectDate
                                                 name="checkinDate"
                                                 value={hotel.checkinDate}
-                                                onChange={props.onChange} />
+                                                // onChange={props.onChange} 
+                                                />
                                         </Col>
                                         <Col></Col>
                                         <Col>
@@ -178,7 +180,8 @@ const UpdateItem = props => {
                                                 name="checkinTime"
                                                 icon="access_time"
                                                 value={hotel.checkinTime}
-                                                onChange={props.onChange} />
+                                                // onChange={props.onChange} 
+                                                />
                                         </Col>
                                     </Row>
 
@@ -189,15 +192,20 @@ const UpdateItem = props => {
                                             <SelectDate
                                                 name="checkoutDate"
                                                 onChange={props.onChange}
-                                                value={hotel.checkoutDate} />
+                                                // value={hotel.checkoutDate} 
+                                                />
                                         </Col>
                                         <Col>
                                             <label>Check-out Time</label>
                                             <UserInput
                                                 name="checkoutTime"
                                                 value={hotel.checkoutTime}
-                                                onChange={props.onChange} />
+                                                // onChange={props.onChange} 
+                                                />
                                         </Col>
+                                    </Row>
+                                    <Row>
+                                        <button onClick={() => {props.delHotel(i)}}>Delete</button>
                                     </Row>
                                 </div>)}
                             <Toast toast="Integrate Changes" className="light-blue lighten-3 waves-effect waves-light btn-small">
@@ -213,7 +221,7 @@ const UpdateItem = props => {
                                 <div key={i}>
                                     <Row>
                                         <ModalInput
-                                            onChange={props.onChange}
+                                            // onChange={props.onChange}
                                             name="activityName"
                                             value={act.activityName}
                                             icon="directions_walk"
@@ -224,7 +232,7 @@ const UpdateItem = props => {
                                             <label>Activity Date</label>
                                             <SelectDate
                                                 name="activityDate"
-                                                onChange={props.onChange}
+                                                // onChange={props.onChange}
                                                 value={act.activityDate} />
                                         </Col>
                                         <Col>
@@ -232,8 +240,12 @@ const UpdateItem = props => {
                                                 name="activityTime"
                                                 icon="access_time"
                                                 value={act.activityTime}
-                                                onChange={props.onChange} />
+                                                // onChange={props.onChange} 
+                                                />
                                         </Col>
+                                    </Row>
+                                    <Row>
+                                        <button onClick={() => {props.delActivity(i)}}>Delete</button>
                                     </Row>
                                 </div>)}
                             <Toast toast="Integrate Changes" className="light-blue lighten-3 waves-effect waves-light btn-small">
