@@ -20,23 +20,27 @@ import testpage from "./pages/testpage"
 const App = ({ store }) => (
   <Provider store={store}>
     <Router>
-    <div>
-      <NavContainer/>
-      <Switch>
-        <Route exact path="/" component={HomeContainer}/>
-        <Route exact path="/itinerary" component={ItinFormContainer}/>
-        <Route exact path = "/itinerary/:id" component= {Update} />
-        <Route exact path = "/itinerary/pass/:id" component= {Itinerary} />
-        <Route exact path = "/getflights" component= {GetFlights} />
-        <Route exact path = "/getairportweather" component= {GetAirportWeather} />
-        <Route exact path = "/gethotel" component= {Hotel} />
-        <Route exact path = "/photoAlbum" component= {PhotoAlbumContainer} />
-        <Route component={NoMatch} />
-    </Switch>
-    <div className="fixed-bottom">
-    <NewFooter />
-    </div>
-    </div>
+      <div>
+        <div>
+          <NavContainer />
+          <Switch>
+            <Route exact path="/" component={HomeContainer} />
+            <Route exact path="/itinerary" component={ItinFormContainer} />
+            <Route exact path="/itinerary/:id" component={Update} />
+            <Route exact path="/itinerary/pass/:id" component={Itinerary} />
+            <Route exact path="/getflights" component={GetFlights} />
+            <Route exact path="/getairportweather" component={GetAirportWeather} />
+            <Route exact path="/gethotel" component={Hotel} />
+            <Route exact path="/photoAlbum" component={PhotoAlbumContainer} />
+            <Route component={NoMatch} />
+          </Switch>
+        </div>
+        <div className="App Site">
+          </div>
+        <div className="Site-content">
+          <NewFooter />
+        </div>
+      </div>
     </Router>
   </Provider>
 )
