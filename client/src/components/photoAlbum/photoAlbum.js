@@ -29,6 +29,17 @@ class PhotoAlbum extends React.Component {
   }
 
   getInfo = () => {
+    if(this.props.index === undefined){
+      photoAPI.getAlbums(this.props.userName).then(res => {
+
+        this.setState({
+          userAlbums: res.data,
+          index: null
+        })
+      })
+
+    }
+    else{
 
     photoAPI.getAlbums(this.props.userName).then(res => {
 
@@ -37,7 +48,7 @@ class PhotoAlbum extends React.Component {
         index: this.props.index
       })
     })
-
+  }
   }
 
   
