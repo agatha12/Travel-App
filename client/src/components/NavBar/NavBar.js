@@ -67,19 +67,24 @@ class NavBar extends Component {
     } else {
       return (
       <div  id="drop">
-      <Dropdown trigger={
+      <button id="MenuButton">Menu</button>
+      <button id="HomeButton" onClick={() => {window.location.href = "/"}}>Home</button>
+      {/* <ul>
+        <li display="block"><a href="/">Home</a></li>
+      </ul> */}
+      {/* <Dropdown trigger={
         <Button id="menu">Menu</Button>
       }>
       <NavItem className="navItem" href="/">Home</NavItem>
       <NavItem className="navItem" href="/itinerary">Add Trip</NavItem>
       <NavItem className="navItem" href={`/itinerary/pass/${this.props.userName}`}>View Trips</NavItem>
-      {/* <NavItem divider /> */}
+      <NavItem divider />
       <NavItem className="navItem" href="/getflights"><p className="textP">Flight Search</p></NavItem>
       <NavItem  className="navItem" href="/getairportweather"><p className="textP">Airport Weather</p></NavItem>
       <NavItem  className="navItem" href="/gethotel"><p className="textP">Hotel Search</p></NavItem>
       <NavItem className="navItem" href="/photoAlbum"><p className="textP">Photo Album</p></NavItem>
       <NavItem className="navItem"><button id="logoutButton" onClick={firebase.logout}>Logout</button></NavItem>
-    </Dropdown>
+    </Dropdown> */}
     </div>
       
       )

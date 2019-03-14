@@ -13,6 +13,13 @@
     width: 200px;
 
 }
+
+#MenuButton {
+    display: block
+}
+#HomeButton {
+    display: block
+}
 #menu {   
      background-color: skyblue;
      border-color: transparent;
@@ -23,6 +30,8 @@
     background-color:skyblue;
     color: white;
     padding-top: 0px;
+
+    
 
 
 }
