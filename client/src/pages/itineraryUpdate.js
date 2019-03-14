@@ -38,7 +38,15 @@ class Update extends Component {
 
         },
         newHotelList: [],
-        newActivityList: []
+        newActivityList: [],
+        newactivityName: "",
+        newactivityDate: "",
+        newactivityTime: "",
+        newhotelName: "",
+        newcheckinDate: "",
+        newcheckinTime: "",
+        newcheckoutDate: "",
+        newcheckoutTime: ""
     }
 
     componentDidMount() {
@@ -76,12 +84,22 @@ class Update extends Component {
             destination,flightnumber, airport, 
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
-            secondarrivalDate, secondarrivalTime, hotelList, activityList,
+            secondarrivalDate, secondarrivalTime,
             // hotelName, checkinDate, checkinTime,
             // checkoutDate, checkoutTime
         } = this.state.itinerary
+        const activityList = this.state.newActivityList
+        const hotelList=this.state.newHotelList
 
         alert("Update Complete");
+        console.log({
+            startDate, endDate,
+            flightnumber, airport, destination,
+            firstDepDate, firstDepTime, firstarrivalDate,
+            firstarrivalTime, seconddepDate, seconddepTime,
+            secondarrivalDate, secondarrivalTime, hotelList,
+            activityList
+        })
 
         API.updateForm(this.props.match.params.id, {
             startDate, endDate,
@@ -89,7 +107,7 @@ class Update extends Component {
             firstDepDate, firstDepTime, firstarrivalDate,
             firstarrivalTime, seconddepDate, seconddepTime,
             secondarrivalDate, secondarrivalTime, hotelList,
-            activityList,
+            activityList
             // hotelName, checkinDate, checkinTime,
             // checkoutDate, checkoutTime
         }).then((result) => {
@@ -100,8 +118,8 @@ class Update extends Component {
     }
     delHotel = index => {
         console.log(index)
-        console.log(this.state.itinerary.hotelList[index])
-        let newArray = this.state.itinerary.hotelList
+
+        let newArray = this.state.newHotelList
         newArray.splice((index), 1)
         
          this.setState({
@@ -109,12 +127,118 @@ class Update extends Component {
              
          })
     }
+    updateHotel = (hotel, index) => {
+        console.log(hotel)
+        console.log(this.state.newHotelList[index])
+        let newArray = []
+        let hotels = this.state.newHotelList
+        hotels.map((hotelFromList, i) => {
+
+            if(i===index){
+                console.log(index)
+                console.log("equal"+i)
+                newArray.push(hotel)
+                if (i===(hotels.length-1)){
+                    console.log(newArray)
+                    this.setState({
+                        newHotelList: newArray
+                    })
+            }
+            }
+         
+            else{
+                console.log(index)
+                console.log("not equal"+i)
+                newArray.push(hotels[i])
+                if (i===(hotels.length-1)){
+                    console.log(newArray)
+                    this.setState({
+                        newHotelList: newArray
+                    })
+            }
+                
+            }
+        })
+   
+}
+
+    addHotel = () => {
+        let newHotel = {
+            hotelName: this.state.newhotelName,
+            checkinDate: this.state.newcheckinDate,
+            checkinTime: this.state.newcheckinTime,
+            checkoutDate: this.state.newcheckoutDate,
+            checkoutTime: this.state.newcheckoutTime
+        }
+   
+        let newArray = [...this.state.newHotelList, newHotel]
+
+        
+         this.setState({
+             newHotelList: newArray
+             
+         })
+         
+    }
 
     delActivity = index => {
         console.log(index)
-        console.log(this.state.itinerary.activityList[index])
-        let newArray = this.state.itinerary.activityList
+        console.log(this.state.newActivityList[index])
+        let newArray = this.state.newActivityList
         newArray.splice((index), 1)
+        
+         this.setState({
+             newActivityList: newArray
+             
+         })
+    }
+    
+    updateActivity = (updatedActivity, index) => {
+        console.log(updatedActivity)
+        console.log(this.state.newActivityList[index])
+        let newArray = []
+        let activities = this.state.newActivityList
+        activities.map((activityFromList, i) => {
+
+            if(i===index){
+                console.log(index)
+                console.log("equal"+i)
+                newArray.push(updatedActivity)
+                if (i===(activities.length-1)){
+                    console.log(newArray)
+                    this.setState({
+                        newActivityList: newArray
+                    })
+            }
+            }
+         
+            else{
+                console.log(index)
+                console.log("not equal"+i)
+                newArray.push(activities[i])
+                if (i===(activities.length-1)){
+                    console.log(newArray)
+                    this.setState({
+                        newActivityList: newArray
+                    })
+            }
+                
+            }
+        })
+   
+}
+
+    addActivity = () => {
+
+        let newAct = {
+            activityName: this.state.newactivityName,
+            activityDate: this.state.newactivityDate,
+            activityTime: this.state.newactivityTime
+        }
+        console.log(newAct)
+        
+        let newArray = [...this.state.newActivityList, newAct]
+        console.log(newArray)
         
          this.setState({
              newActivityList: newArray
@@ -123,7 +247,7 @@ class Update extends Component {
     }
     render() {
         
-        console.log(this.state.itinerary)
+        console.log(this.state)
         
         return (
             <div>
@@ -150,10 +274,25 @@ class Update extends Component {
                     hotelList={this.state.newHotelList}
                     activityList={this.state.newActivityList}
 
+                    hotelName={this.state.newhotelName}
+                    checkinDate={this.state.newcheckinDate}
+                    checkinTime={this.state.newcheckinTime}
+                    checkoutDate={this.state.newcheckoutDate}
+                    checkoutTime={this.state.newcheckoutTime}
+
+                    activityName={this.state.newActivityName}
+                    activityDate={this.state.newActivityDate}
+                    activityTime={this.state.newActivityTime}
+
                     handleUpdate={this.handleUpdate}
                     onChange={this.onChange} 
+                    handleInputChange={this.handleInputChange}
                     delHotel ={this.delHotel}
-                    delActivity={this.delActivity}/>
+                    updateHotel={this.updateHotel}
+                    delActivity={this.delActivity}
+                    updateActivity={this.updateActivity}
+                    addHotel ={this.addHotel}
+                    addActivity={this.addActivity}/>
             </div>
 
         )
