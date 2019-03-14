@@ -72,7 +72,7 @@ class NavBar extends Component {
       }>
       <NavItem className="navItem" href="/">Home</NavItem>
       <NavItem className="navItem" href="/itinerary">Add Trip</NavItem>
-      <NavItem className="navItem" href={`/itinerary/pass/${this.props.userName}`}>View Trip</NavItem>
+      <NavItem className="navItem" href={`/itinerary/pass/${this.props.userName}`}>View Trips</NavItem>
       {/* <NavItem divider /> */}
       <NavItem className="navItem" href="/getflights">Flight Search</NavItem>
       <NavItem  className="navItem" href="/getairportweather">Airport Weather</NavItem>

@@ -1,8 +1,10 @@
 import React from "react";
 import { Row, Col, Toast } from "react-materialize";
 import { RowContainer, ReactModal, FlightModal, HotelModal, UserInput, SelectDate, Hour, Minute, Timezone, FormButton, ItineraryButton, Container, ModalInput } from "../Input";
-
+import UpdateHotel from './updateHotel'
+import UpdateActivity from './updateActivity'
 const UpdateItem = props => {
+    console.log(props)
     return (
         <div id="form-div">
             <h4>Hey {props.passengername}</h4>
@@ -152,66 +154,83 @@ const UpdateItem = props => {
                         <HotelModal>
 
                             {props.hotelList.map((hotel, i) =>
+
                                 <div key={i}>
-                                    <h4>Hotel Check-In</h4>
-
-                                    <label>Hotel Name</label>
+                                    <UpdateHotel
+                                        hotelName={hotel.hotelName}
+                                        checkinDate={hotel.checkinDate}
+                                        checkinTime={hotel.checkinTime}
+                                        checkoutDate={hotel.checkoutDate}
+                                        checkoutTime={hotel.checkoutTime}
+                                        updateHotel={props.updateHotel}
+                                        index={i}
+                                    />
                                     <Row>
-                                        <ModalInput
-                                            name="hotelName"
-                                            icon="room_service"
-                                            value={hotel.hotelName}
-                                            // onChange={props.onChange} 
-                                            />
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <label>Check-in Date</label>
-                                            <SelectDate
-                                                name="checkinDate"
-                                                value={hotel.checkinDate}
-                                                // onChange={props.onChange} 
-                                                />
-                                        </Col>
-                                        <Col></Col>
-                                        <Col>
-                                            <label>Check-in Time</label>
-                                            <UserInput
-                                                name="checkinTime"
-                                                icon="access_time"
-                                                value={hotel.checkinTime}
-                                                // onChange={props.onChange} 
-                                                />
-                                        </Col>
+                                        <button onClick={() => { props.delHotel(i) }}>Delete</button>
                                     </Row>
 
-                                    <h4>Hotel Check-Out</h4>
-                                    <Row>
-                                        <Col>
-                                            <label>Check-out Date</label>
-                                            <SelectDate
-                                                name="checkoutDate"
-                                                onChange={props.onChange}
-                                                // value={hotel.checkoutDate} 
-                                                />
-                                        </Col>
-                                        <Col>
-                                            <label>Check-out Time</label>
-                                            <UserInput
-                                                name="checkoutTime"
-                                                value={hotel.checkoutTime}
-                                                // onChange={props.onChange} 
-                                                />
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <button onClick={() => {props.delHotel(i)}}>Delete</button>
-                                    </Row>
-                                </div>)}
-                            <Toast toast="Integrate Changes" className="light-blue lighten-3 waves-effect waves-light btn-small">
+                                </div>
+
+
+                            )}
+
+                            <h1>Add Hotel</h1>
+                            <label>Hotel Name</label>
+                            <Row>
+                                <ModalInput
+                                    name="newhotelName"
+                                    icon="room_service"
+                                    value={props.hotelName}
+                                    onChange={props.handleInputChange}
+                                />
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <label>Check-in Date</label>
+                                    <SelectDate
+                                        name="newcheckinDate"
+                                        value={props.checkinDate}
+                                        onChange={props.handleInputChange}
+                                    />
+                                </Col>
+                                <Col></Col>
+                                <Col>
+                                    <label>Check-in Time</label>
+                                    <UserInput
+                                        name="newcheckinTime"
+                                        icon="access_time"
+                                        value={props.checkinTime}
+                                        onChange={props.handleInputChange}
+                                    />
+                                </Col>
+                            </Row>
+
+                            <h4>Hotel Check-Out</h4>
+                            <Row>
+                                <Col>
+                                    <label>Check-out Date</label>
+                                    <SelectDate
+                                        name="newcheckoutDate"
+                                        onChange={props.onChange}
+                                        value={props.checkoutDate}
+                                    />
+                                </Col>
+                                <Col>
+                                    <label>Check-out Time</label>
+                                    <UserInput
+                                        name="newcheckoutTime"
+                                        value={props.checkoutTime}
+                                        onChange={props.handleInputChange}
+                                    />
+                                </Col>
+                            </Row>
+
+
+                            {/* <Toast toast="Integrate Changes" className="light-blue lighten-3 waves-effect waves-light btn-small">
                                 Update
                                     <i className="material-icons right">add_circle</i>
-                            </Toast>
+                            </Toast> */}
+                            <button onClick={props.addHotel}>ADD HOTEL</button>
                         </HotelModal>
                     </Col>
                     <Col s={2}>
@@ -219,11 +238,23 @@ const UpdateItem = props => {
 
                             {props.activityList.map((act, i) =>
                                 <div key={i}>
-                                    <Row>
+                                    <UpdateActivity
+                                        updateActivity={props.updateActivity}
+                                        delActivity={props.delActivity}
+                                        activityName={act.activityName}
+                                        activtyDate={act.activityDate}
+                                        activityTime={act.activtyTime}
+                                        index={i}
+
+                                    />
+                    
+                                </div>)}
+                                <Row>
+                                    <h1>Add Activity</h1>
                                         <ModalInput
-                                            // onChange={props.onChange}
-                                            name="activityName"
-                                            value={act.activityName}
+                                            onChange={props.handleInputChange}
+                                            name="newactivityName"
+                                            value={props.activityName}
                                             icon="directions_walk"
                                             placeholder="Activity" />
                                     </Row>
@@ -231,27 +262,26 @@ const UpdateItem = props => {
                                         <Col>
                                             <label>Activity Date</label>
                                             <SelectDate
-                                                name="activityDate"
-                                                // onChange={props.onChange}
-                                                value={act.activityDate} />
+                                                name="newactivityDate"
+                                                onChange={props.handleInputChange}
+                                                value={props.activityDate} />
                                         </Col>
                                         <Col>
                                             <UserInput
-                                                name="activityTime"
+                                                name="newactivityTime"
                                                 icon="access_time"
-                                                value={act.activityTime}
-                                                // onChange={props.onChange} 
+                                                value={props.activityTime}
+                                                onChange={props.handleInputChange} 
                                                 />
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <button onClick={() => {props.delActivity(i)}}>Delete</button>
+                                        <button onClick={props.addActivity}>Add Activity</button>
                                     </Row>
-                                </div>)}
-                            <Toast toast="Integrate Changes" className="light-blue lighten-3 waves-effect waves-light btn-small">
+                            {/* <Toast toast="Integrate Changes" className="light-blue lighten-3 waves-effect waves-light btn-small">
                                 Update
                                 <i className="material-icons right">add_circle</i>
-                            </Toast>
+                            </Toast> */}
                         </ReactModal>
                     </Col>
                 </form>
