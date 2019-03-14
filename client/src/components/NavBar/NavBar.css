@@ -26,6 +26,9 @@
 
 
 }
+.textP {
+    color: white;
+}
 
 #modalLi {
     height: 40px;
@@ -46,6 +49,11 @@
     margin-top: 0px;
     text-align: center;
     width: 200px;
-    color: white;
+    /* color: rgb(150, 150, 150); */
+    /* color: white; */
     height: 100%;
 }
+/* 
+#input {
+    color: black;
+} */
