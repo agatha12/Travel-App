@@ -3,9 +3,7 @@ import './NavBar.css';
 import PropTypes from 'prop-types'
 import ModalContainer from "./modalContainer"
 import firebase from "../../utils/firebase"
-import { Dropdown, Button, NavItem } from 'react-materialize'
-
-
+import { Dropdown, Button, button } from 'react-materialize'
 
 
 class NavBar extends Component {
@@ -14,7 +12,8 @@ class NavBar extends Component {
     super();
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      display: "none"
     }
   }
 
@@ -26,10 +25,35 @@ class NavBar extends Component {
   };
 
   componentDidMount = () => {
+    console.log("hi")
 
     firebase.mount(this.props.handleChange)
 
 
+  }
+  menuDisplay = () => {
+    console.log(this.state)
+    if(this.state.display === "none"){
+      this.setState({
+        display: "block"
+      })
+
+    }
+    else{
+      this.setState({
+        display: "none"
+      })
+
+    }
+  }
+
+  menu = () => {
+    // if(this.state.display === "none"){
+    //   document.getElementsByClassName("button").style = styles.navClose
+    // }
+    // else {
+    //   document.getElementsByClassName("button").style = styles.navOpen
+    // }
   }
 
   login = () => {
@@ -64,31 +88,31 @@ class NavBar extends Component {
         ></ModalContainer></li>
         </ul>
       )
-    } else {
+    } 
+    else {
       return (
       <div  id="drop">
-      <button id="MenuButton">Menu</button>
-      <button id="HomeButton" onClick={() => {window.location.href = "/"}}>Home</button>
-      {/* <ul>
-        <li display="block"><a href="/">Home</a></li>
-      </ul> */}
-      {/* <Dropdown trigger={
+            <Dropdown trigger={
         <Button id="menu">Menu</Button>
       }>
-      <NavItem className="navItem" href="/">Home</NavItem>
-      <NavItem className="navItem" href="/itinerary">Add Trip</NavItem>
-      <NavItem className="navItem" href={`/itinerary/pass/${this.props.userName}`}>View Trips</NavItem>
-      <NavItem divider />
-      <NavItem className="navItem" href="/getflights"><p className="textP">Flight Search</p></NavItem>
-      <NavItem  className="navItem" href="/getairportweather"><p className="textP">Airport Weather</p></NavItem>
-      <NavItem  className="navItem" href="/gethotel"><p className="textP">Hotel Search</p></NavItem>
-      <NavItem className="navItem" href="/photoAlbum"><p className="textP">Photo Album</p></NavItem>
-      <NavItem className="navItem"><button id="logoutButton" onClick={firebase.logout}>Logout</button></NavItem>
-    </Dropdown> */}
+            <button className="button" onClick={() => {window.location.href = "/"}}>Home</button>
+      <button className="button" onClick={() => {window.location.href= "/itinerary"}}>Add Trip</button>
+      <button className="button" onClick={() => {window.location.href= `/itinerary/pass/${this.props.userName}`}}>View Trips</button>
+      <button className="button" onClick={() => {window.location.href = "/getflights"}}>Flight Search</button>
+      <button  className="button" onClick={() => {window.location.href = "/getairportweather"}}>Airport Weather</button>
+      <button  className="button" onClick={() => {window.location.href = "/gethotel"}}>Hotel Search</button>
+      <button className="button" onClick={() => {window.location.href = "/photoAlbum"}}>Photo Album</button>
+      <button className="button" id="logoutButton" onClick={firebase.logout}>Logout</button>
+
+    </Dropdown>
+      {/* <button id="MenuButton" onClick={this.menuDisplay}>Menu</button> */}
+
+  
     </div>
       
       )
     }
+
 
   }
 

@@ -5,39 +5,29 @@
 #logoutButton {
     background-color: transparent;
     border-color: transparent;
+    color: white;
+    background-color: skyblue;
 }
 
 #drop {
     float: right;
-    color:white;
+    text-align: center;
+    /* color:white;
+    width: 200px; */
+
+}
+
+.button {
+    margin: 0;
     width: 200px;
 
 }
-
-#MenuButton {
-    display: block
-}
-#HomeButton {
-    display: block
-}
-#menu {   
+ #menu {   
      background-color: skyblue;
      border-color: transparent;
      box-shadow: 0px;
      width: 200px;
     }
-.navItem {
-    background-color:skyblue;
-    color: white;
-    padding-top: 0px;
-
-    
-
-
-}
-.textP {
-    color: white;
-}
 
 #modalLi {
     height: 40px;
