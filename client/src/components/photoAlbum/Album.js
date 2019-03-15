@@ -11,8 +11,8 @@ return (
 {props.photos.map((photo, index) => {
 
     return(
-        <div id="PhotoDiv" key={index}>
-    <img alt="" src={photo.URL}></img><br></br>
+        <div className="PhotoDiv" key={index}>
+    <img className="userPhoto" alt="" src={photo.URL}></img><br></br>
     <button id="deletePhoto" onClick={() => {firebase.deletePhoto(photo.photoName, props.photos, index, props.id)}}>Delete Photo</button>
     </div>
     )

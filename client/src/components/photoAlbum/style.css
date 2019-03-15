@@ -39,6 +39,8 @@ img {
 #albumName {
     width: 300px;
 }
-/* .photo {
-    float: left;
-} */
+
+.userPhoto {
+    max-height: 350px;
+    max-width: 350px
+}

@@ -31,30 +31,7 @@ class NavBar extends Component {
 
 
   }
-  menuDisplay = () => {
-    console.log(this.state)
-    if(this.state.display === "none"){
-      this.setState({
-        display: "block"
-      })
 
-    }
-    else{
-      this.setState({
-        display: "none"
-      })
-
-    }
-  }
-
-  menu = () => {
-    // if(this.state.display === "none"){
-    //   document.getElementsByClassName("button").style = styles.navClose
-    // }
-    // else {
-    //   document.getElementsByClassName("button").style = styles.navOpen
-    // }
-  }
 
   login = () => {
     firebase.login(this.state.username, this.state.password)
@@ -105,7 +82,6 @@ class NavBar extends Component {
       <button className="button" id="logoutButton" onClick={firebase.logout}>Logout</button>
 
     </Dropdown>
-      {/* <button id="MenuButton" onClick={this.menuDisplay}>Menu</button> */}
 
   
     </div>
