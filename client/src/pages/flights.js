@@ -168,7 +168,7 @@ class GetFlights extends Component {
                                                 <span className="card-title">Flight Info </span>
                                                 <Row>
                                                     <Col>
-                                                        <p>Departing at: {this.state.response.appendix.airports[0].name} </p>
+                                                        <p>Departing at: {this.state.response.appendix.airports[1].name} </p>
 
                                                         <p>({eachFlight.departureAirportFsCode}) Airport on {moment(eachFlight.departureDate.dateLocal).format('LLLL')} at Local Time</p>
                                                     </Col>
@@ -177,7 +177,7 @@ class GetFlights extends Component {
                                                 {/* <Col className='valign-wrapper'>TO</Col> */}
                                                 <Row>
                                                     <Col>
-                                                        <p>Arriving at: {this.state.response.appendix.airports[1].name}</p>
+                                                        <p>Arriving at: {this.state.response.appendix.airports[0].name}</p>
                                                         <p> ({eachFlight.arrivalAirportFsCode}) Airport on {moment(eachFlight.arrivalDate.dateLocal).format('LLLL')} at Local Time </p>
                                                     </Col>
                                                 </Row>
