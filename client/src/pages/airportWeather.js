@@ -58,7 +58,7 @@ class getAirportWeather extends Component {
                 break;
 
             case 'Ice':
-                return <i class="fas fa-icicles"></i>
+                return <i className="fas fa-icicles"></i>
                 break;
 
             case 'Partly Sunny':

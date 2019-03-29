@@ -1,8 +1,8 @@
 const BASEURL = 'https://api.flightstats.com/flex/weather/rest/v1/json/all/';
 //              "https://api.flightstats.com/flex/weather/rest/v1/json/all/JFK?appId=359b0593&appKey=7391440a35325ac00e3ce0e14f4e7b52"
-let APPID = '2a633fa8';
+let APPID = '006f4a0b';
 APPID = `appId=${APPID}`;
-let APPKEY = 'a17f32fde5d1f23deb93952dccb6987c';
+let APPKEY = 'ca412afaa3550eeaf31bd77196adae66';
 APPKEY = `appKey=${APPKEY}`;
 const APPCRED = `?${APPID}&${APPKEY}`;
 
