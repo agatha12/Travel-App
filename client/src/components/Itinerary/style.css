@@ -70,7 +70,7 @@
 .updatebutton {
     margin-right: 15px;
 }
-
+/* 
 .flight {
     position: absolute;
     top: -265px;
@@ -102,9 +102,15 @@
     top: -565px;
     margin-right: 9%;
     margin-left: 60%;
+} */
+
+
+@media screen and (max-width: 640px) {
+
+.card.small {
+margin: 20px;
+
 }
-
-
-
+}
 
 

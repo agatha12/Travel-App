@@ -44,3 +44,11 @@ img {
     max-height: 350px;
     max-width: 350px
 }
+
+@media screen and (max-width: 600px) {
+
+    #albumButtons {
+        width: 100%;
+
+    }
+    }
