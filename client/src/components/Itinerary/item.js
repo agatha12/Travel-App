@@ -19,7 +19,9 @@ const Item = props => {
                 <h5>{props.passengername}</h5>
                 <h5>From <Moment format="MMM D YYYY">{props.startDate}</Moment> to <Moment format="MMM D YYYY">{props.endDate}</Moment></h5>
             </div> */}
-            <Col>
+            <Row>
+                <Col s={1}></Col>
+                <Col m={5} s={12}>
                 <Card className="small trip"
                     header={<CardTitle reveal image={Wow} waves='light'>
                         <p className="trip_header">ITINERARY</p>
@@ -70,6 +72,8 @@ const Item = props => {
                     </SideNav>
 
                 </Card>
+                </Col>
+                <Col m={5} s={12}>
 
                 <Card className="small flight"
                     header={<CardTitle reveal image={Plane} waves='light'>
@@ -151,8 +155,11 @@ const Item = props => {
                         </div>}>
                     <p>Flight Number: {props.flightnumber} Airport: {props.airport} </p>
                 </Card>
-            </Col>
-
+                </Col>
+            </Row>
+            <Row>
+                <Col s={1}></Col>
+                <Col m={5} s={12}>                               
             <Card className="small hotel"
                 header={<CardTitle reveal image={Hotel} waves='light'>
                     <p className="hotel_header">HOTEL</p>
@@ -198,7 +205,8 @@ const Item = props => {
                         )}
                     </div>}>
             </Card>
-
+            </Col>
+                <Col m={5} s={12}>
             <Card className="small activities"
                 header={<CardTitle reveal image={Activity} waves='light'>
                     <p className="events_header">ACTIVITIES</p>
@@ -227,6 +235,8 @@ const Item = props => {
 
                     </div>}>
             </Card>
+            </Col>
+            </Row>
         </div>
     )
 }

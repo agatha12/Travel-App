@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Col} from 'react-materialize';
 import API from "../utils/API";
 import Item from '../components/Itinerary/item';
 
@@ -70,11 +71,11 @@ class Itinerary extends Component {
                         Itinerary
                         </button></a>
                     </div>) : (
-                        <div>
+                        <Col s={12}>
 
                             {this.state.itinerary.map((item, index) => (this.activityList(item, index)))}
                             
-                        </div>
+                        </Col>
                     )}
             </div>
         )
