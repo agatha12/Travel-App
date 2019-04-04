@@ -93,6 +93,7 @@ class getAirportWeather extends Component {
     };
 
     renderWithMetarWeather = () => {
+        // if the api has a metar part then return the below
         if (this.state.response.metar) {
             const { appendix, metar } = this.state.response
             return (
@@ -106,9 +107,9 @@ class getAirportWeather extends Component {
                 </div>
             )
         }
-        else {
-            return (<div>No Response</div>)
-        }
+        // else {
+        //     return (<div>No Response</div>)
+        // }
     };
 
     renderWithZoneForcast = () => {
