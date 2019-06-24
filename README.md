@@ -6,7 +6,7 @@ Overview Description
 
 Trip Pal is an application that caters to many of our user's travel needs in one place. It is designed to provide a place where users can store all of their travel information in an itinerary which can be updated to keep up with any last minute changes. Users can also store their travel photos in albums and search for airport weather, flight status and hotels.
 
-The user must be logged in to access any of the sites featues. 
+The user must be logged in or have an account to access any of the sites features. 
 
 
 Installation
